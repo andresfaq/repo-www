@@ -1,0 +1,7 @@
+body{
+    background-image: url("../img/login-background.jpg");
+}
+
+.form-signin-heading{
+    color: snow;
+}
