@@ -3,3 +3,12 @@ concesionario/concesionario/settings.py
 
 # Ingnorando archivos  *.pyc 
 *.pyc
+
+# Ignorando carpetas y archivos de pycharm
+
+*.iml
+## Directory-based project format:
+.idea/
+## File-based project format:
+*.ipr
+*.iws
