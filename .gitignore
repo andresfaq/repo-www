@@ -9,6 +9,7 @@ concesionario/concesionario/settings.py
 *.iml
 ## Directory-based project format:
 .idea/
+concesionario/idea
 ## File-based project format:
 *.ipr
 *.iws
