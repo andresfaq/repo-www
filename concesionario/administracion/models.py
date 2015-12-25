@@ -3,8 +3,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Con esto agregamos algunos campos al modelo User de django
-
-
 User.add_to_class('cedula', models.PositiveIntegerField(null=True, blank=True))
 User.add_to_class('direccion', models.CharField(max_length=100, null=True, blank=True))
 User.add_to_class('fecha_de_nacimiento', models.DateTimeField(null=True, blank=True))
