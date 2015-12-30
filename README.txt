@@ -7,6 +7,8 @@
 	1.4 Tener instalado virtualenv [sudo apt-get install python-virtualenv]
 
 	1.5 Instalar las siguientes librerias [sudo apt-get install libpq-dev python-dev] y [sudo apt-get install python3.4-dev]
+
+	1.6 Instalar mas librerias [sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev \ libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk] #NUEVO!!!
 	
 
 
@@ -31,6 +33,8 @@
 	
 	3.5 instalar controlador de postgres para python [pip install psycopg2]
 
+	3.6 instalar librerias para manejo de imagenes en los modelos de django [pip install Pillow] #NUEVO!!!
+
 
 4. Instalando Base de datos PostgreSQL
 
@@ -54,11 +58,13 @@
 
 	5.4 Regresar al directorio  [/repo-www/concesionario] 
 
-	5.5 Realizar la migracion de la base de datos [python manage.py migrate]
+	5.5 Generar las migraciones [python manage.py makemigrations] #NUEVO!!! 
 
-	5.6 Correr servidor [python manage.py runserver]
+	5.6 Realizar la migracion de la base de datos [python manage.py migrate]
 
-	5.7 Abrir navegador e ingresar a la direccion 127.0.0.1:8000 o localhost:8000 
+	5.7 Correr servidor [python manage.py runserver]
+
+	5.8 Abrir navegador e ingresar a la direccion 127.0.0.1:8000 o localhost:8000 
 
 #### NOTAS ####
 
@@ -76,6 +82,16 @@
     [alter user postgres with password 'MiNuevoPassword';]
 
 
+### Otras anotaciones temporales ###
+
+Actualicen sus proyectos realizando los pasos que tienen un "#NUEVO!!!" escrito al final
+
+
+AÑADIR AL FINAL DEL ARCHIVO SETTINGS.PY
+---
+# Ruta donde se guardan las imagenes
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+--
 
 
 	
