@@ -93,8 +93,28 @@ AÑADIR AL FINAL DEL ARCHIVO SETTINGS.PY
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 --
 
+Instalacion tastypie
+
+Install using Pip: pip install django-tastypie
+Add to installed apps: INSTALLED_APPS += ['tastypie']
+Syncdb: ./manage.py syncdb
+
+
+
+#Generacion de datos
+Instalacion django-autofixture
+
+pip install django-autofixture
+Add to installed apps: INSTALLED_APPS += ['autofixture']
+	
+python manage.py shell < administracion/seeders.py
 
 	
 
 
-	
+
+#Probando
+pip install django-data-faker
+
+
+

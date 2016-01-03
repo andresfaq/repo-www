@@ -18,19 +18,19 @@ User.add_to_class('telefono', models.PositiveIntegerField(null=True))
 
 
 # Empleado hereda de usuario, por tanto hereda sus atributos
-class Empleado(User):
-
+class Empleado(models.Model):
+    id_usuario = models.OneToOneField(User)
     id_empleado = models.AutoField(primary_key=True)
     inicio_contrato = models.DateTimeField(max_length=8)
     fin_contraro = models.DateTimeField(max_length=8)
-    salario = models.PositiveIntegerField(max_length=10)
+    salario = models.PositiveIntegerField()
 
-class Cliente(User):
+class Cliente(models.Model):
+    id_usuario = models.OneToOneField(User)
     codigo_cliente = models.AutoField(primary_key=True)
 
 
-class Gerente(Empleado):
-    codigo_gerente = models.AutoField(primary_key=True)
+
 
 
 class Sucursal(models.Model):
@@ -38,12 +38,18 @@ class Sucursal(models.Model):
     nombre = models.CharField(max_length=100, null=False)
     direccion = models.CharField(max_length=150, null=False)
 
+class Gerente(models.Model):
+    codigo_empleado = models.OneToOneField(Empleado)
+    codigo_gerente = models.AutoField(primary_key=True)
+    codigo_sucursal = models.OneToOneField(Sucursal)
 
-class Vendedor(Empleado):
+class Vendedor(models.Model):
+    codigo_empleado = models.OneToOneField(Empleado)
     codigo_vendedor = models.AutoField(primary_key=True)
     codigo_sucursal = models.ForeignKey(Sucursal)
 
-class JefeTaller(Empleado):
+class JefeTaller(models.Model):
+    codigo_empleado = models.OneToOneField(Empleado)
     codigo_jefe_taller = models.AutoField(primary_key=True)
     codigo_sucursal = models.OneToOneField(Sucursal)
 

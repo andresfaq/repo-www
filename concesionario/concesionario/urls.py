@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from paginaweb.views import home, login, logout
-
+from tastypie.api import Api
+from administracion.api import UserResource
 
 
 urlpatterns = [
