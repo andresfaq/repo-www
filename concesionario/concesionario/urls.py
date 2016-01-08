@@ -22,6 +22,7 @@ from administracion.api import UserResource
 
 urlpatterns = [
     url(r'^administracion/', include('administracion.urls')),
+    url(r'^reportes/', include('reportes.urls')),
     url(r'^ventas/', include('ventas.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', home, name='home'),
