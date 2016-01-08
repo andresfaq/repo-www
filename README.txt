@@ -33,45 +33,48 @@
 	2.2 Se activa el entorno [source env-www/bin/activate] 
 
 	2.3 Se verifica la version de python dentro del entorno [python -V] debe ser python3.4
-
-
-3. Instalando dependencias en el entorno virtual
-
-	3.1 Activar el entorno virtual (Punto 2.2)
 	
-	3.1 Ejecutar el comando [pip install -r requerimientos.txt] 
+
+3. Clonar el mugroso repositorio
+
+	3.1  Estando dentro de la carpeta env-www ejecutar [git clone https://github.com/andresfaq/repo-www.git]
+
+
+4. Instalando dependencias en el entorno virtual
+
+	4.1 Activar el entorno virtual (Punto 2.2)
+	
+	4.2 Ejecutar el comando [pip install -r requerimientos.txt] 
 	
 	#NOTA: el archivo requerimientos.txt se encuentra dentro de la carpeta repo-www
 
 
-4. Base de datos
+5. Base de datos
 
-	4.2 Instalar administrador grafico (Opcional) [sudo apt-get install pgadmin3]
+	5.1 (Opcional) Instalar administrador grafico [sudo apt-get install pgadmin3]
 
-	4.3 Crear una base de datos llamada 'concesionario'
+	5.2 Crear una base de datos llamada 'concesionario'
 	
 
 
 
-5. Instalando Proyecto
+6. Instalando Proyecto
 
-	5.1 Activar y entrar a la carpeta del entorno
-
-	5.2 Clonar repositorio [git clone https://github.com/andresfaq/repo-www.git]
+	6.1 Activar y entrar a la carpeta del entorno
 	
-	5.3 Copiar el archivo settings.py desde repo-www hasta la carpeta repo-www/concesionario/concesionario y cambiarle en la seccion DATABASES los datos necesarios para que funcione con su base de datos (la contraseña y el usuario... o el puerto si es que lo han cambiado)
+	6.2 Copiar el archivo settings.py desde repo-www hasta la carpeta repo-www/concesionario/concesionario y cambiarle en la seccion DATABASES los datos necesarios para que funcione con su base de datos (la contraseña y el usuario... o el puerto si es que lo han cambiado)
 
-	5.4 Regresar al directorio  [/repo-www/concesionario] 
+	6.3 Regresar al directorio  [/repo-www/concesionario] 
 	
-	5.5 Realizar proceso de migracion de los modelos a la BD
+	6.4 Realizar proceso de migracion de los modelos a la BD
 		[python manage.py migrate auth]
 		[python manage.py makemigrations] 
 		[python manage.py migrate]
 		[python manage.py syncdb] # Tastypie
 
-	5.6 Correr servidor [python manage.py runserver]
+	6.5 Correr servidor [python manage.py runserver]
 	
-	5.7 Abrir navegador e ingresar a la direccion 127.0.0.1:8000 o localhost:8000 
+	6.6 Abrir navegador e ingresar a la direccion 127.0.0.1:8000 o localhost:8000 
 
 #### NOTAS ####
 
