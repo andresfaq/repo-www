@@ -1,14 +1,27 @@
 1. Preliminares
 
-	1.1 Tener instalado git [sudo apt-get install git]
+	Instalar los siguientes paquetes con el comando
+	{sudo apt-get install}
 
-	1.2 Tener instalado python3.4 [sudo apt-get install python3.4]
-
-	1.4 Tener instalado virtualenv [sudo apt-get install python-virtualenv]
-
-	1.5 Instalar las siguientes librerias [sudo apt-get install libpq-dev python-dev] y [sudo apt-get install python3.4-dev]
-
-	1.6 Instalar mas librerias [sudo apt-get install libtiff5-dev libjpeg8-dev zlib1g-dev \ libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk] #NUEVO!!!
+	git
+	python3.4
+	python-virtualenv
+	libpq-dev
+	python-dev
+	python3.4-dev
+	libtiff5-dev
+	libjpeg8-dev
+	zlib1g-dev
+	libfreetype6-dev
+	liblcms2-dev
+	libwebp-dev
+	tcl8.6-dev
+	tk8.6-dev
+	python-tk
+	postgresql #Base de datos
+	postgresql-contrib #Base de datos
+	
+	[sudo apt-get install git python3.4 python-virtualenv libpq-dev python-dev python3.4-dev libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk postgresql postgresql-contrib]
 	
 
 
@@ -16,7 +29,7 @@
 
 	2.1 Se crea un entorno llamado env-www con python 3.4 [virtualenv -p /usr/bin/python3.4 env-www] 
 
-	2.2 Se activa el entorno [source env-www/bin/activate]
+	2.2 Se activa el entorno [source env-www/bin/activate] 
 
 	2.3 Se verifica la version de python dentro del entorno [python -V] debe ser python3.4
 
@@ -37,8 +50,6 @@
 
 
 4. Instalando Base de datos PostgreSQL
-
-	4.1 Instalar postgres [sudo apt-get install postgresql postgresql-contrib]
 
 	4.2 Instalar administrador grafico (Opcional) [sudo apt-get install pgadmin3]
 
