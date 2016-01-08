@@ -21,6 +21,7 @@
 	postgresql #Base de datos
 	postgresql-contrib #Base de datos
 	
+	Version copy-paste para los flojos :v 
 	[sudo apt-get install git python3.4 python-virtualenv libpq-dev python-dev python3.4-dev libtiff5-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk postgresql postgresql-contrib]
 	
 
@@ -34,22 +35,16 @@
 	2.3 Se verifica la version de python dentro del entorno [python -V] debe ser python3.4
 
 
-3. Instalando Django 1.8.4
+3. Instalando dependencias en el entorno virtual
 
-	3.1 Se activa el entorno (ver punto 2.2)
-
-	3.2 Se ingresa a la carpeta del entorno  [cd env-www]
-
-	3.3 Se instala django 1.8.4 [pip install Django==1.8.4] 
-
-	3.4 Se verifica la version de django [django-admin --version] debe aparecer 1.8.4
+	3.1 Activar el entorno virtual (Punto 2.2)
 	
-	3.5 instalar controlador de postgres para python [pip install psycopg2]
+	3.1 Ejecutar el comando [pip install -r requerimientos.txt] 
+	
+	#NOTA: el archivo requerimientos.txt se encuentra dentro de la carpeta repo-www
 
-	3.6 instalar librerias para manejo de imagenes en los modelos de django [pip install Pillow] #NUEVO!!!
 
-
-4. Instalando Base de datos PostgreSQL
+4. Base de datos
 
 	4.2 Instalar administrador grafico (Opcional) [sudo apt-get install pgadmin3]
 
@@ -60,22 +55,23 @@
 
 5. Instalando Proyecto
 
-	5.1 Activar y entrar a la carpeta del entorno (Puntos 2.2 y 3.2)
+	5.1 Activar y entrar a la carpeta del entorno
 
 	5.2 Clonar repositorio [git clone https://github.com/andresfaq/repo-www.git]
 	
-	5.3 Modificar el archivo settings.py en el directorio [ /repo-www/concesionario/concesionario]
-	    en la seccion DATABASES y configurar los datos necesarios (Por ejemplo la contraseña o el usuario)
+	5.3 Copiar el archivo settings.py desde repo-www hasta la carpeta repo-www/concesionario/concesionario y cambiarle en la seccion DATABASES los datos necesarios para que funcione con su base de datos (la contraseña y el usuario... o el puerto si es que lo han cambiado)
 
 	5.4 Regresar al directorio  [/repo-www/concesionario] 
+	
+	5.5 Realizar proceso de migracion de los modelos a la BD
+		[python manage.py migrate auth]
+		[python manage.py makemigrations] 
+		[python manage.py migrate]
+		[python manage.py syncdb] # Tastypie
 
-	5.5 Generar las migraciones [python manage.py makemigrations] #NUEVO!!! 
-
-	5.6 Realizar la migracion de la base de datos [python manage.py migrate]
-
-	5.7 Correr servidor [python manage.py runserver]
-
-	5.8 Abrir navegador e ingresar a la direccion 127.0.0.1:8000 o localhost:8000 
+	5.6 Correr servidor [python manage.py runserver]
+	
+	5.7 Abrir navegador e ingresar a la direccion 127.0.0.1:8000 o localhost:8000 
 
 #### NOTAS ####
 
@@ -86,31 +82,17 @@
     y por ultimo realizar de nuevo el pull del proyecto.   
 
 [Solucionando problema de usuario postgres]
---> Si a la hora de configurar el servidor postgres en pgadmin3 aparece el siguiente error 
+--> Si a la hora de configurar el servidor postgres aparece el siguiente error 
     "Error connecting to the server: FATAL:  password authentication failed for user "postgres"
     se puede solucionar con los siguientes comandos. 
     [sudo su postgres] luego [psql] y una vez dentro de la consola de postgres se escribe el siguiente comando 
     [alter user postgres with password 'MiNuevoPassword';]
 
 
-### Otras anotaciones temporales ###
-
-Actualicen sus proyectos realizando los pasos que tienen un "#NUEVO!!!" escrito al final
 
 
-AÑADIR AL FINAL DEL ARCHIVO SETTINGS.PY
----
-# Ruta donde se guardan las imagenes
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
---
-
-Instalacion tastypie
-
-Install using Pip: pip install django-tastypie
-Add to installed apps: INSTALLED_APPS += ['tastypie']
-Syncdb: ./manage.py syncdb
-
-
+### Esto es solo pruebas, no hagan nada de lo que esta ahí. :v 
+------------------------------------------------------------------------
 
 #Generacion de datos
 Instalacion django-autofixture
@@ -120,12 +102,9 @@ Add to installed apps: INSTALLED_APPS += ['autofixture']
 	
 python manage.py shell < administracion/seeders.py
 
-	
 
 
-
-#Probando
 pip install django-data-faker
 
 
-
+------------------------------------------------------------------------
