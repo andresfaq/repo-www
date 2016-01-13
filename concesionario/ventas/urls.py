@@ -3,5 +3,5 @@ from ventas.views import inicio
 
 
 
-urlpatterns = patterns('concesionario.administracion.views',
+urlpatterns = patterns('concesionario.ventas.views',
                        url(r'^$', inicio))

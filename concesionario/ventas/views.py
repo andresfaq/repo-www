@@ -5,3 +5,4 @@ from django.shortcuts import render
 @login_required
 def inicio(request):
     return render(request, 'ventas/index.html')
+
