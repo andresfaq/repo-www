@@ -8,10 +8,16 @@
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
         ["Vendedor", "Ventas", { role: "style" } ],
-        ["Carlos", 8.94, "#b87333"],
-        ["Cristian", 10.49, "silver"],
-        ["Marco", 19.30, "gold"],
-        ["Ana", 21.45, "color: #e5e4e2"]
+
+        {% for usuario in usuarios %}
+            
+              [ '{{ usuario.username }}',  parseInt('{{usuario.id}}'), "#b87333"] 
+
+              {% if not forloop.last %} 
+              ,  
+              {% endif %}
+        {% endfor %}
+
       ]);
 
       var view = new google.visualization.DataView(data);
