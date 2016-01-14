@@ -122,7 +122,7 @@ class InventarioVehiculo(models.Model):
     precio_unidad = models.PositiveIntegerField()
 
 
-class RevisionVehiculo():
+class RevisionVehiculo(models.Model):
     codigo_revision = models.AutoField(primary_key=True)
     codigo_cliente = models.ForeignKey(Cliente)
     codigo_vehiculo = models.ForeignKey(Vehiculo)
@@ -136,3 +136,5 @@ class RevisionVehiculo():
 @receiver(post_delete, sender=Vehiculo)
 def img_vehiculo_delete(sender, instance, **kwargs):
     instance.photo.delete(False)
+
+

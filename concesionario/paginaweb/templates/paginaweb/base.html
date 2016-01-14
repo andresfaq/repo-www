@@ -58,7 +58,7 @@
 
                     <li>
                     {% if user.is_authenticated %}
-                        <a> Hola {{ user.get }} </a>
+                        <a href="{% url "login" %}">Ingreso</a>
 
                     {% else %}
                         <a href="{% url "login" %}">Ingreso</a>
