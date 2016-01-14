@@ -25,12 +25,15 @@ class Empleado(models.Model):
     fin_contraro = models.DateTimeField(max_length=8)
     salario = models.PositiveIntegerField()
 
+    def __str__(self):
+        return str(self.id_usuario)
+
 class Cliente(models.Model):
     id_usuario = models.OneToOneField(User)
     codigo_cliente = models.AutoField(primary_key=True)
 
-
-
+    def __str__(self):
+        return str(self.id_usuario)
 
 
 class Sucursal(models.Model):
@@ -38,20 +41,32 @@ class Sucursal(models.Model):
     nombre = models.CharField(max_length=100, null=False)
     direccion = models.CharField(max_length=150, null=False)
 
+    def __str__(self):
+        return self.nombre
+
 class Gerente(models.Model):
     codigo_empleado = models.OneToOneField(Empleado)
     codigo_gerente = models.AutoField(primary_key=True)
     codigo_sucursal = models.OneToOneField(Sucursal)
+
+    def __str__(self):
+        return str(self.codigo_empleado)
 
 class Vendedor(models.Model):
     codigo_empleado = models.OneToOneField(Empleado)
     codigo_vendedor = models.AutoField(primary_key=True)
     codigo_sucursal = models.ForeignKey(Sucursal)
 
+    def __str__(self):
+        return str(self.codigo_empleado)
+
 class JefeTaller(models.Model):
     codigo_empleado = models.OneToOneField(Empleado)
     codigo_jefe_taller = models.AutoField(primary_key=True)
     codigo_sucursal = models.OneToOneField(Sucursal)
+
+    def __str__(self):
+        return str(self.codigo_empleado)
 
 
 class Orden(models.Model):
@@ -76,8 +91,6 @@ class Repuesto(models.Model):
 class RepuestosPorOrden(models.Model):
     codigo_orden = models.ForeignKey(Orden)
     codigo_repuesto = models.ForeignKey(Repuesto)
-
-
 
 
 
