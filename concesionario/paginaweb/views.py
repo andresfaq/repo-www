@@ -34,9 +34,11 @@ def login(request):
             log(request, user)
 
             if es_gerente(user):
+                #return render(request, index_administracion)
                 return redirect(index_administracion) #administracion/index.html
 
             if es_vendedor(user):
+                #return render(request, index_ventas)
                 return redirect(index_ventas) #ventas/index.html
 
         else:

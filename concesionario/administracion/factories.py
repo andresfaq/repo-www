@@ -71,7 +71,7 @@ class UserClienteFactory(factory.django.DjangoModelFactory):
     username = factory.Sequence(lambda n: "Cliente%03d" % n)
     first_name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
-    password = make_password(username)
+    password = make_password('Cliente')
     is_active = True
     cedula = factory.fuzzy.FuzzyInteger(10000000, 999999999)
     direccion = factory.Faker('address')
@@ -88,7 +88,7 @@ class UserGerenteFactory(factory.django.DjangoModelFactory):
     username = factory.Sequence(lambda n: "Gerente%03d" % n)
     first_name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
-    password = make_password(username)
+    password = make_password('Gerente')
     is_active = True
     cedula = factory.fuzzy.FuzzyInteger(10000000, 999999999)
     direccion = factory.Faker('address')
@@ -105,7 +105,7 @@ class UserVendedorFactory(factory.django.DjangoModelFactory):
     username = factory.Sequence(lambda n: "Vendedor%03d" % n)
     first_name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
-    password = make_password(username)
+    password = make_password('Vendedor')
     is_active = True
     cedula = factory.fuzzy.FuzzyInteger(10000000, 999999999)
     direccion = factory.Faker('address')
@@ -122,7 +122,7 @@ class UserJefeTallerFactory(factory.django.DjangoModelFactory):
     username = factory.Sequence(lambda n: "JefeTaller%03d" % n)
     first_name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
-    password = make_password(username)
+    password = make_password('JefeTaller')
     is_active = True
     cedula = factory.fuzzy.FuzzyInteger(10000000, 999999999)
     direccion = factory.Faker('address')
