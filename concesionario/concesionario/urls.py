@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from paginaweb.views import home, login, logout
+from paginaweb.views import home, login, logout,concesionario
 
 
 
@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^$', home, name='home'),
     url(r'^login/$', login, name='login'),
     url(r'^logout/$', logout, name='logout'),
+    url(r'^autos/$', concesionario, name='concesionario'),
 ]

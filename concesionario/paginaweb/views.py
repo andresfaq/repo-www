@@ -28,3 +28,6 @@ def login(request):
 def logout(request):
     lout(request)
     return render(request, 'registration/logout.html')
+
+def concesionario(request):
+    return  render (request, 'paginaweb/contenidoAutos.html')

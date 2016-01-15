@@ -1,0 +1,7 @@
+{% extends "paginaweb/index.html" %}
+{% block contenido-autos %}
+     autos = Vehiculo.objects.all()
+       {%for carro in autos:%}
+        <h1>hola que tal {{carro.codigo_vehiculo}}</h1>
+       {% endfor %}
+{% endblock %}
