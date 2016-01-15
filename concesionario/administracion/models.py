@@ -13,7 +13,7 @@ from django.dispatch import receiver
 # Con esto agregamos algunos campos al modelo User de django
 User.add_to_class('cedula', models.PositiveIntegerField(null=True))
 User.add_to_class('direccion', models.CharField(max_length=100, null=True))
-User.add_to_class('fecha_de_nacimiento', models.DateTimeField(null=True))
+User.add_to_class('fecha_de_nacimiento', models.DateField(null=True))
 User.add_to_class('telefono', models.PositiveIntegerField(null=True))
 
 
@@ -21,8 +21,8 @@ User.add_to_class('telefono', models.PositiveIntegerField(null=True))
 class Empleado(models.Model):
     id_usuario = models.OneToOneField(User)
     id_empleado = models.AutoField(primary_key=True)
-    inicio_contrato = models.DateTimeField(max_length=8)
-    fin_contraro = models.DateTimeField(max_length=8)
+    inicio_contrato = models.DateField(max_length=8)
+    fin_contraro = models.DateField(max_length=8)
     salario = models.PositiveIntegerField()
 
     def __str__(self):
@@ -63,7 +63,7 @@ class Vendedor(models.Model):
 class JefeTaller(models.Model):
     codigo_empleado = models.OneToOneField(Empleado)
     codigo_jefe_taller = models.AutoField(primary_key=True)
-    codigo_sucursal = models.OneToOneField(Sucursal)
+    codigo_sucursal = models.ForeignKey(Sucursal)
 
     def __str__(self):
         return str(self.codigo_empleado)
@@ -146,8 +146,10 @@ class RevisionVehiculo(models.Model):
     fecha_cambio_aceite = models.DateField()
 
 #Borra las imagenes de los registros de vehiculos que se eliminan
-@receiver(post_delete, sender=Vehiculo)
-def img_vehiculo_delete(sender, instance, **kwargs):
-    instance.photo.delete(False)
+#@receiver(post_delete, sender=Vehiculo)
+#def img_vehiculo_delete(sender, instance, **kwargs):
+    #instance.photo.delete(False)
+    #instance.photo.delete(True)
+
 
 
