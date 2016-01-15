@@ -40,9 +40,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'paginaweb',
-    'administracion',
     'tastypie',
+    'ventas'
     'reportes',
+    'taller'
 )
 
 MIDDLEWARE_CLASSES = (

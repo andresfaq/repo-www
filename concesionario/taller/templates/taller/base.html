@@ -10,7 +10,7 @@
 	<meta name="description" content="Neon Admin Panel" />
 	<meta name="author" content="" />
 
-	<title> Concesioanrio | Ventas </title>
+	<title> Concesioanrio | Taller </title>
 
 
 	<link rel="stylesheet" type="text/css" href="{% static 'js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css' %}" />
@@ -83,17 +83,17 @@
 			<li class="active opened active">
 				<a href="index.html">
 					<i class="entypo-gauge"></i>
-					<span>Ventas</span>
+					<span>Taller</span>
 				</a>
 				<ul>
 					<li class="active">
-						<a href="">
-							<span>Nueva Venta</span>
+						<a href="{% url "ingresarCarroTaller" %}">
+							<span>Ingresar Vehiculo</span>
 						</a>
 					</li>
                     <li class="active">
 						<a href="">
-							<span>Listado Ventas</span>
+							<span>Vehiculos en reparación</span>
 						</a>
 					</li>
 
@@ -102,17 +102,17 @@
             <li class="active opened active">
 				<a href="index.html">
 					<i class="entypo-gauge"></i>
-					<span>Cotizaciones</span>
+					<span>Inventario</span>
 				</a>
 				<ul>
 					<li class="active">
 						<a href="">
-							<span>Nueva Cotizacion</span>
+							<span>Agregar Refaccion</span>
 						</a>
 					</li>
                     <li class="active">
 						<a href="">
-							<span>Listado Cotizaciones</span>
+							<span>Listar inventario</span>
 						</a>
 					</li>
 

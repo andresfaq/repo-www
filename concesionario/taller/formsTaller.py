@@ -5,5 +5,6 @@ class tallerForm(forms.ModelForm):
 
     class Meta:
         model = Vehiculo
+        fields = '__all__'
 
 

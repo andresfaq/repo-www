@@ -54,5 +54,9 @@ def logout(request):
 def concesionario(request):
     return  render (request, 'paginaweb/contenidoAutos.html')
 
+def taller(request):
+    return  render (request, 'paginaweb/contenidoReparacion.html')
+
+
 
 

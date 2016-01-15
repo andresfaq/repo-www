@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% extends 'taller/base.html' %}
 
-</body>
-</html>
+{% block contenido %}
+    <a>ajaaajajaj</a>
+    <form action="//" method="post">{% csrf_token %}
+    <ul>
+
+    {{ form.as_ul }}
+
+    </ul>
+
+    <input type="submit" name="submit" value="ingresar Vehiculo">
+    </form>
+{% endblock%}

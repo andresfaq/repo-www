@@ -46,7 +46,13 @@
 
     <div class="intro-header">
         <div class="container">
-
+            <div class="row">
+                <div class="container">
+                    <div class="col-lg-12">
+                        <div>{%block contenidoOpciones%} {% endblock %}</div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message-down">
@@ -54,14 +60,20 @@
                             <li class="footer-menu-divider">
                              <!--  <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i src="{% static 'img/banderaIcon.png' %}" class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
                             -->
-                                <input class="separate-button"type=image   src="{% static 'img/verCarroIcon.png' %}" width="90" height="50">
+                                 <a href="{% url "concesionario" %}">
+                                    <input class="separate-button"type=image   src="{% static 'img/verCarroIcon.png' %}" width="90" height="50">
+                                 </a>
                             </li>
                             <li class="footer-menu-divider">
-                                 <input class="separate-button" type=image   src="{% static 'img/repararIcon.png' %}"  width="70" height="60">
+                                <a href="{% url "taller" %}">
+                                   <input class="separate-button" type=image   src="{% static 'img/repararIcon.png' %}"  width="70" height="60">
+                                </a>
 
                             </li>
                             <li class="footer-menu-divider">
-                                 <input class="separate-button" type=image   src="{% static 'img/buscarIcon.png' %}"  width="70" height="60">
+                                <a href="{% url "concesionario" %}">
+                                    <input class="separate-button" type=image   src="{% static 'img/buscarIcon.png' %}"  width="70" height="60">
+                                </a>
 
                             </li>
                         </ul>
@@ -73,12 +85,6 @@
         </div>
         <!-- /.container -->
 
-        <div class="container">
-            <div class="col-lg-12">
-                <div>{%block contenido-autos%} {% endblock %}</div>
-            </div>
-
-        </div>
 
     </div>
     <!-- /.intro-header -->
