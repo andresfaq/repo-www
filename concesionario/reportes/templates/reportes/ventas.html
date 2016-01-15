@@ -1,0 +1,50 @@
+{% extends 'reportes/base.html' %}
+
+{% block javas %}
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Vendedor", "Ventas", { role: "style" } ],
+
+        {% for usuario in usuarios %}
+            
+              [ '{{ usuario.username }}',  parseInt('{{usuario.id}}'), "#b87333"] 
+
+              {% if not forloop.last %} 
+              ,  
+              {% endif %}
+        {% endfor %}
+
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Ventas de vehiculos ultimo mes",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+  </script>
+
+
+{% endblock %}
+
+{% block contenido %}
+
+	<div id="columnchart_values" style="width: 900px; height: 300px;"></div>
+
+{% endblock%}

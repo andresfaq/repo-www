@@ -25,6 +25,10 @@
 
 
 	<script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+	{% block javas %}	{% endblock %}
+
 
 
 	<!--[if lt IE 9]><script src="{% static 'js/ie8-responsive-file-warning.js' %}"></script><![endif]-->
@@ -91,12 +95,29 @@
 			<li class="active opened active">
 				<a href="index.html">
 					<i class="entypo-gauge"></i>
-					<span>Dashboard</span>
+					<span>Reportes</span>
 				</a>
 				<ul>
 					<li class="active">
-						<a href="index.html">
-							<span>Dashboard 1</span>
+
+						<a href={% url "reportes.views.usuarios" %}>
+
+							<span>Reporte de usuarios</span>
+						</a>
+					</li>
+					<li class="active">
+						<a href={% url "reportes.views.ventas" %}>
+							<span>Reporte de ventas</span>
+						</a>
+					</li>
+					<li class="active">
+						<a href={% url "reportes.views.inventario" %}>
+							<span>Reporte de vehiculos</span>
+						</a>
+					</li>
+					<li class="active">
+						<a href={% url "reportes.views.inicio" %}>
+							<span>Reporte mensual de sucursales</span>
 						</a>
 					</li>
 
@@ -111,8 +132,9 @@
 
     <div class="main-content">
 
-        <div class="row pull-right">
+    	<!-- <div id="table_div"></div> -->
 
+        <div class="row pull-right">
 
         <!-- Raw Links -->
         <div class="col-md-6 col-sm-4 clearfix hidden-xs">

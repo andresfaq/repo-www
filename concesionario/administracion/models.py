@@ -18,19 +18,22 @@ User.add_to_class('telefono', models.PositiveIntegerField(null=True))
 
 
 # Empleado hereda de usuario, por tanto hereda sus atributos
-class Empleado(User):
-
+class Empleado(models.Model):
+    id_usuario = models.OneToOneField(User)
     id_empleado = models.AutoField(primary_key=True)
     inicio_contrato = models.DateTimeField(max_length=8)
     fin_contraro = models.DateTimeField(max_length=8)
-    salario = models.PositiveIntegerField(max_length=10)
+    salario = models.PositiveIntegerField()
 
-class Cliente(User):
+    def __str__(self):
+        return str(self.id_usuario)
+
+class Cliente(models.Model):
+    id_usuario = models.OneToOneField(User)
     codigo_cliente = models.AutoField(primary_key=True)
 
-
-class Gerente(Empleado):
-    codigo_gerente = models.AutoField(primary_key=True)
+    def __str__(self):
+        return str(self.id_usuario)
 
 
 class Sucursal(models.Model):
@@ -38,14 +41,32 @@ class Sucursal(models.Model):
     nombre = models.CharField(max_length=100, null=False)
     direccion = models.CharField(max_length=150, null=False)
 
+    def __str__(self):
+        return self.nombre
 
-class Vendedor(Empleado):
+class Gerente(models.Model):
+    codigo_empleado = models.OneToOneField(Empleado)
+    codigo_gerente = models.AutoField(primary_key=True)
+    codigo_sucursal = models.OneToOneField(Sucursal)
+
+    def __str__(self):
+        return str(self.codigo_empleado)
+
+class Vendedor(models.Model):
+    codigo_empleado = models.OneToOneField(Empleado)
     codigo_vendedor = models.AutoField(primary_key=True)
     codigo_sucursal = models.ForeignKey(Sucursal)
 
-class JefeTaller(Empleado):
+    def __str__(self):
+        return str(self.codigo_empleado)
+
+class JefeTaller(models.Model):
+    codigo_empleado = models.OneToOneField(Empleado)
     codigo_jefe_taller = models.AutoField(primary_key=True)
     codigo_sucursal = models.OneToOneField(Sucursal)
+
+    def __str__(self):
+        return str(self.codigo_empleado)
 
 
 class Orden(models.Model):
@@ -70,8 +91,6 @@ class Repuesto(models.Model):
 class RepuestosPorOrden(models.Model):
     codigo_orden = models.ForeignKey(Orden)
     codigo_repuesto = models.ForeignKey(Repuesto)
-
-
 
 
 
@@ -116,7 +135,7 @@ class InventarioVehiculo(models.Model):
     precio_unidad = models.PositiveIntegerField()
 
 
-class RevisionVehiculo():
+class RevisionVehiculo(models.Model):
     codigo_revision = models.AutoField(primary_key=True)
     codigo_cliente = models.ForeignKey(Cliente)
     codigo_vehiculo = models.ForeignKey(Vehiculo)
@@ -130,3 +149,5 @@ class RevisionVehiculo():
 @receiver(post_delete, sender=Vehiculo)
 def img_vehiculo_delete(sender, instance, **kwargs):
     instance.photo.delete(False)
+
+
