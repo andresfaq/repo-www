@@ -326,12 +326,6 @@ class RevisionVehiculoFactory(factory.django.DjangoModelFactory):
 
 
 
-
-
-
-
-
-
 #===================================================
 #Generador de InventarioVehiculos
 class InventarioVehiculoFactory(factory.django.DjangoModelFactory):
@@ -347,4 +341,26 @@ class InventarioVehiculoFactory(factory.django.DjangoModelFactory):
 
 
 
+#===================================================
+#Generador de Ventas
+class VentaFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.Venta
 
+    codigo_vendedor = factory.fuzzy.FuzzyChoice(models.Vendedor.objects.all())
+    codigo_cliente = factory.fuzzy.FuzzyChoice(models.Cliente.objects.all())
+    codigo_vehiculo = factory.fuzzy.FuzzyChoice(models.Vehiculo.objects.all())
+    porcentaje_descuento = factory.fuzzy.FuzzyInteger(1, 100)
+#===================================================
+
+#===================================================
+#Generador de Cotizaciones
+class CotizacionFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.Cotizacion
+
+    codigo_vendedor = factory.fuzzy.FuzzyChoice(models.Vendedor.objects.all())
+    codigo_vehiculo = factory.fuzzy.FuzzyChoice(models.Vehiculo.objects.all())
+    fecha_cotizacion = factory.fuzzy.FuzzyDate(datetime.date(2016, 1, 1))
+    porcentaje_descuento = factory.fuzzy.FuzzyInteger(1, 100)
+#===================================================

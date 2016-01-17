@@ -1,5 +1,17 @@
-from administracion.factories import SuperUserFactory, GerenteFactory, VendedorFactory, JefeTallerFactory, ClienteFactory, OrdenFactory, RepuestoFactory, RepuestosPorOrdenFactory, InventarioRepuestoFactory, VehiculoFactory, RevisionVehiculoFactory, InventarioVehiculoFactory
-from administracion.models import User, Sucursal, Gerente, Vendedor, JefeTaller, Cliente, Orden, Repuesto, RepuestosPorOrden, InventarioRepuesto, Vehiculo, RevisionVehiculo, InventarioVehiculo
+from administracion.factories import SuperUserFactory, GerenteFactory, VendedorFactory, JefeTallerFactory, ClienteFactory, OrdenFactory, RepuestoFactory, RepuestosPorOrdenFactory, InventarioRepuestoFactory, VehiculoFactory, RevisionVehiculoFactory, InventarioVehiculoFactory, VentaFactory, CotizacionFactory
+from administracion.models import User, Sucursal, Gerente, Vendedor, JefeTaller, Cliente, Orden, Repuesto, RepuestosPorOrden, InventarioRepuesto, Vehiculo, RevisionVehiculo, InventarioVehiculo, Venta, Cotizacion
+
+
+#Eliminando Venta
+vent = Venta.objects.all()
+for x in vent:
+    x.delete()
+
+#Eliminando Cotizaciones
+cot = Cotizacion.objects.all()
+for x in cot:
+    x.delete()
+
 
 #Eliminando RevisionVehiculo
 reveh = RevisionVehiculo.objects.all()
@@ -116,5 +128,11 @@ for x in range(150):
     Repuesto.save(RepuestosPorOrdenFactory.create())
 
 
+#Creando Ventas
+for x in range(100):
+    Venta.save(VentaFactory.create())
 
 
+#Creando Cotizaciones
+for x in range(100):
+    Cotizacion.save(CotizacionFactory.create())
