@@ -3,3 +3,4 @@ psycopg2
 Pillow
 django-tastypie
 fake-factory
+factory-boy
