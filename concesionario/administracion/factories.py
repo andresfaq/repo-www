@@ -314,10 +314,8 @@ class RevisionVehiculoFactory(factory.django.DjangoModelFactory):
         model = models.RevisionVehiculo
 
 
-    codigo_cliente = factory.Iterator(models.Cliente.objects.all())
-    codigo_vehiculo = factory.fuzzy.FuzzyChoice(models.Vehiculo.objects.all())
+    codigo_venta = factory.fuzzy.FuzzyChoice(models.Venta.objects.all())
     codigo_orden = factory.Iterator(models.Orden.objects.all())
-    placa = factory.Sequence(lambda n: "ABC%03d" % n)
     fecha_revision = factory.fuzzy.FuzzyDate(datetime.date(2015, 1, 1))
     kilometraje = factory.fuzzy.FuzzyInteger(1000, 999999)
     fecha_cambio_aceite = factory.fuzzy.FuzzyDate(datetime.date(2016, 1, 1))
@@ -351,6 +349,8 @@ class VentaFactory(factory.django.DjangoModelFactory):
     codigo_cliente = factory.fuzzy.FuzzyChoice(models.Cliente.objects.all())
     codigo_vehiculo = factory.fuzzy.FuzzyChoice(models.Vehiculo.objects.all())
     porcentaje_descuento = factory.fuzzy.FuzzyInteger(1, 100)
+    fecha_venta = factory.fuzzy.FuzzyDate(datetime.date(2016, 1, 1))
+    placa = factory.Sequence(lambda n: "ABC%03d" % n)
 #===================================================
 
 #===================================================

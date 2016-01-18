@@ -115,7 +115,9 @@ class Venta(models.Model):
     codigo_vendedor = models.ForeignKey(Vendedor)
     codigo_cliente = models.ForeignKey(Cliente)
     codigo_vehiculo = models.ForeignKey(Vehiculo)
+    placa = models.CharField(max_length=6)
     porcentaje_descuento = models.IntegerField(default=0, validators=[MinValueValidator(0),MaxValueValidator(100)])
+    fecha_venta = models.DateField()
 
 
 class Cotizacion(models.Model):
@@ -137,10 +139,8 @@ class InventarioVehiculo(models.Model):
 
 class RevisionVehiculo(models.Model):
     codigo_revision = models.AutoField(primary_key=True)
-    codigo_cliente = models.ForeignKey(Cliente)
-    codigo_vehiculo = models.ForeignKey(Vehiculo)
+    codigo_venta = models.ForeignKey(Venta)
     codigo_orden = models.OneToOneField(Orden)
-    placa = models.CharField(max_length=6)
     fecha_revision = models.DateField()
     kilometraje = models.PositiveIntegerField()
     fecha_cambio_aceite = models.DateField()

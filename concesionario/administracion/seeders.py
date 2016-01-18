@@ -105,11 +105,16 @@ for x in range(20):
     Vehiculo.save(VehiculoFactory.create())
 
 
+#Creando Ventas
+for x in range(50):
+    Venta.save(VentaFactory.create())
+
+
 #Creando RevisionVehiculo = #Ordenes
 for x in range(60):
     RevisionVehiculo.save(RevisionVehiculoFactory.create())
 
-#Creando InventarioVehiculo = #Vehiculo
+#Creando InventarioVehiculo = #Vehiculos
 for x in range(20):
     InventarioVehiculo.save(InventarioVehiculoFactory.create())
 
@@ -119,7 +124,7 @@ for x in range(20):
 for x in range(120):
     Repuesto.save(RepuestoFactory.create())
 
-#Creando InventarioRepuesto << Se crea la misma cantidad que repuestos o menor
+#Creando InventarioRepuesto = #Repuestos
 for x in range(120):
     InventarioRepuesto.save(InventarioRepuestoFactory.create())
 
@@ -128,11 +133,9 @@ for x in range(150):
     Repuesto.save(RepuestosPorOrdenFactory.create())
 
 
-#Creando Ventas
-for x in range(100):
-    Venta.save(VentaFactory.create())
+
 
 
 #Creando Cotizaciones
-for x in range(100):
+for x in range(50):
     Cotizacion.save(CotizacionFactory.create())

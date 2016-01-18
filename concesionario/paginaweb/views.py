@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as log, logout as lout
 from administracion.views import inicio as index_administracion
 from ventas.views import inicio as index_ventas
+from clientes.views import inicio as index_clientes
 
 
 
@@ -38,6 +39,9 @@ def login(request):
 
             if es_vendedor(user):
                 return redirect(index_ventas) #ventas/index.html
+
+            if es_cliente(user):
+                return redirect(index_clientes) #clientes/index.html
 
         else:
             return redirect(home) #paginaweb/index.html
