@@ -71,10 +71,13 @@
 		[python manage.py makemigrations] 
 		[python manage.py migrate]
 		[python manage.py syncdb] # Tastypie
+		
+	6.5 Poblar la BD
+		[python manage.py shell < administracion/seeders.py]
 
-	6.5 Correr servidor [python manage.py runserver]
+	6.6 Correr servidor [python manage.py runserver]
 	
-	6.6 Abrir navegador e ingresar a la direccion 127.0.0.1:8000 o localhost:8000 
+	6.7 Abrir navegador e ingresar a la direccion 127.0.0.1:8000 o localhost:8000 
 
 #### NOTAS ####
 
@@ -92,22 +95,3 @@
     [alter user postgres with password 'MiNuevoPassword';]
 
 
-
-
-### Esto es solo pruebas, no hagan nada de lo que esta ahí. :v 
-------------------------------------------------------------------------
-
-#Generacion de datos
-Instalacion django-autofixture
-
-pip install django-autofixture
-Add to installed apps: INSTALLED_APPS += ['autofixture']
-	
-python manage.py shell < administracion/seeders.py
-
-
-
-pip install django-data-faker
-
-
-------------------------------------------------------------------------
