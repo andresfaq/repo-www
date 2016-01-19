@@ -1,14 +1,27 @@
 {% extends 'taller/base.html' %}
 
 {% block contenido %}
-    <a>ajaaajajaj</a>
-    <form action="//" method="post">{% csrf_token %}
-    <ul>
+    {% if form.errors %}
+    <p style="color: red">
+    Por favor corrige lo siguiente:
+    </p>
+    {% endif %}
+    <div >
+        <form id='formTallerEntrada'action="" method="post">{% csrf_token %}
+        <div class="form-group">
+           {{form.nombreCliente.label}}
+           {{form.nombreCliente}}
+        </div>
+        <div class="form-group">
+           {{form.apellidoCliente.label}}
+           {{form.apellidoCliente}}
+        </div>
+        <div class="form-group">
+           {{form.mensaje.label}}
+           {{form.mensaje}}
+        </div>
 
-    {{ form.as_ul }}
-
-    </ul>
-
-    <input type="submit" name="submit" value="ingresar Vehiculo">
-    </form>
+        <input type="submit" name="submit" value="ingresar Vehiculo">
+        </form>
+    </div>
 {% endblock%}

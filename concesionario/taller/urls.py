@@ -1,9 +1,7 @@
 from django.conf.urls import patterns, url, include
-from taller import views
-
-
+from concesionario.taller import views
 
 urlpatterns = patterns('concesionario.taller.views',
                        url(r'^$', views.inicio),
-                       url(r'^ingresarCarro/$', views.ingresarVehiculo, name='ingresarCarroTaller')
+                       url(r'^ingresarVehiculo/$', views.ingresarVehiculo, name='ingresarVehiculo')
                        )
