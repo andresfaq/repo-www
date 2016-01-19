@@ -274,6 +274,7 @@ class RepuestosPorOrdenFactory(factory.django.DjangoModelFactory):
 
     codigo_orden = factory.fuzzy.FuzzyChoice(models.Orden.objects.all())
     codigo_repuesto = factory.fuzzy.FuzzyChoice(models.Repuesto.objects.all())
+    cantidad = factory.fuzzy.FuzzyInteger(1, 5)
 #===================================================
 
 
@@ -314,21 +315,13 @@ class RevisionVehiculoFactory(factory.django.DjangoModelFactory):
         model = models.RevisionVehiculo
 
 
-    codigo_cliente = factory.Iterator(models.Cliente.objects.all())
-    codigo_vehiculo = factory.fuzzy.FuzzyChoice(models.Vehiculo.objects.all())
+    codigo_venta = factory.fuzzy.FuzzyChoice(models.Venta.objects.all())
     codigo_orden = factory.Iterator(models.Orden.objects.all())
-    placa = factory.Sequence(lambda n: "ABC%03d" % n)
     fecha_revision = factory.fuzzy.FuzzyDate(datetime.date(2015, 1, 1))
     kilometraje = factory.fuzzy.FuzzyInteger(1000, 999999)
     fecha_cambio_aceite = factory.fuzzy.FuzzyDate(datetime.date(2016, 1, 1))
 
 #===================================================
-
-
-
-
-
-
 
 
 
@@ -347,4 +340,28 @@ class InventarioVehiculoFactory(factory.django.DjangoModelFactory):
 
 
 
+#===================================================
+#Generador de Ventas
+class VentaFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.Venta
 
+    codigo_vendedor = factory.fuzzy.FuzzyChoice(models.Vendedor.objects.all())
+    codigo_cliente = factory.fuzzy.FuzzyChoice(models.Cliente.objects.all())
+    codigo_vehiculo = factory.fuzzy.FuzzyChoice(models.Vehiculo.objects.all())
+    porcentaje_descuento = factory.fuzzy.FuzzyInteger(1, 100)
+    fecha_venta = factory.fuzzy.FuzzyDate(datetime.date(2016, 1, 1))
+    placa = factory.Sequence(lambda n: "ABC%03d" % n)
+#===================================================
+
+#===================================================
+#Generador de Cotizaciones
+class CotizacionFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = models.Cotizacion
+
+    codigo_vendedor = factory.fuzzy.FuzzyChoice(models.Vendedor.objects.all())
+    codigo_vehiculo = factory.fuzzy.FuzzyChoice(models.Vehiculo.objects.all())
+    fecha_cotizacion = factory.fuzzy.FuzzyDate(datetime.date(2016, 1, 1))
+    porcentaje_descuento = factory.fuzzy.FuzzyInteger(1, 100)
+#===================================================

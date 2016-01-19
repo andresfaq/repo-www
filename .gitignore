@@ -13,3 +13,6 @@ concesionario/idea
 ## File-based project format:
 *.ipr
 *.iws
+
+#Ignorando imagenes generadas por factory-boy
+concesionario/media/vehiculos/*.jpg

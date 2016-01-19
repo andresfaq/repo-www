@@ -1,5 +1,17 @@
-from administracion.factories import SuperUserFactory, GerenteFactory, VendedorFactory, JefeTallerFactory, ClienteFactory, OrdenFactory, RepuestoFactory, RepuestosPorOrdenFactory, InventarioRepuestoFactory, VehiculoFactory, RevisionVehiculoFactory, InventarioVehiculoFactory
-from administracion.models import User, Sucursal, Gerente, Vendedor, JefeTaller, Cliente, Orden, Repuesto, RepuestosPorOrden, InventarioRepuesto, Vehiculo, RevisionVehiculo, InventarioVehiculo
+from administracion.factories import SuperUserFactory, GerenteFactory, VendedorFactory, JefeTallerFactory, ClienteFactory, OrdenFactory, RepuestoFactory, RepuestosPorOrdenFactory, InventarioRepuestoFactory, VehiculoFactory, RevisionVehiculoFactory, InventarioVehiculoFactory, VentaFactory, CotizacionFactory
+from administracion.models import User, Sucursal, Gerente, Vendedor, JefeTaller, Cliente, Orden, Repuesto, RepuestosPorOrden, InventarioRepuesto, Vehiculo, RevisionVehiculo, InventarioVehiculo, Venta, Cotizacion
+
+
+#Eliminando Venta
+vent = Venta.objects.all()
+for x in vent:
+    x.delete()
+
+#Eliminando Cotizaciones
+cot = Cotizacion.objects.all()
+for x in cot:
+    x.delete()
+
 
 #Eliminando RevisionVehiculo
 reveh = RevisionVehiculo.objects.all()
@@ -93,11 +105,16 @@ for x in range(20):
     Vehiculo.save(VehiculoFactory.create())
 
 
+#Creando Ventas
+for x in range(50):
+    Venta.save(VentaFactory.create())
+
+
 #Creando RevisionVehiculo = #Ordenes
 for x in range(60):
     RevisionVehiculo.save(RevisionVehiculoFactory.create())
 
-#Creando InventarioVehiculo = #Vehiculo
+#Creando InventarioVehiculo = #Vehiculos
 for x in range(20):
     InventarioVehiculo.save(InventarioVehiculoFactory.create())
 
@@ -107,7 +124,7 @@ for x in range(20):
 for x in range(120):
     Repuesto.save(RepuestoFactory.create())
 
-#Creando InventarioRepuesto << Se crea la misma cantidad que repuestos o menor
+#Creando InventarioRepuesto = #Repuestos
 for x in range(120):
     InventarioRepuesto.save(InventarioRepuestoFactory.create())
 
@@ -118,3 +135,7 @@ for x in range(150):
 
 
 
+
+#Creando Cotizaciones
+for x in range(50):
+    Cotizacion.save(CotizacionFactory.create())
