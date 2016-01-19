@@ -91,6 +91,7 @@ class Repuesto(models.Model):
 class RepuestosPorOrden(models.Model):
     codigo_orden = models.ForeignKey(Orden)
     codigo_repuesto = models.ForeignKey(Repuesto)
+    cantidad = models.PositiveIntegerField()
 
 
 

@@ -274,6 +274,7 @@ class RepuestosPorOrdenFactory(factory.django.DjangoModelFactory):
 
     codigo_orden = factory.fuzzy.FuzzyChoice(models.Orden.objects.all())
     codigo_repuesto = factory.fuzzy.FuzzyChoice(models.Repuesto.objects.all())
+    cantidad = factory.fuzzy.FuzzyInteger(1, 5)
 #===================================================
 
 
