@@ -16,3 +16,6 @@ concesionario/idea
 
 #Ignorando imagenes generadas por factory-boy
 concesionario/media/vehiculos/*.jpg
+
+#Ignorando Migraciones
+concesionario/administracion/migrations/*.py

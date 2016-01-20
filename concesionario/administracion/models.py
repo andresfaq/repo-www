@@ -18,18 +18,18 @@ User.add_to_class('telefono', models.PositiveIntegerField(null=True))
 
 
 # Empleado hereda de usuario, por tanto hereda sus atributos
-class Empleado(models.Model):
-    id_usuario = models.OneToOneField(User)
+class Empleado(User):
+    #id_usuario = models.OneToOneField(User)
     id_empleado = models.AutoField(primary_key=True)
-    inicio_contrato = models.DateField(max_length=8)
-    fin_contraro = models.DateField(max_length=8)
-    salario = models.PositiveIntegerField()
+    inicio_contrato = models.DateField(max_length=8, null=True)
+    fin_contraro = models.DateField(max_length=8, null=True)
+    salario = models.PositiveIntegerField(null=True)
 
     def __str__(self):
         return str(self.id_usuario)
 
-class Cliente(models.Model):
-    id_usuario = models.OneToOneField(User)
+class Cliente(Empleado):
+    #id_usuario = models.OneToOneField(User)
     codigo_cliente = models.AutoField(primary_key=True)
 
     def __str__(self):
@@ -44,26 +44,29 @@ class Sucursal(models.Model):
     def __str__(self):
         return self.nombre
 
-class Gerente(models.Model):
-    codigo_empleado = models.OneToOneField(Empleado)
+class Gerente(Empleado):
+    #codigo_empleado = models.OneToOneField(Empleado)
     codigo_gerente = models.AutoField(primary_key=True)
     codigo_sucursal = models.OneToOneField(Sucursal)
 
+
     def __str__(self):
         return str(self.codigo_empleado)
 
-class Vendedor(models.Model):
-    codigo_empleado = models.OneToOneField(Empleado)
+class Vendedor(Empleado):
+    #codigo_empleado = models.OneToOneField(Empleado)
     codigo_vendedor = models.AutoField(primary_key=True)
     codigo_sucursal = models.ForeignKey(Sucursal)
+    porcentaje_comision = models.IntegerField(default=0, validators=[MinValueValidator(0),MaxValueValidator(100)])
 
     def __str__(self):
         return str(self.codigo_empleado)
 
-class JefeTaller(models.Model):
-    codigo_empleado = models.OneToOneField(Empleado)
+class JefeTaller(Empleado):
+    #codigo_empleado = models.OneToOneField(Empleado)
     codigo_jefe_taller = models.AutoField(primary_key=True)
     codigo_sucursal = models.ForeignKey(Sucursal)
+
 
     def __str__(self):
         return str(self.codigo_empleado)

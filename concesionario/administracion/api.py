@@ -24,16 +24,19 @@ class GerenteResource(ModelResource):
     class Meta:
         queryset = models.Gerente.objects.all()
         resource_name = 'gerente'
+        excludes = ['password', 'is_active', 'is_staff', 'is_superuser']
 
 class VendedorResource(ModelResource):
     class Meta:
         queryset = models.Vendedor.objects.all()
         resource_name = 'vendedor'
+        excludes = ['password', 'is_active', 'is_staff', 'is_superuser']
 
 class JefeTallerResource(ModelResource):
     class Meta:
         queryset = models.JefeTaller.objects.all()
         resource_name = 'jefetaller'
+        excludes = ['password', 'is_active', 'is_staff', 'is_superuser']
 
 class ClienteResource(ModelResource):
     class Meta:
