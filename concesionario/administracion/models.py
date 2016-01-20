@@ -25,18 +25,26 @@ class Empleado(User):
     fin_contraro = models.DateField(max_length=8, null=True)
     salario = models.PositiveIntegerField(null=True)
 
-    def __str__(self):
-        return str(self.id_usuario)
+#    def __str__(self):
+#        return str(self.id_usuario)
 
 class Cliente(Empleado):
+    class Meta:
+        verbose_name = 'Cliente'
+        verbose_name_plural = 'Clientes'
+
     #id_usuario = models.OneToOneField(User)
     codigo_cliente = models.AutoField(primary_key=True)
 
-    def __str__(self):
-        return str(self.id_usuario)
+#    def __str__(self):
+#        return str(self.codigo_cliente)
 
 
 class Sucursal(models.Model):
+    class Meta:
+        verbose_name = 'Sucursal'
+        verbose_name_plural = 'Sucursales'
+
     codigo_sucursal = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100, null=False)
     direccion = models.CharField(max_length=150, null=False)
@@ -45,31 +53,43 @@ class Sucursal(models.Model):
         return self.nombre
 
 class Gerente(Empleado):
+    class Meta:
+        verbose_name = 'Gerente'
+        verbose_name_plural = 'Gerentes'
+
     #codigo_empleado = models.OneToOneField(Empleado)
     codigo_gerente = models.AutoField(primary_key=True)
     codigo_sucursal = models.OneToOneField(Sucursal)
 
 
-    def __str__(self):
-        return str(self.codigo_empleado)
+#    def __str__(self):
+#        return str(self.codigo_empleado)
 
 class Vendedor(Empleado):
+    class Meta:
+        verbose_name = 'Vendedor'
+        verbose_name_plural = 'Vendedores'
+
     #codigo_empleado = models.OneToOneField(Empleado)
     codigo_vendedor = models.AutoField(primary_key=True)
     codigo_sucursal = models.ForeignKey(Sucursal)
     porcentaje_comision = models.IntegerField(default=0, validators=[MinValueValidator(0),MaxValueValidator(100)])
 
-    def __str__(self):
-        return str(self.codigo_empleado)
+#    def __str__(self):
+#        return str(self.codigo_empleado)
 
 class JefeTaller(Empleado):
+    class Meta:
+        verbose_name = 'Jefe Taller'
+        verbose_name_plural = 'Jefes Taller'
+
     #codigo_empleado = models.OneToOneField(Empleado)
     codigo_jefe_taller = models.AutoField(primary_key=True)
     codigo_sucursal = models.ForeignKey(Sucursal)
 
 
-    def __str__(self):
-        return str(self.codigo_empleado)
+#    def __str__(self):
+#        return str(self.codigo_empleado)
 
 
 class Orden(models.Model):

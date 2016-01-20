@@ -1,5 +1,7 @@
+from django.contrib.auth.models import Group, Permission
 from administracion.factories import SuperUserFactory, GerenteFactory, VendedorFactory, JefeTallerFactory, ClienteFactory, OrdenFactory, RepuestoFactory, RepuestosPorOrdenFactory, InventarioRepuestoFactory, VehiculoFactory, RevisionVehiculoFactory, InventarioVehiculoFactory, VentaFactory, CotizacionFactory
 from administracion.models import User, Sucursal, Gerente, Vendedor, JefeTaller, Cliente, Orden, Repuesto, RepuestosPorOrden, InventarioRepuesto, Vehiculo, RevisionVehiculo, InventarioVehiculo, Venta, Cotizacion
+
 
 
 #Eliminando Venta
@@ -73,6 +75,12 @@ usr = User.objects.all()
 for x in usr:
     x.delete()
 
+#eliminando grupos
+
+grp = Group.objects.all()
+for x in grp:
+    x.delete()
+
 #===================================================================================
 
 
@@ -132,10 +140,33 @@ for x in range(120):
 for x in range(150):
     Repuesto.save(RepuestosPorOrdenFactory.create())
 
-
-
-
-
 #Creando Cotizaciones
 for x in range(50):
     Cotizacion.save(CotizacionFactory.create())
+
+
+# Creacion y asignacion de grupos [falta asignar permisos por grupo]
+
+grupo_gerentes = Group.objects.get_or_create(name='Gerentes')
+grupo_vendedores = Group.objects.get_or_create(name='Vendedores')
+grupo_jefestaller = Group.objects.get_or_create(name='JefesTaller')
+grupo_clientes = Group.objects.get_or_create(name='Clientes')
+
+clientes = Cliente.objects.all()
+gerentes = Gerente.objects.all()
+jefestaller = JefeTaller.objects.all()
+vendedores = Vendedor.objects.all()
+
+
+for x in clientes:
+    x.groups = [Group.objects.get(name='Clientes')]
+
+for x in gerentes:
+    x.groups = [Group.objects.get(name='Gerentes')]
+
+for x in vendedores:
+    x.groups = [Group.objects.get(name='Vendedores')]
+
+for x in jefestaller:
+    x.groups = [Group.objects.get(name='JefesTaller')]
+
