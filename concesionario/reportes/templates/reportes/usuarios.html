@@ -10,13 +10,14 @@
         var data = new google.visualization.DataTable();
 
         data.addColumn('string', 'Nombre');
-        data.addColumn('number', 'salarios');
-        data.addColumn('boolean', 'Staff');
+        data.addColumn('string', 'Cedula');
+        data.addColumn('string', 'Estado');
+        data.addColumn('string', 'Correo');
         data.addRows([
 
         	{% for usuario in usuarios %}
         		
-          		[ '{{ usuario.username }}',  parseInt('{{usuario.telefono}}'), ('{{usuario.is_staff}}' === 'True')] 
+          		[ '{{ usuario.first_name }}', '{{usuario.cedula}}', '{{usuario.username}}', '{{usuario.email}}'] 
           		{% if not forloop.last %} 
           		,  
           		{% endif %}

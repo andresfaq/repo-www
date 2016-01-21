@@ -18,25 +18,33 @@ User.add_to_class('telefono', models.PositiveIntegerField(null=True))
 
 
 # Empleado hereda de usuario, por tanto hereda sus atributos
-class Empleado(models.Model):
-    id_usuario = models.OneToOneField(User)
+class Empleado(User):
+    #id_usuario = models.OneToOneField(User)
     id_empleado = models.AutoField(primary_key=True)
-    inicio_contrato = models.DateField(max_length=8)
-    fin_contraro = models.DateField(max_length=8)
-    salario = models.PositiveIntegerField()
+    inicio_contrato = models.DateField(max_length=8, null=True)
+    fin_contraro = models.DateField(max_length=8, null=True)
+    salario = models.PositiveIntegerField(null=True)
 
-    def __str__(self):
-        return str(self.id_usuario)
+#    def __str__(self):
+#        return str(self.id_usuario)
 
-class Cliente(models.Model):
-    id_usuario = models.OneToOneField(User)
+class Cliente(Empleado):
+    class Meta:
+        verbose_name = 'Cliente'
+        verbose_name_plural = 'Clientes'
+
+    #id_usuario = models.OneToOneField(User)
     codigo_cliente = models.AutoField(primary_key=True)
 
-    def __str__(self):
-        return str(self.id_usuario)
+#    def __str__(self):
+#        return str(self.codigo_cliente)
 
 
 class Sucursal(models.Model):
+    class Meta:
+        verbose_name = 'Sucursal'
+        verbose_name_plural = 'Sucursales'
+
     codigo_sucursal = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100, null=False)
     direccion = models.CharField(max_length=150, null=False)
@@ -44,29 +52,44 @@ class Sucursal(models.Model):
     def __str__(self):
         return self.nombre
 
-class Gerente(models.Model):
-    codigo_empleado = models.OneToOneField(Empleado)
+class Gerente(Empleado):
+    class Meta:
+        verbose_name = 'Gerente'
+        verbose_name_plural = 'Gerentes'
+
+    #codigo_empleado = models.OneToOneField(Empleado)
     codigo_gerente = models.AutoField(primary_key=True)
     codigo_sucursal = models.OneToOneField(Sucursal)
 
-    def __str__(self):
-        return str(self.codigo_empleado)
 
-class Vendedor(models.Model):
-    codigo_empleado = models.OneToOneField(Empleado)
+#    def __str__(self):
+#        return str(self.codigo_empleado)
+
+class Vendedor(Empleado):
+    class Meta:
+        verbose_name = 'Vendedor'
+        verbose_name_plural = 'Vendedores'
+
+    #codigo_empleado = models.OneToOneField(Empleado)
     codigo_vendedor = models.AutoField(primary_key=True)
     codigo_sucursal = models.ForeignKey(Sucursal)
+    porcentaje_comision = models.IntegerField(default=0, validators=[MinValueValidator(0),MaxValueValidator(100)])
 
-    def __str__(self):
-        return str(self.codigo_empleado)
+#    def __str__(self):
+#        return str(self.codigo_empleado)
 
-class JefeTaller(models.Model):
-    codigo_empleado = models.OneToOneField(Empleado)
+class JefeTaller(Empleado):
+    class Meta:
+        verbose_name = 'Jefe Taller'
+        verbose_name_plural = 'Jefes Taller'
+
+    #codigo_empleado = models.OneToOneField(Empleado)
     codigo_jefe_taller = models.AutoField(primary_key=True)
     codigo_sucursal = models.ForeignKey(Sucursal)
 
-    def __str__(self):
-        return str(self.codigo_empleado)
+
+#    def __str__(self):
+#        return str(self.codigo_empleado)
 
 
 class Orden(models.Model):

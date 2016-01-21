@@ -27,171 +27,44 @@ class SuperUserFactory(factory.Factory):
 
 #===================================================
 ###Generadores de usuarios###
-
-#Genera usuarios standar
-# class UserFactory(factory.Factory):
-#
-#     class Meta:
-#         model = User
-#         #inline_args = ('username')
-#
-#     username = factory.Sequence(lambda n: "Usuario %03d" % n)
-#     first_name = factory.Faker('first_name')
-#     last_name = factory.Faker('last_name')
-#     password = make_password(username)
-#     is_active = True
-#     cedula = factory.fuzzy.FuzzyInteger(10000000, 999999999)
-#     direccion = factory.Faker('address')
-#     email = factory.Faker('email')
-#     fecha_de_nacimiento = factory.fuzzy.FuzzyDate(datetime.date(1950, 1, 1), datetime.date(2000, 12, 31))
-#     telefono = factory.fuzzy.FuzzyInteger(1000000, 9999999)
-
-#Genera usuarios con username Empleadoxxx
-class UserEmpleadoFactory(factory.django.DjangoModelFactory):
+class UserFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = User
 
-    username = factory.Sequence(lambda n: "Empleado%03d" % n)
+    username = factory.Sequence(lambda n: "Usuario%03d" % n)
     first_name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
-    password = make_password(username)
+    password = make_password('Usuario')
     is_active = True
     cedula = factory.fuzzy.FuzzyInteger(10000000, 999999999)
     direccion = factory.Faker('address')
     email = factory.Faker('email')
     fecha_de_nacimiento = factory.fuzzy.FuzzyDate(datetime.date(1950, 1, 1), datetime.date(2000, 12, 31))
     telefono = factory.fuzzy.FuzzyInteger(1000000, 9999999)
-
-class UserClienteFactory(factory.django.DjangoModelFactory):
-
-    class Meta:
-        model = User
-
-    username = factory.Sequence(lambda n: "Cliente%03d" % n)
-    first_name = factory.Faker('first_name')
-    last_name = factory.Faker('last_name')
-    password = make_password('Cliente')
-    is_active = True
-    cedula = factory.fuzzy.FuzzyInteger(10000000, 999999999)
-    direccion = factory.Faker('address')
-    email = factory.Faker('email')
-    fecha_de_nacimiento = factory.fuzzy.FuzzyDate(datetime.date(1950, 1, 1), datetime.date(2000, 12, 31))
-    telefono = factory.fuzzy.FuzzyInteger(1000000, 9999999)
-
-#Genera usuarios con username Gerentexxx
-class UserGerenteFactory(factory.django.DjangoModelFactory):
-
-    class Meta:
-        model = User
-
-    username = factory.Sequence(lambda n: "Gerente%03d" % n)
-    first_name = factory.Faker('first_name')
-    last_name = factory.Faker('last_name')
-    password = make_password('Gerente')
-    is_active = True
-    cedula = factory.fuzzy.FuzzyInteger(10000000, 999999999)
-    direccion = factory.Faker('address')
-    email = factory.Faker('email')
-    fecha_de_nacimiento = factory.fuzzy.FuzzyDate(datetime.date(1950, 1, 1), datetime.date(2000, 12, 31))
-    telefono = factory.fuzzy.FuzzyInteger(1000000, 9999999)
-
-#Genera usuarios con username Vendedorxxx
-class UserVendedorFactory(factory.django.DjangoModelFactory):
-
-    class Meta:
-        model = User
-
-    username = factory.Sequence(lambda n: "Vendedor%03d" % n)
-    first_name = factory.Faker('first_name')
-    last_name = factory.Faker('last_name')
-    password = make_password('Vendedor')
-    is_active = True
-    cedula = factory.fuzzy.FuzzyInteger(10000000, 999999999)
-    direccion = factory.Faker('address')
-    email = factory.Faker('email')
-    fecha_de_nacimiento = factory.fuzzy.FuzzyDate(datetime.date(1950, 1, 1), datetime.date(2000, 12, 31))
-    telefono = factory.fuzzy.FuzzyInteger(1000000, 9999999)
-
-#Genera usuarios con username JefeTallerxxx
-class UserJefeTallerFactory(factory.django.DjangoModelFactory):
-
-    class Meta:
-        model = User
-
-    username = factory.Sequence(lambda n: "JefeTaller%03d" % n)
-    first_name = factory.Faker('first_name')
-    last_name = factory.Faker('last_name')
-    password = make_password('JefeTaller')
-    is_active = True
-    cedula = factory.fuzzy.FuzzyInteger(10000000, 999999999)
-    direccion = factory.Faker('address')
-    email = factory.Faker('email')
-    fecha_de_nacimiento = factory.fuzzy.FuzzyDate(datetime.date(1950, 1, 1), datetime.date(2000, 12, 31))
-    telefono = factory.fuzzy.FuzzyInteger(1000000, 9999999)
-
-#===================================================
-
-
 
 
 #===================================================
 #Generadores de Empleados
-# class EmpleadoFactory(factory.Factory):
-#
-#     class Meta:
-#         model = models.Empleado
-#
-#     id_usuario = factory.SubFactory(UserEmpleadoFactory)
-#     inicio_contrato = factory.fuzzy.FuzzyDate(datetime.date(2000, 1, 1))
-#     fin_contraro = factory.fuzzy.FuzzyDate(datetime.date(2016, 1, 1))
-#     salario = factory.fuzzy.FuzzyInteger(1000000, 9999999)
-
-
-class EmpleadoGerenteFactory(factory.django.DjangoModelFactory):
+class EmpleadoFactory(UserFactory):
 
     class Meta:
         model = models.Empleado
 
-    id_usuario = factory.SubFactory(UserGerenteFactory)
     inicio_contrato = factory.fuzzy.FuzzyDate(datetime.date(2000, 1, 1))
     fin_contraro = factory.fuzzy.FuzzyDate(datetime.date(2016, 1, 1))
     salario = factory.fuzzy.FuzzyInteger(1000000, 9999999)
-
-
-class EmpleadoVendedorFactory(factory.django.DjangoModelFactory):
-
-    class Meta:
-        model = models.Empleado
-
-    id_usuario = factory.SubFactory(UserVendedorFactory)
-    inicio_contrato = factory.fuzzy.FuzzyDate(datetime.date(2000, 1, 1))
-    fin_contraro = factory.fuzzy.FuzzyDate(datetime.date(2016, 1, 1))
-    salario = factory.fuzzy.FuzzyInteger(1000000, 9999999)
-
-
-class EmpleadoJefeTallerFactory(factory.django.DjangoModelFactory):
-
-    class Meta:
-        model = models.Empleado
-
-    id_usuario = factory.SubFactory(UserJefeTallerFactory)
-    inicio_contrato = factory.fuzzy.FuzzyDate(datetime.date(2000, 1, 1))
-    fin_contraro = factory.fuzzy.FuzzyDate(datetime.date(2016, 1, 1))
-    salario = factory.fuzzy.FuzzyInteger(1000000, 9999999)
-
-#===================================================
-
-
 
 
 #===================================================
 #Generador de Clientes
-class ClienteFactory(factory.django.DjangoModelFactory):
+class ClienteFactory(UserFactory):
     class Meta:
         model = models.Cliente
 
-    id_usuario = factory.SubFactory(UserClienteFactory)
+    #id_usuario = factory.SubFactory(UserClienteFactory)
+    username = factory.Sequence(lambda n: "Cliente%03d" % n)
+    password = make_password('Cliente')
 #===================================================
 
 #===================================================
@@ -207,37 +80,35 @@ class SucursalFactory(factory.django.DjangoModelFactory):
 
 #===================================================
 #Genreador de Gerentes
-class GerenteFactory(factory.django.DjangoModelFactory):
+class GerenteFactory(EmpleadoFactory):
     class Meta:
         model = models.Gerente
-
-    codigo_empleado = factory.SubFactory(EmpleadoGerenteFactory)
-    #codigo_gerente << Creado automaticamente por la BD
+    username = factory.Sequence(lambda n: "Gerente%03d" % n)
+    password = make_password('Gerente')
     codigo_sucursal = factory.SubFactory(SucursalFactory)
 #===================================================
 
 
 #===================================================
 #Generador de Vendedores
-class VendedorFactory(factory.django.DjangoModelFactory):
+class VendedorFactory(EmpleadoFactory):
     class Meta:
         model = models.Vendedor
-
-    codigo_empleado = factory.SubFactory(EmpleadoVendedorFactory)
+    username = factory.Sequence(lambda n: "Vendedor%03d" % n)
+    password = make_password('Vendedor')
     codigo_sucursal = factory.Iterator(models.Sucursal.objects.all())
-
+    porcentaje_comision = factory.fuzzy.FuzzyInteger(1, 100)
 #===================================================
 
 
 #===================================================
 #Generador de JefesTaller
-class JefeTallerFactory(factory.django.DjangoModelFactory):
+class JefeTallerFactory(EmpleadoFactory):
     class Meta:
         model = models.JefeTaller
-
-    codigo_empleado = factory.SubFactory(EmpleadoJefeTallerFactory)
+    username = factory.Sequence(lambda n: "JefeTaller%03d" % n)
+    password = make_password('JefeTaller')
     codigo_sucursal = factory.Iterator(models.Sucursal.objects.all())
-
 #===================================================
 
 
@@ -305,9 +176,6 @@ class VehiculoFactory(factory.django.DjangoModelFactory):
 #===================================================
 
 
-
-
-
 #===================================================
 #Generador de RevisionVehiculo
 class RevisionVehiculoFactory(factory.django.DjangoModelFactory):
@@ -336,9 +204,6 @@ class InventarioVehiculoFactory(factory.django.DjangoModelFactory):
     cantidad = factory.fuzzy.FuzzyInteger(1, 50)
     precio_unidad = factory.fuzzy.FuzzyInteger(30000000, 120000000)
 #===================================================
-
-
-
 
 #===================================================
 #Generador de Ventas
