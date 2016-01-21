@@ -9,9 +9,9 @@
       var data = google.visualization.arrayToDataTable([
         ["Vendedor", "Ventas", { role: "style" } ],
 
-        {% for usuario in usuarios %}
+        {% for vendedor in vendedores %}
             
-              [ '{{ usuario.username }}',  parseInt('{{usuario.id}}'), "#b87333"] 
+              [ '{{ vendedor.first_name }}',  parseInt('{{vendedor.num_ventas}}'), "#b87333"] 
 
               {% if not forloop.last %} 
               ,  
