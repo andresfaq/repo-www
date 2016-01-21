@@ -2,9 +2,9 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import django.contrib.auth.models
-from django.conf import settings
 import django.core.validators
+from django.conf import settings
+import django.contrib.auth.models
 
 
 class Migration(migrations.Migration):
@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Cotizacion',
             fields=[
-                ('codigo_cotizacion', models.AutoField(primary_key=True, serialize=False)),
+                ('codigo_cotizacion', models.AutoField(serialize=False, primary_key=True)),
                 ('fecha_cotizacion', models.DateField()),
                 ('porcentaje_descuento', models.IntegerField(validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)], default=0)),
             ],
@@ -25,15 +25,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Empleado',
             fields=[
-                ('user_ptr', models.OneToOneField(parent_link=True, auto_created=True, to=settings.AUTH_USER_MODEL)),
-                ('id_empleado', models.AutoField(primary_key=True, serialize=False)),
+                ('user_ptr', models.OneToOneField(auto_created=True, parent_link=True, to=settings.AUTH_USER_MODEL)),
+                ('id_empleado', models.AutoField(serialize=False, primary_key=True)),
                 ('inicio_contrato', models.DateField(null=True, max_length=8)),
                 ('fin_contraro', models.DateField(null=True, max_length=8)),
                 ('salario', models.PositiveIntegerField(null=True)),
             ],
             options={
-                'verbose_name': 'user',
                 'abstract': False,
+                'verbose_name': 'user',
                 'verbose_name_plural': 'users',
             },
             bases=('auth.user',),
@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='InventarioRepuesto',
             fields=[
-                ('codigo_inventario', models.AutoField(primary_key=True, serialize=False)),
+                ('codigo_inventario', models.AutoField(serialize=False, primary_key=True)),
                 ('cantidad', models.PositiveIntegerField()),
                 ('precio_unidad', models.PositiveIntegerField()),
             ],
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='InventarioVehiculo',
             fields=[
-                ('codigo_inventario', models.AutoField(primary_key=True, serialize=False)),
+                ('codigo_inventario', models.AutoField(serialize=False, primary_key=True)),
                 ('color', models.CharField(max_length=50)),
                 ('cantidad', models.PositiveIntegerField()),
                 ('precio_unidad', models.PositiveIntegerField()),
@@ -61,15 +61,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Orden',
             fields=[
-                ('codigo_orden', models.AutoField(primary_key=True, serialize=False)),
+                ('codigo_orden', models.AutoField(serialize=False, primary_key=True)),
                 ('diagnostico', models.CharField(blank=True, null=True, max_length=2000)),
-                ('estado', models.CharField(choices=[('C', 'Cancelada'), ('T', 'Terminada'), ('E', 'En Espera')], max_length=1)),
+                ('estado', models.CharField(max_length=1, choices=[('C', 'Cancelada'), ('T', 'Terminada'), ('E', 'En Espera')])),
             ],
         ),
         migrations.CreateModel(
             name='Repuesto',
             fields=[
-                ('codigo_repuesto', models.AutoField(primary_key=True, serialize=False)),
+                ('codigo_repuesto', models.AutoField(serialize=False, primary_key=True)),
                 ('nombre', models.CharField(max_length=100)),
                 ('descripcion', models.CharField(blank=True, null=True, max_length=300)),
             ],
@@ -77,7 +77,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RepuestosPorOrden',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', auto_created=True, primary_key=True)),
                 ('cantidad', models.PositiveIntegerField()),
                 ('codigo_orden', models.ForeignKey(to='administracion.Orden')),
                 ('codigo_repuesto', models.ForeignKey(to='administracion.Repuesto')),
@@ -86,7 +86,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RevisionVehiculo',
             fields=[
-                ('codigo_revision', models.AutoField(primary_key=True, serialize=False)),
+                ('codigo_revision', models.AutoField(serialize=False, primary_key=True)),
                 ('fecha_revision', models.DateField()),
                 ('kilometraje', models.PositiveIntegerField()),
                 ('fecha_cambio_aceite', models.DateField()),
@@ -96,7 +96,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Sucursal',
             fields=[
-                ('codigo_sucursal', models.AutoField(primary_key=True, serialize=False)),
+                ('codigo_sucursal', models.AutoField(serialize=False, primary_key=True)),
                 ('nombre', models.CharField(max_length=100)),
                 ('direccion', models.CharField(max_length=150)),
             ],
@@ -108,7 +108,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Vehiculo',
             fields=[
-                ('codigo_vehiculo', models.AutoField(primary_key=True, serialize=False)),
+                ('codigo_vehiculo', models.AutoField(serialize=False, primary_key=True)),
                 ('marca', models.CharField(max_length=50)),
                 ('modelo', models.CharField(max_length=50)),
                 ('descripcion', models.CharField(blank=True, null=True, max_length=200)),
@@ -118,7 +118,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Venta',
             fields=[
-                ('codigo_venta', models.AutoField(primary_key=True, serialize=False)),
+                ('codigo_venta', models.AutoField(serialize=False, primary_key=True)),
                 ('placa', models.CharField(max_length=6)),
                 ('porcentaje_descuento', models.IntegerField(validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)], default=0)),
                 ('fecha_venta', models.DateField()),
@@ -128,13 +128,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Cliente',
             fields=[
-                ('empleado_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='administracion.Empleado')),
-                ('codigo_cliente', models.AutoField(primary_key=True, serialize=False)),
+                ('empleado_ptr', models.OneToOneField(auto_created=True, parent_link=True, to='administracion.Empleado')),
+                ('codigo_cliente', models.AutoField(serialize=False, primary_key=True)),
             ],
             options={
-                'verbose_name': 'user',
-                'abstract': False,
-                'verbose_name_plural': 'users',
+                'verbose_name': 'Cliente',
+                'verbose_name_plural': 'Clientes',
             },
             bases=('administracion.empleado',),
             managers=[
@@ -144,8 +143,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Gerente',
             fields=[
-                ('empleado_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='administracion.Empleado')),
-                ('codigo_gerente', models.AutoField(primary_key=True, serialize=False)),
+                ('empleado_ptr', models.OneToOneField(auto_created=True, parent_link=True, to='administracion.Empleado')),
+                ('codigo_gerente', models.AutoField(serialize=False, primary_key=True)),
                 ('codigo_sucursal', models.OneToOneField(to='administracion.Sucursal')),
             ],
             options={
@@ -160,8 +159,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='JefeTaller',
             fields=[
-                ('empleado_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='administracion.Empleado')),
-                ('codigo_jefe_taller', models.AutoField(primary_key=True, serialize=False)),
+                ('empleado_ptr', models.OneToOneField(auto_created=True, parent_link=True, to='administracion.Empleado')),
+                ('codigo_jefe_taller', models.AutoField(serialize=False, primary_key=True)),
                 ('codigo_sucursal', models.ForeignKey(to='administracion.Sucursal')),
             ],
             options={
@@ -176,8 +175,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Vendedor',
             fields=[
-                ('empleado_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='administracion.Empleado')),
-                ('codigo_vendedor', models.AutoField(primary_key=True, serialize=False)),
+                ('empleado_ptr', models.OneToOneField(auto_created=True, parent_link=True, to='administracion.Empleado')),
+                ('codigo_vendedor', models.AutoField(serialize=False, primary_key=True)),
                 ('porcentaje_comision', models.IntegerField(validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)], default=0)),
                 ('codigo_sucursal', models.ForeignKey(to='administracion.Sucursal')),
             ],
