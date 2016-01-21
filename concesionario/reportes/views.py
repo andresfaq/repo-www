@@ -11,7 +11,6 @@ def inicio(request):
 
 	for vendedor in vendedores:
 
-		#vendedor.num_ventas = len(vendedor.filter(codigo_vendedor=ventas.codigo_vendedor)
 		vendedor.num_ventas = len(ventas.filter(codigo_vendedor=vendedor.codigo_vendedor))
 
 	print(sucursales)
@@ -20,7 +19,6 @@ def inicio(request):
 		for vendedor in vendedores:
 			if vendedor.codigo_sucursal.codigo_sucursal == sucursal.codigo_sucursal:
 				sucursal.num_ventas += vendedor.num_ventas 
-				print("holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: " + str(sucursal.num_ventas))
 
 	return render(request, 'reportes/index.html',{'sucursales':sucursales})
 
