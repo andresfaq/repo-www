@@ -39,11 +39,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'paginaweb',
     'tastypie',
-    'ventas'
+    'autofixture',
+    'paginaweb',
+    'administracion',
+    'ventas',
     'reportes',
-    'taller'
+    'clientes',
+    'taller',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -123,4 +126,6 @@ STATICFILES_DIRS = (
 
 LOGIN_URL = reverse_lazy('login')
 
+
+# Ruta donde se guardan las imagenes
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

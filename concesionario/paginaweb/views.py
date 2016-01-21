@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login as log, logout as lout
 from administracion.views import inicio as index_administracion
 from ventas.views import inicio as index_ventas
 from clientes.views import inicio as index_clientes
-
+from taller.views import inicio as index_taller
 
 
 def es_gerente(user):
@@ -43,6 +43,9 @@ def login(request):
             if es_cliente(user):
                 return redirect(index_clientes) #clientes/index.html
 
+            if es_jefetaller(user):
+                return redirect(index_taller) #clientes/index.html
+
         else:
             return redirect(home) #paginaweb/index.html
 
@@ -59,7 +62,7 @@ def concesionario(request):
     return render(request, 'paginaweb/contenidoAutos.html')
 
 def taller(request):
-    return  render (request, 'paginaweb/contenidoReparacion.html')
+    return render(request, 'paginaweb/contenidoReparacion.html')
 
 
 
