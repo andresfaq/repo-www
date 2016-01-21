@@ -32,10 +32,10 @@ class UserFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = User
 
-    username = factory.Sequence(lambda n: "Usuario %03d" % n)
+    username = factory.Sequence(lambda n: "Usuario%03d" % n)
     first_name = factory.Faker('first_name')
     last_name = factory.Faker('last_name')
-    password = make_password(username)
+    password = make_password('Usuario')
     is_active = True
     cedula = factory.fuzzy.FuzzyInteger(10000000, 999999999)
     direccion = factory.Faker('address')
@@ -64,6 +64,7 @@ class ClienteFactory(UserFactory):
 
     #id_usuario = factory.SubFactory(UserClienteFactory)
     username = factory.Sequence(lambda n: "Cliente%03d" % n)
+    password = make_password('Cliente')
 #===================================================
 
 #===================================================
@@ -83,6 +84,7 @@ class GerenteFactory(EmpleadoFactory):
     class Meta:
         model = models.Gerente
     username = factory.Sequence(lambda n: "Gerente%03d" % n)
+    password = make_password('Gerente')
     codigo_sucursal = factory.SubFactory(SucursalFactory)
 #===================================================
 
@@ -93,6 +95,7 @@ class VendedorFactory(EmpleadoFactory):
     class Meta:
         model = models.Vendedor
     username = factory.Sequence(lambda n: "Vendedor%03d" % n)
+    password = make_password('Vendedor')
     codigo_sucursal = factory.Iterator(models.Sucursal.objects.all())
     porcentaje_comision = factory.fuzzy.FuzzyInteger(1, 100)
 #===================================================
@@ -104,6 +107,7 @@ class JefeTallerFactory(EmpleadoFactory):
     class Meta:
         model = models.JefeTaller
     username = factory.Sequence(lambda n: "JefeTaller%03d" % n)
+    password = make_password('JefeTaller')
     codigo_sucursal = factory.Iterator(models.Sucursal.objects.all())
 #===================================================
 
