@@ -3,29 +3,44 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import django.contrib.auth.models
-import django.core.validators
 from django.conf import settings
+import django.core.validators
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('auth', '0008_auto_20160119_1520'),
+        ('auth', '0007_auto_20160122_1941'),
     ]
 
     operations = [
+        migrations.CreateModel(
+            name='Cliente',
+            fields=[
+                ('user_ptr', models.OneToOneField(parent_link=True, auto_created=True, to=settings.AUTH_USER_MODEL)),
+                ('codigo_cliente', models.AutoField(serialize=False, primary_key=True)),
+            ],
+            options={
+                'verbose_name_plural': 'Clientes',
+                'verbose_name': 'Cliente',
+            },
+            bases=('auth.user',),
+            managers=[
+                ('objects', django.contrib.auth.models.UserManager()),
+            ],
+        ),
         migrations.CreateModel(
             name='Cotizacion',
             fields=[
                 ('codigo_cotizacion', models.AutoField(serialize=False, primary_key=True)),
                 ('fecha_cotizacion', models.DateField()),
-                ('porcentaje_descuento', models.IntegerField(validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)], default=0)),
+                ('porcentaje_descuento', models.IntegerField(default=0, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)])),
             ],
         ),
         migrations.CreateModel(
             name='Empleado',
             fields=[
-                ('user_ptr', models.OneToOneField(parent_link=True, to=settings.AUTH_USER_MODEL, auto_created=True)),
+                ('user_ptr', models.OneToOneField(parent_link=True, auto_created=True, to=settings.AUTH_USER_MODEL)),
                 ('id_empleado', models.AutoField(serialize=False, primary_key=True)),
                 ('inicio_contrato', models.DateField(null=True, max_length=8)),
                 ('fin_contraro', models.DateField(null=True, max_length=8)),
@@ -33,8 +48,8 @@ class Migration(migrations.Migration):
             ],
             options={
                 'verbose_name_plural': 'users',
-                'abstract': False,
                 'verbose_name': 'user',
+                'abstract': False,
             },
             bases=('auth.user',),
             managers=[
@@ -62,7 +77,7 @@ class Migration(migrations.Migration):
             name='Orden',
             fields=[
                 ('codigo_orden', models.AutoField(serialize=False, primary_key=True)),
-                ('diagnostico', models.CharField(null=True, blank=True, max_length=2000)),
+                ('diagnostico', models.CharField(blank=True, max_length=2000, null=True)),
                 ('estado', models.CharField(max_length=1, choices=[('C', 'Cancelada'), ('T', 'Terminada'), ('E', 'En Espera')])),
             ],
         ),
@@ -71,13 +86,13 @@ class Migration(migrations.Migration):
             fields=[
                 ('codigo_repuesto', models.AutoField(serialize=False, primary_key=True)),
                 ('nombre', models.CharField(max_length=100)),
-                ('descripcion', models.CharField(null=True, blank=True, max_length=300)),
+                ('descripcion', models.CharField(blank=True, max_length=300, null=True)),
             ],
         ),
         migrations.CreateModel(
             name='RepuestosPorOrden',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
                 ('cantidad', models.PositiveIntegerField()),
                 ('codigo_orden', models.ForeignKey(to='administracion.Orden')),
                 ('codigo_repuesto', models.ForeignKey(to='administracion.Repuesto')),
@@ -111,7 +126,7 @@ class Migration(migrations.Migration):
                 ('codigo_vehiculo', models.AutoField(serialize=False, primary_key=True)),
                 ('marca', models.CharField(max_length=50)),
                 ('modelo', models.CharField(max_length=50)),
-                ('descripcion', models.CharField(null=True, blank=True, max_length=200)),
+                ('descripcion', models.CharField(blank=True, max_length=200, null=True)),
                 ('imagen', models.ImageField(upload_to='vehiculos/')),
             ],
         ),
@@ -120,30 +135,16 @@ class Migration(migrations.Migration):
             fields=[
                 ('codigo_venta', models.AutoField(serialize=False, primary_key=True)),
                 ('placa', models.CharField(max_length=6)),
-                ('porcentaje_descuento', models.IntegerField(validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)], default=0)),
+                ('porcentaje_descuento', models.IntegerField(default=0, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)])),
                 ('fecha_venta', models.DateField()),
+                ('codigo_cliente', models.ForeignKey(to='administracion.Cliente')),
                 ('codigo_vehiculo', models.ForeignKey(to='administracion.Vehiculo')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Cliente',
-            fields=[
-                ('empleado_ptr', models.OneToOneField(parent_link=True, to='administracion.Empleado', auto_created=True)),
-                ('codigo_cliente', models.AutoField(serialize=False, primary_key=True)),
-            ],
-            options={
-                'verbose_name_plural': 'Clientes',
-                'verbose_name': 'Cliente',
-            },
-            bases=('administracion.empleado',),
-            managers=[
-                ('objects', django.contrib.auth.models.UserManager()),
             ],
         ),
         migrations.CreateModel(
             name='Gerente',
             fields=[
-                ('empleado_ptr', models.OneToOneField(parent_link=True, to='administracion.Empleado', auto_created=True)),
+                ('empleado_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='administracion.Empleado')),
                 ('codigo_gerente', models.AutoField(serialize=False, primary_key=True)),
                 ('codigo_sucursal', models.OneToOneField(to='administracion.Sucursal')),
             ],
@@ -159,7 +160,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='JefeTaller',
             fields=[
-                ('empleado_ptr', models.OneToOneField(parent_link=True, to='administracion.Empleado', auto_created=True)),
+                ('empleado_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='administracion.Empleado')),
                 ('codigo_jefe_taller', models.AutoField(serialize=False, primary_key=True)),
                 ('codigo_sucursal', models.ForeignKey(to='administracion.Sucursal')),
             ],
@@ -175,9 +176,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Vendedor',
             fields=[
-                ('empleado_ptr', models.OneToOneField(parent_link=True, to='administracion.Empleado', auto_created=True)),
+                ('empleado_ptr', models.OneToOneField(parent_link=True, auto_created=True, to='administracion.Empleado')),
                 ('codigo_vendedor', models.AutoField(serialize=False, primary_key=True)),
-                ('porcentaje_comision', models.IntegerField(validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)], default=0)),
+                ('porcentaje_comision', models.IntegerField(default=0, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(100)])),
                 ('codigo_sucursal', models.ForeignKey(to='administracion.Sucursal')),
             ],
             options={
@@ -208,11 +209,6 @@ class Migration(migrations.Migration):
             model_name='cotizacion',
             name='codigo_vehiculo',
             field=models.ForeignKey(to='administracion.Vehiculo'),
-        ),
-        migrations.AddField(
-            model_name='venta',
-            name='codigo_cliente',
-            field=models.ForeignKey(to='administracion.Cliente'),
         ),
         migrations.AddField(
             model_name='venta',

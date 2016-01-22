@@ -1,5 +1,6 @@
 # Ignorando el archivo settings.py
 concesionario/concesionario/settings.py
+concesionario/administracion/migrations/0001.initial.py
 
 # Ingnorando archivos  *.pyc 
 *.pyc

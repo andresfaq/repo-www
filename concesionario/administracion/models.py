@@ -28,7 +28,7 @@ class Empleado(User):
 #    def __str__(self):
 #        return str(self.id_usuario)
 
-class Cliente(Empleado):
+class Cliente(User):
     class Meta:
         verbose_name = 'Cliente'
         verbose_name_plural = 'Clientes'
