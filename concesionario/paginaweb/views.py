@@ -45,6 +45,8 @@ def login(request):
 
             if es_jefetaller(user):
                 return redirect(index_taller) #clientes/index.html
+            else:
+                return redirect(home)
 
         else:
             return redirect(home) #paginaweb/index.html

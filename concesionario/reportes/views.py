@@ -1,10 +1,26 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from administracion.models import User, Empleado, Vendedor, Venta, Vehiculo
+from administracion.models import User, Empleado, Vendedor, Venta, Vehiculo, Repuesto, Sucursal
 
 @login_required
 def inicio(request):
-	return render(request, 'reportes/index.html')
+
+	sucursales = Sucursal.objects.all()
+	vendedores = Vendedor.objects.all()
+	ventas = Venta.objects.all()
+
+	for vendedor in vendedores:
+
+		vendedor.num_ventas = len(ventas.filter(codigo_vendedor=vendedor.codigo_vendedor))
+
+	print(sucursales)
+	for sucursal in sucursales:
+		sucursal.num_ventas = 0
+		for vendedor in vendedores:
+			if vendedor.codigo_sucursal.codigo_sucursal == sucursal.codigo_sucursal:
+				sucursal.num_ventas += vendedor.num_ventas 
+
+	return render(request, 'reportes/index.html',{'sucursales':sucursales})
 
 @login_required
 def usuarios(request):
@@ -15,7 +31,10 @@ def usuarios(request):
 
 @login_required
 def inventario(request):
-	return render(request, 'reportes/inventario.html')
+
+	vehiculos = Vehiculo.objects.all()
+
+	return render(request, 'reportes/inventario.html',{'vehiculos':vehiculos})
 
 @login_required
 def ventas(request):
@@ -30,3 +49,10 @@ def ventas(request):
 		print(vendedor.first_name, vendedor.username, vendedor.num_ventas, vendedor.id_empleado, vendedor.codigo_vendedor)
 
 	return render(request, 'reportes/ventas.html', {'vendedores':vendedores})
+
+@login_required
+def repuesto(request):
+
+	repuestos = Repuesto.objects.all()
+
+	return render(request, 'reportes/repuesto.html',{'repuestos':repuestos})
