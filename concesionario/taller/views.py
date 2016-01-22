@@ -17,7 +17,11 @@ def ingresarVehiculo(request):
         if request.POST:
             form = tallerForm(request.POST)
             if form.is_valid():
-                form.save()
+                jefe=request.POST.get('selectJefeTaller', None)
+                orden=Orden(codigo_jefe_taller='Beatles Blog',
+                            diagnostico='All the latest Beatles news.',
+                            estado='')
+                orden.save()
 
                 return HttpResponseRedirect('/')
         else:
