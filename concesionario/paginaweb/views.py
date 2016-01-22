@@ -60,11 +60,11 @@ def logout(request):
     return render(request, 'registration/logout.html')
 
 
-def concesionario(request):
-    return render(request, 'paginaweb/contenidoAutos.html')
+# def concesionario(request):
+#     return render(request, 'paginaweb/contenidoAutos.html')
 
-def taller(request):
-    return render(request, 'paginaweb/contenidoReparacion.html')
+# def taller(request):
+#     return render(request, 'paginaweb/contenidoReparacion.html')
 
 
 

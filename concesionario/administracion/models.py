@@ -103,6 +103,7 @@ class Orden(models.Model):
     codigo_jefe_taller = models.ForeignKey(JefeTaller)
     diagnostico = models.CharField(max_length=2000, null=True, blank=True)
     estado = models.CharField(max_length=1, choices=ESTADOS)
+    #codigo_cliente = models.ForeignKey(Cliente)
 
 
 class Repuesto(models.Model):

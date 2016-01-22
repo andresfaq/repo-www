@@ -7,7 +7,7 @@
       google.setOnLoadCallback(drawTable);
 
       function drawTable() {
-        var data = new google.visualization.DataTable();
+        var data = new google.visualization.DataTable(pageSize=20);
 
         data.addColumn('string', 'Nombre');
         data.addColumn('string', 'Cedula');
@@ -35,7 +35,7 @@
 {% block contenido %}
 
 
-	<div id="table_div" style='overflow-y: scroll; overflow-x: scroll; height: 50%; width: 90%;'></div>
+	<div id="table_div" style='overflow-y: scroll; overflow-x: scroll;'></div>
 
 
 {% endblock%}

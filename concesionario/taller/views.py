@@ -12,7 +12,7 @@ from administracion.models import Orden,JefeTaller
 def inicio(request):
     return render(request, 'taller/index.html')
 
-
+@login_required
 def ingresarVehiculo(request):
         if request.POST:
             form = tallerForm(request.POST)
