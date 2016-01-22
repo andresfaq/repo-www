@@ -1,27 +1,47 @@
 {% extends 'taller/base.html' %}
 
 {% block contenido %}
-    {% if form.errors %}
-    <p style="color: red">
-    Por favor corrige lo siguiente:
-    </p>
-    {% endif %}
-    <div >
-        <form id='formTallerEntrada'action="" method="post">{% csrf_token %}
-        <div class="form-group">
-           {{form.nombreCliente.label}}
-           {{form.nombreCliente}}
-        </div>
-        <div class="form-group">
-           {{form.apellidoCliente.label}}
-           {{form.apellidoCliente}}
-        </div>
-        <div class="form-group">
-           {{form.mensaje.label}}
-           {{form.mensaje}}
-        </div>
 
-        <input type="submit" name="submit" value="ingresar Vehiculo">
-        </form>
-    </div>
+        <div class="cuerpo" id="cuerpo">
+            <div class="class="row pull-left izquierda" id="izquierda">
+                 <div>
+                    <h1>NUEVA ORDEN</h1>
+                 </div>
+                 {% if form.errors %}
+                    <p style="color: red">
+                        Por favor corrige lo siguiente:
+                    </p>
+                 {% endif %}
+                 <form id='formTallerEntrada'action="" method="post">{% csrf_token %}
+                    <!--{{ form.as_p }} -->
+                     <div class="form-group">
+                       {{form.estado.label}}
+                       {{form.estado}}
+                    </div>
+                    <div class="form-group">
+                       <label>Jefe Taller</label>
+                        <select name=selectJefeTaller>
+                           {%for jefe in form.jefeTaller%}
+                                <option name={{jefe.codigo_jefe_taller}}>{{jefe.first_name}}</option>
+                           {%endfor%}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                       {{form.diagnostico.label}}
+                    </div>
+                    <div>
+                        {{form.diagnostico}}
+                    </div>
+
+                     <input type="submit" name="submit" value="ingresar Vehiculo">
+                 </form>
+
+            </div>
+            <div class="row pull-center centro" id="centro">
+                <p>algo centro</p>
+            </div>
+            <div class="row pull-right"id="derecha">
+                <p>algo derecha</p>
+            </div>
+	    </div>
 {% endblock%}
