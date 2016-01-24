@@ -17,20 +17,25 @@ def ingresarVehiculo(request):
         if request.POST:
             form = tallerForm(request.POST)
             if form.is_valid():
-                jefe=request.POST.get('selectJefeTaller', None)
-                orden=Orden(codigo_jefe_taller='Beatles Blog',
-                            diagnostico='All the latest Beatles news.',
-                            estado='')
+                #jefe=request.POST.get('selectJefeTaller', None)
+                selectionJefe = form.cleaned_data['jefeTaller']
+                estadoOr =  form.cleaned_data['estado']
+                orden=Orden(codigo_jefe_taller=selectionJefe.codigo_jefe_taller,
+                            diagnostico=form.clean_diagnostico(),
+                            estado=estadoOr)
                 orden.save()
-
+                #render(request, 'taller/ingresarVehiculo.html', {'mensaje': "ENTRO EN EL IF"})
                 return HttpResponseRedirect('/')
+
         else:
             form = tallerForm()
-            form.jefeTaller = JefeTaller.objects.all().order_by('first_name')
+            #form.jefeTaller = JefeTaller.objects.all().order_by('first_name')
+            #render(request, 'taller/ingresarVehiculo.html', {'mensaje': "ENTRO EN EL ELSE"})
+
+
 
         args = {}
         args.update(csrf(request))
-
         args['form'] = form
         return render(request, 'taller/ingresarVehiculo.html',args)
         #return render_to_response('taller/ingresarVehiculo.html',args,context_instance=RequestContext(request))

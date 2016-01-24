@@ -3,13 +3,17 @@ from paginaweb.static import *
 import datetime
 from functools import partial
 DateInput = partial(forms.DateInput, {'class': 'datepicker'})
+from administracion.models import Orden,JefeTaller
 
 class tallerForm(forms.Form):
 
-    ESTADO_CHOICES=(('En Espera','En espera'),( 'Terminada','Terminada'),('Cancelada','Cancelada'),)
+    ESTADO_CHOICES=(('E','En espera'),( 'T','Terminada'),('C','Cancelada'),)
     diagnostico=forms.CharField(widget=forms.Textarea(attrs={'class' : ''}),label="Diagnostico")
     estado=forms.ChoiceField(choices=ESTADO_CHOICES,label="Estado Orden")
-    jefeTaller= forms.Select()
+    jefeTaller= forms.ModelChoiceField(queryset=JefeTaller.objects.all().order_by('first_name').values_list('first_name',flat=True),
+                                       to_field_name="codigo_jefe_taller",
+                                       empty_label="Seleccione Jefe encargado",
+                                       widget=forms.Select(attrs={'onchange': 'this.form.submit();'}))
     fechaRevision =forms.DateField(initial=datetime.date.today)
 
 
@@ -20,6 +24,8 @@ class tallerForm(forms.Form):
             raise forms.ValidationError("Se requieren minimo 4 palabras!")
         return mensaje
 
+    def __unicode__(self):
+        return self.jefeTaller
 
 '''
     class Meta:

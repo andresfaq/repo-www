@@ -9,10 +9,12 @@
                  {% if form.errors %}
                     <p style="color: red">
                         Por favor corrige lo siguiente:
+                        {{form.errors}}
                     </p>
                  {% endif %}
                  <form id='formTallerEntrada'action="" method="post">{% csrf_token %}
                     <!--{{ form.as_p }} -->
+                     {% csrf_token %}
                      <div class="form-group">
                        <label>Fecha Revisión</label>
                        {{form.fechaRevision}}
@@ -23,12 +25,15 @@
                        {{form.estado}}
                     </div>
                     <div class="form-group">
-                       <label>Jefe Taller</label>
+                        {{form.jefeTaller.label}}
+                        {{form.jefeTaller}}
+                      <!--
                         <select name=selectJefeTaller>
                            {%for jefe in form.jefeTaller%}
                                 <option name={{jefe.codigo_jefe_taller}}>{{jefe.first_name}}</option>
                            {%endfor%}
                         </select>
+                        -->
                     </div>
                     <div class="form-group">
                        {{form.diagnostico.label}}
@@ -39,6 +44,9 @@
 
                      <input type="submit" name="submit" value="ingresar Vehiculo">
                  </form>
+                <p sytle="color: blue">
+                    {{mensaje}}
+                </p>
 
             </div>
             <div class="row pull-center centro" id="centro">
