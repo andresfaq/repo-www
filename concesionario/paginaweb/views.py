@@ -49,7 +49,7 @@ def login(request):
                 return redirect(home)
 
         else:
-            return redirect(home) #paginaweb/index.html
+            return redirect(home)
 
     else:
         return render(request, 'registration/login.html')
