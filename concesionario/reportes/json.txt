@@ -1,7 +1,0 @@
-/*O_o*/
-google.visualization.Query.setResponse(
-	{"version":"0.6","reqId":"0","status":"ok","sig":"179870790","table":
-	{"cols":[{"id":"A","label":"Name","type":"string"},{"id":"B","label":"Dept","type":"string"},{"id":"C","label":"Age","type":"strings","pattern":"General"},
-		{"id":"D","label":"Coming","type":"string"}],
-	"rows":[{"c":[{"v":"John"},{"v":"Men"},{"v":"hola"},{"v":"hola"}]}
-|		]}});
