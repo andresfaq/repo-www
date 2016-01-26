@@ -38,7 +38,9 @@ def ingresarVehiculo(request):
         return render(request, 'taller/ingresarVehiculo.html',args)
         #return render_to_response('taller/ingresarVehiculo.html',args,context_instance=RequestContext(request))
 
+'''
 @login_required
 def busquedaCodigoVenta(request):
     if request.POST and 'btBuscar' in request.POST:
 
+'''
