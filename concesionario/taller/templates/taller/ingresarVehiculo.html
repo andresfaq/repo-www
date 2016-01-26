@@ -28,7 +28,7 @@
                     <div class="form-group">
                        {{form.codigoVenta.label}}
                        {{form.codigoVenta}}
-                        <button type="button"  name="btBuscar" id="btBuscar">Buscar</button>
+                        <button class="btn btn-dark-gray" data-toggle="modal"  name="btBuscar" id="btBuscar">Buscar</button>
                     </div>
 
                     <div class="form-group">
@@ -49,7 +49,7 @@
                         {{form.diagnostico}}
                     </div>
 
-                     <input type="submit" name="submit" value="ingresar Vehiculo">
+                     <input class="btn btn-dark-gray" type="submit" name="submit" value="ingresar Vehiculo">
                  </form>
                 <p sytle="color: blue">
                     {{mensaje}}
@@ -66,8 +66,36 @@
 {% endblock%}
 
 {% block popBuscar%}
-    <div class="content-popup"  id="contactModal" style="display: none;">
-        <form  method="post" action="">
+    <div class="modal fade"  id="contactModal"  role="dialog" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="modal-title">Buscar Código de Venta</h4>
+                </div>
+                <div id="nuevaAventura" class="modal-body">
+                    <form role="form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                           {{form.buscarVenta.label}}
+                           {{form.buscarVenta}}
+                            <button type="button" name="btBuscarVentaCliente">Buscar</button>
+                        </div>
+                        <div>
+                            
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" id="botonAventura" onClick="">Crear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--
+<form  method="post" action="">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">×</button>
             <h3>Codigo Venta </h3>
@@ -83,12 +111,11 @@
                    AQUI ESTÁ FUNCIONANDO AJAX
                 </h1>
               <!-- {{form.as_p}}
-          -->
+
           </div>
           <div class="modal-footer">
                <input name="cancel" class="btn" type="submit" value="Cerrar"/>
           </div>
         </form>
-    </div>
-
+-->
 {% endblock%}

@@ -8,15 +8,18 @@ $(document).ready(function() {
 
 
 function ajaxFunction(){
+
     $('#btBuscar').click(
         function(e){
              e.preventDefault();
-             //$('#contactModal').modal('show');
-            $('#contactModal').fadeIn('slow');
-            $('.popup-overlay').fadeIn('slow');
-            $('.popup-overlay').height($(window).height());
-            return false;
+             $('#contactModal').appendTo("body").modal('show'); //i have to set it in this way because i don understand why the modal block
+                                                                // the window and i can´t edit neither modal or main page ... and i found this
+                                                                // way for resolve the problem. :)  it works!
+
+
+
     })
+
 }
 
 
