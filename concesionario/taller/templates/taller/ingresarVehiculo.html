@@ -28,7 +28,7 @@
                     <div class="form-group">
                        {{form.codigoVenta.label}}
                        {{form.codigoVenta}}
-                        <button type="button" name="btBuscar" id="btBuscar">Buscar</button>
+                        <button type="button"  name="btBuscar" id="btBuscar">Buscar</button>
                     </div>
 
                     <div class="form-group">
@@ -66,8 +66,8 @@
 {% endblock%}
 
 {% block popBuscar%}
-    <div class="modal hide" name="contactModal" id="contactModal">
-        <form class="well" method="post" action="">
+    <div class="content-popup"  id="contactModal" style="display: none;">
+        <form  method="post" action="">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">×</button>
             <h3>Codigo Venta </h3>

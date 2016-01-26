@@ -8,13 +8,17 @@ $(document).ready(function() {
 
 
 function ajaxFunction(){
-    $('.btBuscar').click(
+    $('#btBuscar').click(
         function(e){
              e.preventDefault();
-             $('.contactModal').modal('show');
-
+             //$('#contactModal').modal('show');
+            $('#contactModal').fadeIn('slow');
+            $('.popup-overlay').fadeIn('slow');
+            $('.popup-overlay').height($(window).height());
+            return false;
     })
 }
+
 
 /*
 $.ajax({
