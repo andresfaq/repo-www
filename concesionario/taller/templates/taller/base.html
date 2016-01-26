@@ -155,6 +155,9 @@
             </div>
 
         </div>
+		{% block popBuscar %}
+
+		{% endblock%}
 
         {% block contenido %}
 
@@ -194,11 +197,10 @@
 	<script src="{% static 'js/neon-chat.js' %}"></script>
 	<script src="{% static 'js/neon-custom.js' %}"></script>
 	<script src="{% static 'js/neon-demo.js' %}"></script>
-    <script>
-        $(document).ready(function() {
-            $('.datepicker').datepicker();
-        });
-    </script>
+
+
+	<script src="{% taller 'ajax.js' %}"></script>
+
 
 
 </body>

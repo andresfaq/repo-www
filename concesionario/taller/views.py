@@ -14,13 +14,14 @@ def inicio(request):
 
 @login_required
 def ingresarVehiculo(request):
-        if request.POST:
+        if request.POST and 'submit' in request.POST:
             form = tallerForm(request.POST)
             if form.is_valid():
                 #jefe=request.POST.get('selectJefeTaller', None)
                 selectionJefe = form.cleaned_data['jefeTaller']
+                #jefeT=form.jefeTaller._get_choices(selectionJefe)
                 estadoOr =  form.cleaned_data['estado']
-                orden=Orden(codigo_jefe_taller=selectionJefe.codigo_jefe_taller,
+                orden=Orden(codigo_jefe_taller=selectionJefe,
                             diagnostico=form.clean_diagnostico(),
                             estado=estadoOr)
                 orden.save()
@@ -31,11 +32,13 @@ def ingresarVehiculo(request):
             form = tallerForm()
             #form.jefeTaller = JefeTaller.objects.all().order_by('first_name')
             #render(request, 'taller/ingresarVehiculo.html', {'mensaje': "ENTRO EN EL ELSE"})
-
-
-
         args = {}
         args.update(csrf(request))
         args['form'] = form
         return render(request, 'taller/ingresarVehiculo.html',args)
         #return render_to_response('taller/ingresarVehiculo.html',args,context_instance=RequestContext(request))
+
+@login_required
+def busquedaCodigoVenta(request):
+    if request.POST and 'btBuscar' in request.POST:
+

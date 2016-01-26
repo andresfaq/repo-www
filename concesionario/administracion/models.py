@@ -87,6 +87,9 @@ class JefeTaller(Empleado):
     codigo_jefe_taller = models.AutoField(primary_key=True)
     codigo_sucursal = models.ForeignKey(Sucursal)
 
+    def __str__(self):
+        return "%s %s" % (self.first_name, self.last_name)
+
 
 #    def __str__(self):
 #        return str(self.codigo_empleado)
