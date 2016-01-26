@@ -16,25 +16,26 @@ function ajaxFunction(){
                                                                 // the window and i can´t edit neither modal or main page ... and i found this
                                                                 // way for resolve the problem. :)  it works!
 
-
-
     })
 
-}
-
-
-/*
-$.ajax({
-                type:'post',
-                url:'/busqueda/',
-
-                success:function(){
-                    $(contactModal).modal('show');
-                },
-
-                error:function(){
-
+    $('#btBuscarVentaCliente').click(
+        function(e){
+            e.preventDefault();
+            var consulta = "soy cristian"
+            $.ajax(
+                {
+                    type:'post',
+                    url:'/ingresarVehiculo/busquedaCodigoVenta/',
+                    data: {'nombre': consulta},
+                    success:function(data){
+                        console.log(data[0].nombre);
+                    },
+                    error: function(message){
+                        console.log(message);
+                    }
                 }
+            )
+        }
+    )
 
-            })
- */
+}

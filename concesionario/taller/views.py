@@ -2,9 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,render_to_response,get_object_or_404
 from .formsTaller import tallerForm
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.core.context_processors import csrf
-from django.template import RequestContext
 from administracion.models import Orden,JefeTaller
+import json
 
 
 
@@ -37,6 +38,15 @@ def ingresarVehiculo(request):
         args['form'] = form
         return render(request, 'taller/ingresarVehiculo.html',args)
         #return render_to_response('taller/ingresarVehiculo.html',args,context_instance=RequestContext(request))
+
+@login_required
+def busquedaCodigoVenta(request):
+    if request.POST and 'btBuscarVentaCliente' in request.POST:
+        if request.is_ajax():
+            usuario = {'nombre': 'Eduardo Ismael'}
+            return HttpResponse( json.dumps(usuario), content_type='application/json' )
+        else:
+            return HttpResponse('SOLO AJAX!')
 
 '''
 @login_required
