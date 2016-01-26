@@ -24,6 +24,13 @@
                        {{form.estado.label}}
                        {{form.estado}}
                     </div>
+
+                    <div class="form-group">
+                       {{form.codigoVenta.label}}
+                       {{form.codigoVenta}}
+                        <button type="button"  name="btBuscar" id="btBuscar">Buscar</button>
+                    </div>
+
                     <div class="form-group">
                         {{form.jefeTaller.label}}
                         {{form.jefeTaller}}
@@ -56,4 +63,32 @@
                 <p>algo derecha</p>
             </div>
 	    </div>
+{% endblock%}
+
+{% block popBuscar%}
+    <div class="content-popup"  id="contactModal" style="display: none;">
+        <form  method="post" action="">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            <h3>Codigo Venta </h3>
+          </div>
+          <div class="modal-body">
+               {% csrf_token %}
+                <div class="form-group">
+                   {{form.buscarVenta.label}}
+                   {{form.buscarVenta}}
+                    <button type="button" name="btBuscarVentaCliente">Buscar</button>
+                </div>
+                <h1>
+                   AQUI ESTÁ FUNCIONANDO AJAX
+                </h1>
+              <!-- {{form.as_p}}
+          -->
+          </div>
+          <div class="modal-footer">
+               <input name="cancel" class="btn" type="submit" value="Cerrar"/>
+          </div>
+        </form>
+    </div>
+
 {% endblock%}
