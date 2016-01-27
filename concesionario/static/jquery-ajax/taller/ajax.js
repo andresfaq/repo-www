@@ -21,16 +21,20 @@ function ajaxFunction(){
     $('#btBuscarVentaCliente').click(
         function(e){
             e.preventDefault();
-            var consulta = "soy cristian"
+            var consulta = "soy cristian";
             $.ajax(
                 {
+                    url:'busquedaCodigoVenta',
                     type:'post',
-                    url:'/ingresarVehiculo/busquedaCodigoVenta/',
+                    datatype:'json',
                     data: {'nombre': consulta},
+
                     success:function(data){
-                        console.log(data[0].nombre);
+                        //console.log(data[0].nombre);
+                        alert(data[0].nombre + "hola success");
                     },
                     error: function(message){
+                        alert(message+"hola error")
                         console.log(message);
                     }
                 }

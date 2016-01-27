@@ -44,7 +44,7 @@ def busquedaCodigoVenta(request):
     if request.POST and 'btBuscarVentaCliente' in request.POST:
         if request.is_ajax():
             usuario = {'nombre': 'Eduardo Ismael'}
-            return HttpResponse( json.dumps(usuario), content_type='application/json' )
+            return HttpResponse(json.dumps(usuario), content_type='application/json' )
         else:
             return HttpResponse('SOLO AJAX!')
 
