@@ -39,14 +39,19 @@ def ingresarVehiculo(request):
         return render(request, 'taller/ingresarVehiculo.html',args)
         #return render_to_response('taller/ingresarVehiculo.html',args,context_instance=RequestContext(request))
 
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+@csrf_exempt
 @login_required
 def busquedaCodigoVenta(request):
-    if request.POST and 'btBuscarVentaCliente' in request.POST:
-        if request.is_ajax():
-            usuario = {'nombre': 'Eduardo Ismael'}
-            return HttpResponse(json.dumps(usuario), content_type='application/json' )
+    if request.method == 'POST':        
+        if request.is_ajax():           
+            usuario = {'nombre': 'Eduardo Ismael'}            
+            return JsonResponse(usuario)
         else:
             return HttpResponse('SOLO AJAX!')
+
+    return HttpResponse()
 
 '''
 @login_required

@@ -1,5 +1,5 @@
 {% extends 'taller/base.html' %}
-
+{% load staticfiles %}
 {% block contenido %}
         <div class="cuerpo" id="cuerpo">
             <div class="class="row pull-left izquierda" id="izquierda">
@@ -94,28 +94,11 @@
         </div>
     </div>
 
-<!--
-<form  method="post" action="">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">×</button>
-            <h3>Codigo Venta </h3>
-          </div>
-          <div class="modal-body">
-               {% csrf_token %}
-                <div class="form-group">
-                   {{form.buscarVenta.label}}
-                   {{form.buscarVenta}}
-                    <button type="button" name="btBuscarVentaCliente">Buscar</button>
-                </div>
-                <h1>
-                   AQUI ESTÁ FUNCIONANDO AJAX
-                </h1>
-              <!-- {{form.as_p}}
-
-          </div>
-          <div class="modal-footer">
-               <input name="cancel" class="btn" type="submit" value="Cerrar"/>
-          </div>
-        </form>
--->
 {% endblock%}
+
+{% block js %}
+  <script type="text/javascript">
+      var csrf_token = "{%csrf_token%}";
+  </script>
+  <script src="{% static 'jquery-ajax/taller/ajax.js' %}"></script>
+{% endblock %}

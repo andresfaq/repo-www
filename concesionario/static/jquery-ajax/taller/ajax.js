@@ -3,12 +3,6 @@
  */
 
 $(document).ready(function() {
-        ajaxFunction();
-});
-
-
-function ajaxFunction(){
-
     $('#btBuscar').click(
         function(e){
              e.preventDefault();
@@ -16,7 +10,7 @@ function ajaxFunction(){
                                                                 // the window and i can´t edit neither modal or main page ... and i found this
                                                                 // way for resolve the problem. :)  it works!
 
-    })
+    });
 
     $('#btBuscarVentaCliente').click(
         function(e){
@@ -24,14 +18,13 @@ function ajaxFunction(){
             var consulta = "soy cristian";
             $.ajax(
                 {
-                    url:'busquedaCodigoVenta',
+                    url:'/taller/busquedaCodigoVenta/',
                     type:'post',
                     datatype:'json',
                     data: {'nombre': consulta},
 
                     success:function(data){
-                        //console.log(data[0].nombre);
-                        alert(data[0].nombre + "hola success");
+                        console.log(data)
                     },
                     error: function(message){
                         alert(message+"hola error")
@@ -40,6 +33,8 @@ function ajaxFunction(){
                 }
             )
         }
-    )
+    );        
 
-}
+});
+
+
