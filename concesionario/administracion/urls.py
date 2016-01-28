@@ -1,10 +1,11 @@
 from django.conf.urls import patterns, url, include
 from administracion.views import inicio
-from reportes.views import inicio as index_reportes
+from administracion.views import crearUsuario
+from administracion.views import modificarUsuario
+from administracion.views import eliminarUsuario
 
 from tastypie.api import Api
 from administracion.api import UserResource, OrdenResource, DatosVehiculoResource, GerenteResource, JefeTallerResource, VendedorResource
-from administracion import views
 
 v1_api = Api(api_name='v1')
 v1_api.register(UserResource())
@@ -17,7 +18,7 @@ v1_api.register(VendedorResource())
 
 urlpatterns = [url(r'^$', inicio),
 			   url(r'^api/', include(v1_api.urls)),
-               url(r'^crearUsuario/$', views.crearUsuario, name='crearUsuario'),
-			   url(r'^modificarUsuario/$', views.modificarUsuario, name='modificarUsuario'),
-			   url(r'^eliminarUsuario/$', views.eliminarUsuario, name='eliminarUsuario'),
+               url(r'^crearUsuario/$', crearUsuario, name='crearUsuario'),
+			   url(r'^modificarUsuario/$', modificarUsuario, name='modificarUsuario'),
+			   url(r'^eliminarUsuario/$', eliminarUsuario, name='eliminarUsuario'),
 			   ]
