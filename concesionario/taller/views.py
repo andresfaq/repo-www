@@ -5,8 +5,8 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core.context_processors import csrf
 from administracion.models import Orden,JefeTaller
-import json
-
+from django.http import JsonResponse
+#from django.views.decorators.csrf import csrf_exempt
 
 
 @login_required
@@ -39,9 +39,9 @@ def ingresarVehiculo(request):
         return render(request, 'taller/ingresarVehiculo.html',args)
         #return render_to_response('taller/ingresarVehiculo.html',args,context_instance=RequestContext(request))
 
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
-@csrf_exempt
+
+
+#@csrf_exempt
 @login_required
 def busquedaCodigoVenta(request):
     if request.method == 'POST':        
