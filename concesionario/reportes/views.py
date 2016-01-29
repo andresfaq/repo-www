@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from administracion import models
-
-
 from rest_framework import generics
+from reportes.serializers import UserSerializer
+from rest_framework.decorators import api_view
 
 
 @login_required
@@ -62,13 +62,13 @@ def repuesto(request):
 
 
 class UserList(generics.ListCreateAPIView):
-    queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
+    queryset = models.User.objects.all()
+    serializer_class = UserSerializer
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Snippet.objects.all()
-    serializer_class = SnippetSerializer
+    queryset = models.User.objects.all()
+    serializer_class = UserSerializer
 
 @api_view(('GET',))
 def api_root(request, format=None):

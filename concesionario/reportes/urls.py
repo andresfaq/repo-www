@@ -7,7 +7,6 @@ urlpatterns = [url(r'^$', views.inicio,name="reporte_inicio"),
 				url(r'^inventario$', views.inventario),
 				url(r'^ventas$', views.ventas),
 				url(r'^repuesto$', views.repuesto),
-				url(r'^peticion$', views.vista_divida, {'GET': views.peticion_get, 'POST': views.peticion_post}),
 				url(r'^user/$', views.UserList.as_view()),
 				url(r'^user/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
 				]
