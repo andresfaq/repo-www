@@ -1,5 +1,5 @@
 {% extends 'administracion/base.html' %}
-
+{% load staticfiles %}
 {% block contenido %}
 
         <div id="page-wrapper">
@@ -22,13 +22,13 @@
 			
 			<div class="panel-body">
 				
-				<form role="form" class="form-horizontal form-groups-bordered">
+				<form action="" method="post" class="form-horizontal form-groups-bordered">{% csrf_token %}
 	
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label">Usuario</label>
 						
 						<div class="col-sm-5">
-							{{form.usuario}}
+							{{ user_form.username }}
 							
 						</div>
 					</div>
@@ -37,7 +37,7 @@
 						<label for="field-3" class="col-sm-3 control-label">Contraseña</label>
 						
 						<div class="col-sm-5">
-							{{form.contrasenaUsuario}}
+							{{ user_form.password }}
 						</div>
 					</div>
 
@@ -45,43 +45,15 @@
 						<label class="col-sm-3 control-label">Tipo de usuario</label>
 						
 						<div class="col-sm-5">
-								{{form.tipoUsuario}}
+								tipo
 						</div>
 					</div>
-					
-				</form>
-				
-			</div>
-		
-		</div>
-	
-	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-12">
-		
-		<div class="panel panel-primary" data-collapsed="0">
-		
-			<div class="panel-heading">
-				<div class="panel-title">
-					Datos personales
-				</div>
-				
-				<div class="panel-options">
-					<a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
-				</div>
-			</div>
-			
-			<div class="panel-body">
-				
-				<form role="form" class="form-horizontal form-groups-bordered">
 	
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label">Nombres</label>
 						
 						<div class="col-sm-5">
-							{{ form.nombres }}
+							{{ user_form.first_name }}
 						</div>
 					</div>
 
@@ -89,7 +61,7 @@
 						<label for="field-1" class="col-sm-3 control-label">Apellidos</label>
 						
 						<div class="col-sm-5">
-							{{ form.apellidos }}
+							{{ user_form.last_name }}
 						</div>
 					</div>
 
@@ -99,7 +71,7 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon">C.C</span>
-								{{ form.cedula }}
+								{{ user_form.cedula }}
 							</div>
 						</div>
 					</div>
@@ -109,7 +81,7 @@
 						<div class="col-sm-5">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="entypo-mail"></i></span>
-								{{ form.email }}
+								{{ user_form.email }}
 							</div>
 						</div>
 					</div>
@@ -132,10 +104,23 @@
 						<label for="field-1" class="col-sm-3 control-label">Teléfono</label>
 						
 						<div class="col-sm-5">
-							{{ form.telefono }}
+							{{ user_form.telefono }}
 						</div>
 					</div>
-					
+
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Dirección</label>
+						
+						<div class="col-sm-5">
+							{{ user_form.direccion }}
+						</div>
+					</div>
+
+					<input type="submit" class="btn btn-default btn-icon" value="Crear usuario">
+						
+						<i class="entypo-user-add"></i>
+					</input>
+								
 				</form>
 				
 			</div>
@@ -145,14 +130,6 @@
 	</div>
 </div>
 
-<div class="row">
-	<div class="col-sm-5 ">
-		<button type="button" class="btn btn-default btn-icon" onclick="javascript:$('#confirmar-usuario').modal('show', {backdrop: 'static'});">
-			Crear usuario
-			<i class="entypo-user-add"></i>
-		</button>
-	</div>
-</div>
             </div>
             <!-- /.container-fluid -->
 

@@ -3,18 +3,19 @@ from paginaweb.static import *
 import datetime
 from functools import partial
 DateInput = partial(forms.DateInput, {'class': 'datepicker'})
-#from administracion.models import Orden,JefeTaller
+from administracion.models import User
 
-class crearUsuarioForm(forms.Form):
-    
-    usuario = forms.CharField(max_length=30, required=True)
-    contrasenaUsuario = forms.CharField(max_length=128, widget=forms.TextInput(attrs={'type': 'password'}), required=True)
-    TIPO_CHOICES=(('A','Aministrador'),( 'G','Gerente'),('J','Jefe de taller'),( 'V','Vendedor'))
-    tipoUsuario=forms.ChoiceField(choices=TIPO_CHOICES,label="Tipo de usuario")
-
-    nombres = forms.CharField(max_length=30, required=True)
-    apellidos = forms.CharField(max_length=30, required=True)
-    cedula = forms.IntegerField(widget=forms.TextInput(attrs={'maxlength': '15' , 'data-mask' : '999999999999999'}), required=True)
-    email = forms.EmailField(max_length=254, required=True)
-    fecha = forms.DateField(required=True)
-    telefono = forms.IntegerField(widget=forms.TextInput(attrs={'maxlength': '15', 'data-mask' : '999999999999999'}), required=True)
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'password',
+            'first_name',
+            'last_name',
+            'email',
+            'cedula',
+            'direccion',
+            #'fecha_de_nacimiento',
+            'telefono'
+            )
