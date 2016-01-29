@@ -1,0 +1,161 @@
+{% extends 'administracion/base.html' %}
+
+{% block contenido %}
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid" id="contenedor">
+            	<div class="row">
+	<div class="col-md-12">
+		
+		<div class="panel panel-primary" data-collapsed="0">
+		
+			<div class="panel-heading">
+				<div class="panel-title">
+					Datos de cuenta
+				</div>
+				
+				<div class="panel-options">
+					<a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
+				</div>
+			</div>
+			
+			<div class="panel-body">
+				
+				<form role="form" class="form-horizontal form-groups-bordered">
+	
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Usuario</label>
+						
+						<div class="col-sm-5">
+							{{form.usuario}}
+							
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="field-3" class="col-sm-3 control-label">Contraseña</label>
+						
+						<div class="col-sm-5">
+							{{form.contrasenaUsuario}}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Tipo de usuario</label>
+						
+						<div class="col-sm-5">
+								{{form.tipoUsuario}}
+						</div>
+					</div>
+					
+				</form>
+				
+			</div>
+		
+		</div>
+	
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		
+		<div class="panel panel-primary" data-collapsed="0">
+		
+			<div class="panel-heading">
+				<div class="panel-title">
+					Datos personales
+				</div>
+				
+				<div class="panel-options">
+					<a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
+				</div>
+			</div>
+			
+			<div class="panel-body">
+				
+				<form role="form" class="form-horizontal form-groups-bordered">
+	
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Nombres</label>
+						
+						<div class="col-sm-5">
+							{{ form.nombres }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Apellidos</label>
+						
+						<div class="col-sm-5">
+							{{ form.apellidos }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Documento de identidad</label>
+						
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon">C.C</span>
+								{{ form.cedula }}
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+					<label for="field-1" class="col-sm-3 control-label">Correo electrónico</label>						
+						<div class="col-sm-5">
+							<div class="input-group">
+								<span class="input-group-addon"><i class="entypo-mail"></i></span>
+								{{ form.email }}
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Fecha de nacimiento</label>
+						
+						<div class="col-sm-3">
+							<div class="input-group">
+								<input type="text" class="form-control datepicker" data-format="D, dd MM yyyy">
+								
+								<div class="input-group-addon">
+									<a href="#"><i class="entypo-calendar"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Teléfono</label>
+						
+						<div class="col-sm-5">
+							{{ form.telefono }}
+						</div>
+					</div>
+					
+				</form>
+				
+			</div>
+		
+		</div>
+	
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-5 ">
+		<button type="button" class="btn btn-default btn-icon" onclick="javascript:$('#confirmar-usuario').modal('show', {backdrop: 'static'});">
+			Crear usuario
+			<i class="entypo-user-add"></i>
+		</button>
+	</div>
+</div>
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+
+{% endblock%}

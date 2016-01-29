@@ -1,13 +1,17 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from administracion.models import User, Empleado, Vendedor, Venta, Vehiculo, Repuesto, Sucursal
+from administracion import models
+from rest_framework import generics
+from reportes.serializers import UserSerializer
+from rest_framework.decorators import api_view
+
 
 @login_required
 def inicio(request):
 
-	sucursales = Sucursal.objects.all()
-	vendedores = Vendedor.objects.all()
-	ventas = Venta.objects.all()
+	sucursales = models.Sucursal.objects.all()
+	vendedores = models.Vendedor.objects.all()
+	ventas = models.Venta.objects.all()
 
 	for vendedor in vendedores:
 
@@ -25,34 +29,49 @@ def inicio(request):
 @login_required
 def usuarios(request):
 
-	usuarios = User.objects.all()
+	usuarios = models.User.objects.all()
 
 	return render(request, 'reportes/usuarios.html', {'usuarios':usuarios})
 
 @login_required
 def inventario(request):
 
-	vehiculos = Vehiculo.objects.all()
+	vehiculos = models.Vehiculo.objects.all()
 
 	return render(request, 'reportes/inventario.html',{'vehiculos':vehiculos})
 
 @login_required
 def ventas(request):
 
-	vendedores = Vendedor.objects.all()
-	ventas = Venta.objects.all()
+	vendedores = models.Vendedor.objects.all()
+	ventas = models.Venta.objects.all()
 
 	for vendedor in vendedores:
 
 		#vendedor.num_ventas = len(vendedor.filter(codigo_vendedor=ventas.codigo_vendedor)
 		vendedor.num_ventas = len(ventas.filter(codigo_vendedor=vendedor.codigo_vendedor))
-		print(vendedor.first_name, vendedor.username, vendedor.num_ventas, vendedor.id_empleado, vendedor.codigo_vendedor)
 
 	return render(request, 'reportes/ventas.html', {'vendedores':vendedores})
 
 @login_required
 def repuesto(request):
 
-	repuestos = Repuesto.objects.all()
+	repuestos = models.Repuesto.objects.all()
 
 	return render(request, 'reportes/repuesto.html',{'repuestos':repuestos})
+
+
+class UserList(generics.ListCreateAPIView):
+    queryset = models.User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.User.objects.all()
+    serializer_class = UserSerializer
+
+@api_view(('GET',))
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('User-list', request=request, format=format)
+    })

@@ -28,6 +28,13 @@ angular.module('starter')
   $scope.data = {};
 
   $scope.login = function(data) {
+
+     $http({
+      url: user.update_path, 
+      method: "POST",
+      data: {user_id: user.id, draft: true}
+     });
+    
     AuthService.login(data.username, data.password).then(function(authenticated) {
       $state.go('main.dash', {}, {reload: true});
       $scope.setCurrentUsername(data.username);
@@ -126,7 +133,7 @@ angular.module('starter')
 
         navigator.geolocation.getCurrentPosition(function(pos) {
           $scope.map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
-          $scope.loading.hide();
+          $ionicLoading.hide();
         }, function(error) {
           alert('Unable to get location: ' + error.message);
         });
