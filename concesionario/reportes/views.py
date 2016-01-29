@@ -55,9 +55,7 @@ def ventas(request):
 
 @login_required
 def repuesto(request):
-
 	repuestos = models.Repuesto.objects.all()
-
 	return render(request, 'reportes/repuesto.html',{'repuestos':repuestos})
 
 

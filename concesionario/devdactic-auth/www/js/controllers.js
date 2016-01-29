@@ -30,7 +30,7 @@ angular.module('starter')
   $scope.login = function(data) {
 
      $http({
-      url: user.update_path, 
+      url: 'http://127.0.0.1:8000/reportes/user/', 
       method: "POST",
       data: {user_id: user.id, draft: true}
      });
