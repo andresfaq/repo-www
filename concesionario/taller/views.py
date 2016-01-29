@@ -4,10 +4,9 @@ from .formsTaller import tallerForm
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core.context_processors import csrf
-from administracion.models import Orden,JefeTaller
+from administracion.models import User, Empleado, Orden,JefeTaller,Venta,Cliente
 from django.http import JsonResponse
 
-#from django.views.decorators.csrf import csrf_exempt
 
 
 @login_required
@@ -49,6 +48,9 @@ def busquedaCodigoVenta(request):
         if request.is_ajax():
             consulta = request.POST.get('nombreCliente')
             print ("esta es la consulta: ",consulta)
+            clientes = Cliente.objects.all()
+            print ("lista de clientes: ",clientes)
+
             usuario = {'nombreCliente': 'Eduardo Ismael'}
             return JsonResponse(usuario)
         else:

@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'reportes',
     'clientes',
     'taller',
+    #'rest_framework',
 )
 
 MIDDLEWARE_CLASSES = (
