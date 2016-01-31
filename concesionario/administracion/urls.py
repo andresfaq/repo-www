@@ -3,6 +3,7 @@ from administracion.views import inicio
 from administracion.views import crearUsuario
 from administracion.views import modificarUsuario
 from administracion.views import eliminarUsuario
+from administracion.views import recuperarUsuario
 
 from tastypie.api import Api
 from administracion.api import UserResource, OrdenResource, DatosVehiculoResource, GerenteResource, JefeTallerResource, VendedorResource
@@ -21,4 +22,5 @@ urlpatterns = [url(r'^$', inicio),
                url(r'^crearUsuario/$', crearUsuario, name='crearUsuario'),
 			   url(r'^modificarUsuario/$', modificarUsuario, name='modificarUsuario'),
 			   url(r'^eliminarUsuario/$', eliminarUsuario, name='eliminarUsuario'),
+			   url(r'^recuperarUsuario/$', recuperarUsuario, name='recuperarUsuario'),
 			   ]

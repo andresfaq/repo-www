@@ -20,3 +20,6 @@ concesionario/media/vehiculos/*.jpg
 
 #Ignorando Migraciones
 concesionario/administracion/migrations/*.py
+
+#Ignorando scripts
+concesionario/reiniciarbd.sh

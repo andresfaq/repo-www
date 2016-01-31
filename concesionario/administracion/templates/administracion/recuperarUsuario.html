@@ -1,0 +1,79 @@
+{% extends 'administracion/base.html' %}
+{% load staticfiles %}
+{% block contenido %}
+
+        <!--PRINCIPAL-->
+        <div id="page-wrapper">
+
+            <div class="container-fluid" id="contenedor">
+
+<form class="row" action="" method="post">{% csrf_token %}
+	<div class="col-md-12">
+		
+		<div class="panel panel-primary" data-collapsed="0">
+		
+			<div class="panel-heading">
+				<div class="panel-title">
+					Usuario a recuperar
+				</div>
+				
+				<div class="panel-options">
+					<a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
+				</div>
+			</div>
+			
+			<div class="panel-body">
+				
+	
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Usuario</label>
+						
+						<div class="col-sm-5">
+							{{ user_form.usernameChoice }}
+						</div>
+					</div>
+					
+				
+			</div>
+		
+		</div>
+	
+	</div>
+	<div class="col-sm-5 ">
+		<input type="submit" class="btn btn-danger btn-icon" value="Recuperar usuario">
+			
+	</div>
+</form>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+<br />
+
+<!-- Footer -->
+	</div>
+
+	</div>
+
+	<div class="modal fade" id="confirmar-usuario" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<h4 class="modal-title">Eliminación de usuario exitosa</h4>
+			</div>
+			
+			<div class="modal-body">
+			
+				Su usario fue eliminado con éxito... O tal vez no.
+				
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal">Finalizar</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock%}

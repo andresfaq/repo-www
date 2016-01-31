@@ -103,8 +103,13 @@
 						</a>
 					</li>
 					<li>
-						<a href="">
-							<span>Eliminar tal vez (?)</span>
+						<a href={% url 'administracion.views.eliminarUsuario' %}>
+							<span>Eliminar usuario</span>
+						</a>
+					</li>
+					<li>
+						<a href={% url 'administracion.views.recuperarUsuario' %}>
+							<span>Recuperar usuario</span>
 						</a>
 					</li>
 				</ul>

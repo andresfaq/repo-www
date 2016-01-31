@@ -16,6 +16,29 @@ class UserForm(forms.ModelForm):
             'email',
             'cedula',
             'direccion',
-            #'fecha_de_nacimiento',
+            'fecha_de_nacimiento',
             'telefono'
             )
+    def identificacion():
+        numID = User.objects.count()
+        return numID
+
+class UserFormEliminate(forms.Form):
+    usernameChoice = forms.ModelChoiceField(queryset=User.objects.all().filter(is_active=True).order_by('username'), to_field_name='username')
+
+    def eliminate(usernameX):
+        user = User.objects.get(username=usernameX)
+        User.objects.filter(username=usernameX).update(is_active=False)
+
+    def save(self):
+        print("error")
+
+class UserFormRecuperate(forms.Form):
+    usernameChoice = forms.ModelChoiceField(queryset=User.objects.all().filter(is_active=False).order_by('username'), to_field_name='username')
+
+    def recuperate(usernameX):
+        user = User.objects.get(username=usernameX)
+        User.objects.filter(username=usernameX).update(is_active=True)
+
+    def save(self):
+        print("error")
