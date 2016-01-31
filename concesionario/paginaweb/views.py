@@ -5,7 +5,8 @@ from ventas.views import inicio as index_ventas
 from clientes.views import inicio as index_clientes
 from taller.views import inicio as index_taller
 from django.http import JsonResponse, HttpResponse
-
+from rest_framework.response import Response
+from rest_framework import status, views
 
 def es_gerente(user):
     return user.groups.filter(name='Gerentes').exists()
@@ -72,7 +73,18 @@ def loginMovil(request):
 
     user = request.POST.get('username')
     passwd = request.POST.get('password')
-    return HttpResponse('Me cago en la leche')
+
+    auth = authenticate(username=user, password=passwd)
+
+    if auth is not None:
+        serialized = UserSerializer(auth)
+        return Response(serialized.data)
+    else:
+        return Response({
+            'status': 'Unauthorized',
+            'message': 'Username/password combination invalid.'
+            }, status=status.HTTP_401_UNAUTHORIZED)
+
     #auth = authenticate(username=user, password=passwd)
 
     #if auth is not None:

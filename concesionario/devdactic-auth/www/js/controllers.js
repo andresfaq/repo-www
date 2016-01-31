@@ -26,7 +26,7 @@ angular.module('starter')
 
 .controller('LoginCtrl', function($scope, $http ,$state, $ionicPopup, AuthService) {
 
-//  $scope.data = {};
+  $scope.data = {};
 //  console.log('Hello')
 
   $scope.login = function(data){
@@ -64,6 +64,7 @@ angular.module('starter')
 
 .controller('DashCtrl', function($scope, $http, $state, $ionicPopup, AuthService) {
 
+
   $scope.logout = function() {
     AuthService.logout();
     $state.go('login');
@@ -71,7 +72,8 @@ angular.module('starter')
 
 
   $scope.performValidRequest = function() {
-    $http.jsonp('http://localhost:8000/administracion/api/v1/client/1/?callback=JSON_CALLBACK').then(
+    $http.get('http://localhost:8000/administracion/api/v1/usuario/1/').then(
+      //http://127.0.0.1:8000/reportes/user/1/
     //$http.get('http://localhost:8000/administracion/api/v1/usuario/1/?callback=JSON_CALLBACK').then(  
       function(result) {
         $scope.response = result.data.username;
