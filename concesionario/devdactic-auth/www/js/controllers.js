@@ -24,47 +24,59 @@ angular.module('starter')
   };
 })
 
-.controller('LoginCtrl', function($scope, $state, $ionicPopup, AuthService) {
-  $scope.data = {};
+.controller('LoginCtrl', function($scope, $http ,$state, $ionicPopup, AuthService) {
 
-  $scope.login = function(data) {
+//  $scope.data = {};
+//  console.log('Hello')
 
-     $http({
-      url: 'http://127.0.0.1:8000/reportes/user/', 
-      method: "POST",
-      data: {user_id: user.id, draft: true}
-     });
-    
-    AuthService.login(data.username, data.password).then(function(authenticated) {
-      $state.go('main.dash', {}, {reload: true});
-      $scope.setCurrentUsername(data.username);
-    }, function(err) {
-      var alertPopup = $ionicPopup.alert({
-        title: 'Login failed!',
-        template: 'Please check your credentials!'
+  $scope.login = function(data){
+    console.log(data.password)
+    $http.post('http://localhost:8000/loginMovil/', { username:data.username, password:data.password }).then(
+    //$http.get('http://localhost:8000/administracion/api/v1/usuario/1/?callback=JSON_CALLBACK').then(  
+      function(result) {
+        $scope.response = result;
+        $state.go('main.dash', {}, {reload: true});
+      }, function(err) {
+        $scope.response = 'aqui no hay ni chimba';
+
+        var alertPopup = $ionicPopup.alert({
+         title: 'Login failed!',
+         template: 'Please check your credentials!'
+        });
+
       });
-    });
   };
+
+  // $scope.login = function(data) {
+    
+    // AuthService.login(data.username, data.password).then(function(authenticated) {
+    //   $state.go('main.dash', {}, {reload: true});
+    //   $scope.setCurrentUsername(data.username);
+    // }, function(err) {
+    //   var alertPopup = $ionicPopup.alert({
+    //     title: 'Login failed!',
+    //     template: 'Please check your credentials!'
+    //   });
+    // });
+
+
 })
 
-.controller('DashCtrl', function($scope, $state, $http, $ionicPopup, AuthService) {
-
-  $scope.placa = $state.params.placa;
-  $scope.codigo_orden = $state.params.codigo_orden;
-
-  $scope.enviar = function(){
-
-  };
+.controller('DashCtrl', function($scope, $http, $state, $ionicPopup, AuthService) {
 
   $scope.logout = function() {
     AuthService.logout();
     $state.go('login');
   };
 
+
   $scope.performValidRequest = function() {
-    $http.get('http://localhost:8100/valid').then(
+    $http.jsonp('http://localhost:8000/administracion/api/v1/client/1/?callback=JSON_CALLBACK').then(
+    //$http.get('http://localhost:8000/administracion/api/v1/usuario/1/?callback=JSON_CALLBACK').then(  
       function(result) {
-        $scope.response = result.data.message;
+        $scope.response = result.data.username;
+      }, function(err) {
+        $scope.response = 'aqui no hay ni chimba';
       });
   };
 

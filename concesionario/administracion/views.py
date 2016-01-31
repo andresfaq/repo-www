@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core.context_processors import csrf
 from django.http import JsonResponse
-from administracion.models import User
+from administracion.models import User, Cliente
 from django.template import RequestContext, loader
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 
@@ -48,3 +48,7 @@ def modificarUsuario(request):
 @login_required
 def eliminarUsuario(request):
     return render(request, 'administracion/eliminarUsuario.html')
+
+
+
+

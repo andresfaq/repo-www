@@ -4,6 +4,7 @@ from administracion.views import inicio as index_administracion
 from ventas.views import inicio as index_ventas
 from clientes.views import inicio as index_clientes
 from taller.views import inicio as index_taller
+from django.http import JsonResponse, HttpResponse
 
 
 def es_gerente(user):
@@ -66,6 +67,21 @@ def logout(request):
 # def taller(request):
 #     return render(request, 'paginaweb/contenidoReparacion.html')
 
+
+def loginMovil(request):
+
+    user = request.POST.get('username')
+    passwd = request.POST.get('password')
+    return HttpResponse('Me cago en la leche')
+    #auth = authenticate(username=user, password=passwd)
+
+    #if auth is not None:
+        #codigo_cliente = Cliente.models.fillter(username=user)
+        #return JsonResponse({'login':'True','codigo_cliente':codigo_cliente})
+    #    return HttpResponse('Test Response Es User')
+    #else:
+        #return JsonResponse({'login':'False'})
+    #    return HttpResponse('Test Response NO Es User')
 
 
 

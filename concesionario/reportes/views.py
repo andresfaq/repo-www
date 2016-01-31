@@ -73,3 +73,20 @@ def api_root(request, format=None):
     return Response({
         'users': reverse('User-list', request=request, format=format)
     })
+
+
+def login(request):
+	if request.method != 'POST':
+		raise Http404('Únicamente se permiten métodos POSTs') 
+	try:
+		m = Member.objects.get(username=request.POST['username']) 
+		if m.password == request.POST['password']: 
+			request.session['member_id'] = m.id 
+			return JsonResponse({'login': 'True'}) 
+	except Member.DoesNotExist: 
+		return JsonResponse({'login': 'False'}) 
+
+
+def logout(request):
+	return HttpResponse("Haz salido de la sesión") 
+ 
