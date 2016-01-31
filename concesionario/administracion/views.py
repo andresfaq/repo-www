@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,render_to_response,get_object_or_404
-from .formsAdministracion import UserForm, UserFormEliminate, UserFormRecuperate
+from .formsAdministracion import UserForm, UserFormEliminate, UserFormRecuperate, UserFormModificateAux
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core.context_processors import csrf
@@ -21,33 +21,82 @@ def crearUsuario(request):
     if request.method == 'POST':
 
         # formulario enviado
-        user_form = UserForm(request.POST, instance=request.user)
+        user_form = UserForm(request.POST)
 
         if user_form.is_valid():
             # formulario validado correctamente
-            usuario = user_form.save()
-            usuario.id = UserForm.identificacion()
-            truePass = make_password(usuario.password)
-            usuario.password = truePass
-            usuario.is_superuser = True
-            usuario.is_staff = True
+            usuario = user_form
+            usuario.id = UserForm.identificacion() + 1
+            usuario.password = make_password(user_form.cleaned_data['password'])
+            usuario.is_superuser = False
+            usuario.username = user_form.cleaned_data['username']
+            usuario.first_name = user_form.cleaned_data['first_name']
+            usuario.last_name = user_form.cleaned_data['last_name']
+            usuario.email = user_form.cleaned_data['email']
+            usuario.is_staff = False
             usuario.is_active = True
-            usuario.date_joined = '2000-10-10'
-            #usuario.fecha_de_nacimiento = '2000-10-10'
-            #usuario.save()
-            return HttpResponseRedirect('/great/'+truePass)
+            usuario.date_joined = '2000-10-10' #Poner la fecha del dia actual
+            usuario.cedula = user_form.cleaned_data['cedula']
+            usuario.direccion = user_form.cleaned_data['direccion']
+            usuario.fecha_de_nacimiento = user_form.cleaned_data['fecha_de_nacimiento']
+            usuario.telefono = user_form.cleaned_data['telefono']
+            usuario.save()
+            
         else:
             print("asd")
 
     else:
         # formulario inicial
-        user_form = UserForm(instance=request.user)
+        user_form = UserForm()
 
     return render(request, 'administracion/crearUsuario.html', { 'user_form': user_form})  
 
 @login_required
 def modificarUsuario(request):
-    return render(request, 'administracion/modificarUsuario.html')
+    if request.method == 'POST':
+        user_form_aux = UserFormModificateAux(request.POST)
+        user_form = UserForm(request.POST)
+        complete = False
+        user = ""
+        if user != "":
+            user_form = UserForm(instance=user)
+        
+        if user_form_aux.is_valid():
+            usernameChoice = user_form_aux.cleaned_data['usernameChoice']
+            user = UserFormModificateAux.get(usernameChoice)
+            complete = True
+
+        if user != "":
+            user_form = UserForm(instance=user)
+
+        else:
+            print("asd")
+
+        if user_form.is_valid():
+            usuario = user_form
+            usuario.password = user_form.cleaned_data['password']
+            usuario.username = user_form.cleaned_data['username']
+            usuario.first_name = user_form.cleaned_data['first_name']
+            usuario.last_name = user_form.cleaned_data['last_name']
+            usuario.email = user_form.cleaned_data['email']
+            usuario.cedula = user_form.cleaned_data['cedula']
+            usuario.direccion = user_form.cleaned_data['direccion']
+            usuario.fecha_de_nacimiento = user_form.cleaned_data['fecha_de_nacimiento']
+            usuario.telefono = user_form.cleaned_data['telefono']
+            usuario.save()
+            
+
+        else:
+            print("asdas")
+
+
+    else:
+        # formulario inicial
+        user_form_aux = UserFormModificateAux()
+        user_form = UserForm(request.POST)
+
+    return render(request, 'administracion/modificarUsuario.html', { 'user_form_aux': user_form_aux, 'user_form': user_form})
+    #return render(request, 'administracion/modificarUsuario.html', )
 
 @login_required
 def eliminarUsuario(request):
@@ -62,7 +111,7 @@ def eliminarUsuario(request):
             username = user_form.cleaned_data['usernameChoice']
             UserFormEliminate.eliminate(username)
         else:
-            return HttpResponseRedirect('/AquiDeberíaDeHaberUnMensajeDeError/')
+            print("asd")
 
     else:
         # formulario inicial

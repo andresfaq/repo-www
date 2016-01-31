@@ -42,3 +42,11 @@ class UserFormRecuperate(forms.Form):
 
     def save(self):
         print("error")
+
+class UserFormModificateAux(forms.Form):
+
+    usernameChoice = forms.ModelChoiceField(queryset=User.objects.all().filter(is_active=True).order_by('username'), to_field_name='username')
+
+    def get(identificacion):
+        usuario = User.objects.get(username=identificacion)
+        return usuario
