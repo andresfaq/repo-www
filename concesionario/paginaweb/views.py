@@ -5,8 +5,6 @@ from ventas.views import inicio as index_ventas
 from clientes.views import inicio as index_clientes
 from taller.views import inicio as index_taller
 from django.http import JsonResponse, HttpResponse
-from rest_framework.response import Response
-from rest_framework import status, views
 
 def es_gerente(user):
     return user.groups.filter(name='Gerentes').exists()
@@ -67,33 +65,33 @@ def logout(request):
 
 # def taller(request):
 #     return render(request, 'paginaweb/contenidoReparacion.html')
-
-
+from django.views.decorators.csrf import csrf_exempt
+import json
+@csrf_exempt
 def loginMovil(request):
+    try:
+        dic = json.loads(request.body.decode('utf-8'))
+        print('request',dic)
+        
+        user = dic['username']
+        print('user',user)
+        
+        passwd = dic['password']
+        print('passwd',passwd)
 
-    user = request.POST.get('username')
-    passwd = request.POST.get('password')
+        auth = authenticate(username=user, password=passwd)
 
-    auth = authenticate(username=user, password=passwd)
+
+    except Exception as e:
+        print(e)
+        return JsonResponse({'auth':"False"})
 
     if auth is not None:
-        serialized = UserSerializer(auth)
-        return Response(serialized.data)
+        print("adasdasdasd")
+        return JsonResponse({'auth':"True"},{'codigo_cliente':'codigo'})
     else:
-        return Response({
-            'status': 'Unauthorized',
-            'message': 'Username/password combination invalid.'
-            }, status=status.HTTP_401_UNAUTHORIZED)
+        return JsonResponse({'auth':"False"})
 
-    #auth = authenticate(username=user, password=passwd)
-
-    #if auth is not None:
-        #codigo_cliente = Cliente.models.fillter(username=user)
-        #return JsonResponse({'login':'True','codigo_cliente':codigo_cliente})
-    #    return HttpResponse('Test Response Es User')
-    #else:
-        #return JsonResponse({'login':'False'})
-    #    return HttpResponse('Test Response NO Es User')
 
 
 

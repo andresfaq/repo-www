@@ -30,18 +30,32 @@ angular.module('starter')
 //  console.log('Hello')
 
   $scope.login = function(data){
-    console.log(data.password)
-    $http.post('http://localhost:8000/loginMovil/', { username:data.username, password:data.password }).then(
+    console.log(data.username);
+    $http({
+    method: 'POST',
+    url: 'http://localhost:8000/loginMovil/',
+    data: data,
+    headers: {'Content-Type': 'application/json'}
+    }).then(
     //$http.get('http://localhost:8000/administracion/api/v1/usuario/1/?callback=JSON_CALLBACK').then(  
-      function(result) {
-        $scope.response = result;
-        $state.go('main.dash', {}, {reload: true});
-      }, function(err) {
-        $scope.response = 'aqui no hay ni chimba';
 
-        var alertPopup = $ionicPopup.alert({
-         title: 'Login failed!',
-         template: 'Please check your credentials!'
+      function(result) {
+        console.log(result.data.auth)
+        if(result.data.auth === "True")
+          {$scope.response = result;
+                    $state.go('main.dash', {}, {reload: true});}
+        else{
+          console.log(result.auth)
+          var alertPopup = $ionicPopup.alert({
+                      title: 'Login failed!',
+                      template: 'Please check your credentials!'
+        });}
+      }, function(err) {
+        $scope.response = err;
+
+          var alertPopup = $ionicPopup.alert({
+         title: 'Failed!',
+         template: 'Please stop!'
         });
 
       });
@@ -72,10 +86,11 @@ angular.module('starter')
 
 
   $scope.performValidRequest = function() {
-    $http.get('http://localhost:8000/administracion/api/v1/usuario/1/').then(
+    $http.jsonp('http://localhost:8000/administracion/api/v1/usuario/1/?callback=JSON_CALLBACK').then(
       //http://127.0.0.1:8000/reportes/user/1/
     //$http.get('http://localhost:8000/administracion/api/v1/usuario/1/?callback=JSON_CALLBACK').then(  
       function(result) {
+        console.log(result.data)
         $scope.response = result.data.username;
       }, function(err) {
         $scope.response = 'aqui no hay ni chimba';
