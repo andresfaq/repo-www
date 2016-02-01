@@ -94,13 +94,20 @@ def estadoVehiculo(request):
 
         clientes = models.Cliente.objects.all()
         ordenes = models.Orden.objects.all()
-        print(request.body)
+        ventas = models.Venta.objects.all()
+
         peticion = json.loads(request.body.decode('utf-8'))
-        print(peticion)
         codigo_orden = peticion['codigo_orden']
-        print(codigo_orden)
+        placa = peticion['placa']
+
+        venta_placa = ventas.filter(placa=placa).get()
+
         estado_orden = ordenes.filter(codigo_orden=codigo_orden).get()
-        print(estado_orden.estado,"aqui jue")
+
+        if(venta_placa.placa == placa or str(estado_orden.codigo_orden) == str(codigo_orden)):
+            print(estado_orden.codigo_orden == codigo_orden)
+            print(str(estado_orden.codigo_orden), str(codigo_orden))
+            print('entre')
 
         return JsonResponse({'estado':estado_orden.estado})
 

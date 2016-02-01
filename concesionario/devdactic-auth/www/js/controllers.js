@@ -1,6 +1,7 @@
 angular.module('starter')
 
 .controller('AppCtrl', function($scope, $state, $ionicPopup, AuthService, AUTH_EVENTS) {
+  
   $scope.username = AuthService.username();
 
   $scope.$on(AUTH_EVENTS.notAuthorized, function(event) {
@@ -85,15 +86,6 @@ angular.module('starter')
 
   $scope.performValidRequest = function(data) {
 
-    /*$http.jsonp('http://localhost:8000/administracion/api/v1/usuario/1/?callback=JSON_CALLBACK').then(
-      //http://127.0.0.1:8000/reportes/user/1/
-    //$http.get('http://localhost:8000/administracion/api/v1/usuario/1/?callback=JSON_CALLBACK').then(  
-      function(result) {
-        console.log(result.data.codigo_cliente)
-        $scope.response = result.data.username;
-      }, function(err) {
-        $scope.response = 'Error!';
-      });*/
     console.log(data)
 
     $http({
@@ -111,11 +103,7 @@ angular.module('starter')
         $scope.response = "En espera"
       }
 
-
-        
-
       }, function(err) {
-        console.log(data)
         $scope.response = err;
 
       });
