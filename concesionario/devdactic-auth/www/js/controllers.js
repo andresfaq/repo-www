@@ -94,6 +94,7 @@ angular.module('starter')
       }, function(err) {
         $scope.response = 'Error!';
       });*/
+    console.log(data)
 
     $http({
     method: 'POST',
@@ -102,9 +103,19 @@ angular.module('starter')
     headers: {'Content-Type': 'application/json'}
     }).then(function(result) {
 
-        $scope.response = result.data.estado
+      if (result.data.estado === 'C'){
+        $scope.response = "Cancelada"
+      }else if(result.data.estado === 'T'){
+        $scope.response = "Terminada"
+      }else if(result.data.estado === 'E'){
+        $scope.response = "En espera"
+      }
+
+
+        
 
       }, function(err) {
+        console.log(data)
         $scope.response = err;
 
       });
