@@ -30,21 +30,18 @@ angular.module('starter')
 //  console.log('Hello')
 
   $scope.login = function(data){
-    console.log(data.username);
     $http({
     method: 'POST',
     url: 'http://localhost:8000/loginMovil/',
     data: data,
     headers: {'Content-Type': 'application/json'}
-    }).then(
-    //$http.get('http://localhost:8000/administracion/api/v1/usuario/1/?callback=JSON_CALLBACK').then(  
+    }).then(function(result) {
 
-      function(result) {
-        console.log(result.data.auth)
-        if(result.data.auth === "True")
-          {$scope.response = result;
-                    $state.go('main.dash', {}, {reload: true});}
-        else{
+        if(result.data.auth === "True"){
+          $scope.response = result;
+          $state.go('main.dash', {}, {reload: true});
+
+        }else{
           console.log(result.auth)
           var alertPopup = $ionicPopup.alert({
                       title: 'Login failed!',
@@ -78,6 +75,7 @@ angular.module('starter')
 
 .controller('DashCtrl', function($scope, $http, $state, $ionicPopup, AuthService) {
 
+  $scope.data = {};
 
   $scope.logout = function() {
     AuthService.logout();
@@ -85,15 +83,30 @@ angular.module('starter')
   };
 
 
-  $scope.performValidRequest = function() {
-    $http.jsonp('http://localhost:8000/administracion/api/v1/usuario/1/?callback=JSON_CALLBACK').then(
+  $scope.performValidRequest = function(data) {
+
+    /*$http.jsonp('http://localhost:8000/administracion/api/v1/usuario/1/?callback=JSON_CALLBACK').then(
       //http://127.0.0.1:8000/reportes/user/1/
     //$http.get('http://localhost:8000/administracion/api/v1/usuario/1/?callback=JSON_CALLBACK').then(  
       function(result) {
-        console.log(result.data)
+        console.log(result.data.codigo_cliente)
         $scope.response = result.data.username;
       }, function(err) {
-        $scope.response = 'aqui no hay ni chimba';
+        $scope.response = 'Error!';
+      });*/
+
+    $http({
+    method: 'POST',
+    url: 'http://localhost:8000/estadoVehiculo/',
+    data: data,
+    headers: {'Content-Type': 'application/json'}
+    }).then(function(result) {
+
+        $scope.response = result.data.estado
+
+      }, function(err) {
+        $scope.response = err;
+
       });
   };
 

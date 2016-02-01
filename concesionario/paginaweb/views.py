@@ -5,6 +5,9 @@ from ventas.views import inicio as index_ventas
 from clientes.views import inicio as index_clientes
 from taller.views import inicio as index_taller
 from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from administracion import models
 
 def es_gerente(user):
     return user.groups.filter(name='Gerentes').exists()
@@ -65,32 +68,47 @@ def logout(request):
 
 # def taller(request):
 #     return render(request, 'paginaweb/contenidoReparacion.html')
-from django.views.decorators.csrf import csrf_exempt
-import json
+
 @csrf_exempt
 def loginMovil(request):
     try:
         dic = json.loads(request.body.decode('utf-8'))
-        print('request',dic)
-        
         user = dic['username']
-        print('user',user)
-        
         passwd = dic['password']
-        print('passwd',passwd)
-
         auth = authenticate(username=user, password=passwd)
-
 
     except Exception as e:
         print(e)
         return JsonResponse({'auth':"False"})
 
     if auth is not None:
-        print("adasdasdasd")
-        return JsonResponse({'auth':"True"},{'codigo_cliente':'codigo'})
+        return JsonResponse({'auth':"True"})
     else:
         return JsonResponse({'auth':"False"})
+
+@csrf_exempt
+def estadoVehiculo(request):
+
+    try:
+
+        clientes = models.Cliente.objects.all()
+        ordenes = models.Orden.objects.all()
+        print(request)
+        peticion = json.loads(request.body.decode('utf-8'))
+        print('peticion1',peticion)
+        codigo_orden = peticion['codigo_orden']
+        print('peticion',peticion)
+        estado_orden = ordenes.filter(codigo_orden=codigo_orden).estado
+
+        return JsonResponse({'estado':estado_orden})
+
+    except Exception as e:
+        print(e)
+
+        return JsonResponse({'estado':"Sin estado, consulte sus compras"})
+
+
+
 
 
 

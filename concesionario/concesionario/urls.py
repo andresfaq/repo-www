@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 from django.contrib import admin
-from paginaweb.views import home, login, logout, loginMovil
+from paginaweb.views import home, login, logout, loginMovil, estadoVehiculo
 admin.autodiscover() #registra todos los archivos admin.py del proyecto
 
 from django.contrib.auth.models import User
@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^login/$', login, name='login'),
     url(r'^logout/$', logout, name='logout'),
     url(r'^loginMovil/$', loginMovil),
+    url(r'^estadoVehiculo/$', estadoVehiculo),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
 ]
