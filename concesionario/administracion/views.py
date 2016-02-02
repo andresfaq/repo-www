@@ -24,7 +24,7 @@ def crearUsuario(request):
         user_form = UserForm(request.POST)
 
         if user_form.is_valid():
-            # formulario validado correctamente
+            tipo = user_form.cleaned_data['tipo']
             usuario = user_form
             usuario.id = UserForm.identificacion() + 1
             usuario.password = make_password(user_form.cleaned_data['password'])
@@ -35,13 +35,24 @@ def crearUsuario(request):
             usuario.email = user_form.cleaned_data['email']
             usuario.is_staff = False
             usuario.is_active = True
-            usuario.date_joined = '2000-10-10' #Poner la fecha del dia actual
             usuario.cedula = user_form.cleaned_data['cedula']
             usuario.direccion = user_form.cleaned_data['direccion']
             usuario.fecha_de_nacimiento = user_form.cleaned_data['fecha_de_nacimiento']
             usuario.telefono = user_form.cleaned_data['telefono']
-            usuario.save()
-            
+            if "C" == tipo:
+                UserForm.crearCliente(usuario)
+            if "A" == tipo:
+                usuario.is_superuser = True
+                usuario.is_staff = True
+                usuario.save()
+            if "V" == tipo:
+                UserForm.crearVendedor(usuario)
+            if "J" == tipo:
+                UserForm.crearJefeTaller(usuario)
+            if "G" == tipo:
+                UserForm.crearGerente(usuario)
+
+
         else:
             print("asd")
 
@@ -96,7 +107,6 @@ def modificarUsuario(request):
         user_form = UserForm(request.POST)
 
     return render(request, 'administracion/modificarUsuario.html', { 'user_form_aux': user_form_aux, 'user_form': user_form})
-    #return render(request, 'administracion/modificarUsuario.html', )
 
 @login_required
 def eliminarUsuario(request):
