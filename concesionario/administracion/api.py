@@ -40,7 +40,7 @@ class JefeTallerResource(ModelResource):
 
 class ClienteResource(ModelResource):
     class Meta:
-        queryset = models.Cliente.objects.all(username='')
+        queryset = models.Cliente.objects.all()
         resource_name = 'cliente'
         excludes = ['password', 'is_active', 'is_staff', 'is_superuser']
 

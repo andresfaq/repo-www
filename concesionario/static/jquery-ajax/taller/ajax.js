@@ -26,6 +26,11 @@ $(document).ready(function() {
             }
         }
     });
+//*******************************************************************************************************
+    function agregarCodigo(codigoVenta){
+        $('#id_codigoVenta').val(codigoVenta);
+    }
+
 //********************************************************************************************************
 
     $('#btBuscar').click(
@@ -54,7 +59,7 @@ $(document).ready(function() {
                         //[iteradorobjeto][0]+"campo" campo=nombreCliente, apellidoCliente,codigoVenta
                         //$('#mensajeTabla').val("");
 
-                        var head="<th>NOMBRE </th> <th>APELLIDO </th> <th>CODIGO VENTA </th>";
+                        var head="<th>NOMBRE </th> <th>APELLIDO </th> <th>CODIGO VENTA </th> <th>SELECCIONAR </th>";
                         var html="";
                         var color="success";
                         if(data.length<1){
@@ -64,14 +69,14 @@ $(document).ready(function() {
                               for( var i=0; i<data.length;i++){
 
                                     html+="<tr class="+color+">" +
-                                              " <td>"+data[i][0].nombreCliente+"</td>" +
+                                               "<td>"+data[i][0].nombreCliente+"</td>" +
                                                "<td>"+data[i][1].apellidoCliente+"</td>" +
-                                               "<td>"+data[i][2].codigoVenta+"</td> </tr>"+
+                                               "<td>"+data[i][2].codigoVenta+"</td>"+
                                                "<td>" +
-                                                    "<button type='button' class='btn btn-success'>" +
-                                                        "<i class='entypo-check'> </i>"+
+                                                    "<button type='button' class='btn btn-success' onclick='"+agregarCodigo( data[i][2].codigoVenta )+"'>" +
+                                                        "<i class='entypo-check'></i>"+
                                                     " </button>" +
-                                               "</td>"
+                                               "</td> </tr>";
                                     if(color=="success"){
                                         color="info";
                                     }
@@ -94,6 +99,8 @@ $(document).ready(function() {
             )
         }
     );
+
+
 
 
 
