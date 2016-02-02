@@ -1,4 +1,5 @@
-angular.module('starter', ['ionic', 'ngMockE2E'])
+//angular.module('starter', ['ionic', 'ngMockE2E'])
+angular.module('starter', ['ionic'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -54,7 +55,10 @@ angular.module('starter', ['ionic', 'ngMockE2E'])
   $urlRouterProvider.otherwise('/main/dash');
 })
 
+/*
 .run(function($httpBackend){
+  $httpBackend.whenGET('http://localhost:8000/administracion/api/v1/usuario/1')
+        .respond({message: 'Hola carecjo'});
   $httpBackend.whenGET('http://localhost:8100/valid')
         .respond({message: 'This is my valid response!'});
   $httpBackend.whenGET('http://localhost:8100/notauthenticated')
@@ -62,10 +66,10 @@ angular.module('starter', ['ionic', 'ngMockE2E'])
   $httpBackend.whenGET('http://localhost:8100/notauthorized')
         .respond(403, {message: "Not Authorized"});
 
-  $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
- })
+  $httpBackend.whenGET(/templates\/\w+.*  /).passThrough();
+ })*/
 
-.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+/*.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
   $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
 
     if ('data' in next && 'authorizedRoles' in next.data) {
@@ -84,5 +88,5 @@ angular.module('starter', ['ionic', 'ngMockE2E'])
       }
     }
   });
-});
+});*/
 

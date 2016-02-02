@@ -11,7 +11,7 @@
 	<meta name="description" content="Neon Admin Panel" />
 	<meta name="author" content="" />
 
-	<title>Neon | Dashboard</title>
+	<title> Adminsitacion | Concesionario </title>
 
 
 	<link rel="stylesheet" type="text/css" href="{% static 'js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css' %}" />
@@ -48,7 +48,6 @@
 			<!-- logo -->
 			<div class="logo">
 				<a href="index.html">
-					<img src="{% static 'assets/images/logo@2x.png' %}" width="120" alt="" />
 				</a>
 			</div>
 			
@@ -94,18 +93,23 @@
 				</a>
 				<ul>
 					<li>
-						<a href="{% url 'crearUsuario' %}.html">
+						<a href={% url 'administracion.views.crearUsuario' %}>
 							<span>Crear usuario</span>
 						</a>
 					</li>
 					<li>
-						<a href="{% url 'modificarUsuario' %}.html">
+						<a href={% url 'administracion.views.modificarUsuario' %}>
 							<span>Modificar usuario</span>
 						</a>
 					</li>
 					<li>
-						<a href="{% url 'eliminarUsuario' %}.html">
-							<span>Eliminar tal vez (?)</span>
+						<a href={% url 'administracion.views.eliminarUsuario' %}>
+							<span>Eliminar usuario</span>
+						</a>
+					</li>
+					<li>
+						<a href={% url 'administracion.views.recuperarUsuario' %}>
+							<span>Recuperar usuario</span>
 						</a>
 					</li>
 				</ul>
@@ -127,7 +131,6 @@
 			<li class="profile-info dropdown"><!-- add class "pull-right" if you want to place this from right -->
 				
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					<img src="{% static 'assets/images/thumb-1@2x.png' %}" alt="" class="img-circle" width="44" />
 					{{ user.username }} (Administrador)
 				</a>
 				

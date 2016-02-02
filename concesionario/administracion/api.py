@@ -40,8 +40,9 @@ class JefeTallerResource(ModelResource):
 
 class ClienteResource(ModelResource):
     class Meta:
-        queryset = models.Cliente.objects.all()
+        queryset = models.Cliente.objects.all(username='')
         resource_name = 'cliente'
+        excludes = ['password', 'is_active', 'is_staff', 'is_superuser']
 
 
 
@@ -71,4 +72,22 @@ class DatosVehiculoResource(ModelResource):
             #'user': ALL_WITH_RELATIONS,
             #'created': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
         }
+
+
+
+
+#===== API Modulo Clientes =====#
+
+class DatosOrdenMovilResource(ModelResource):
+    #codigo_orden = fields.OneToOneField(OrdenResource, 'codigo_orden')
+
+    class Meta:
+        queryset = models.Cliente.objects.all()
+        resource_name = 'ordenmovil'
+        #excludes = ['codigo_revision', 'codigo_venta', 'codigo_orden', ]
+        #filtering = {
+            #'codigo_orden': ALL,
+            #'user': ALL_WITH_RELATIONS,
+            #'created': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
+        #}
 

@@ -1,6 +1,7 @@
 angular.module('starter')
 
 .controller('AppCtrl', function($scope, $state, $ionicPopup, AuthService, AUTH_EVENTS) {
+  
   $scope.username = AuthService.username();
 
   $scope.$on(AUTH_EVENTS.notAuthorized, function(event) {
@@ -24,47 +25,87 @@ angular.module('starter')
   };
 })
 
-.controller('LoginCtrl', function($scope, $state, $ionicPopup, AuthService) {
+.controller('LoginCtrl', function($scope, $http ,$state, $ionicPopup, AuthService) {
+
   $scope.data = {};
+//  console.log('Hello')
 
-  $scope.login = function(data) {
+  $scope.login = function(data){
+    $http({
+    method: 'POST',
+    url: 'http://localhost:8000/loginMovil/',
+    data: data,
+    headers: {'Content-Type': 'application/json'}
+    }).then(function(result) {
 
-     $http({
-      url: user.update_path, 
-      method: "POST",
-      data: {user_id: user.id, draft: true}
-     });
-    
-    AuthService.login(data.username, data.password).then(function(authenticated) {
-      $state.go('main.dash', {}, {reload: true});
-      $scope.setCurrentUsername(data.username);
-    }, function(err) {
-      var alertPopup = $ionicPopup.alert({
-        title: 'Login failed!',
-        template: 'Please check your credentials!'
+        if(result.data.auth === "True"){
+          $scope.response = result;
+          $state.go('main.dash', {}, {reload: true});
+
+        }else{
+          console.log(result.auth)
+          var alertPopup = $ionicPopup.alert({
+                      title: 'Login failed!',
+                      template: 'Please check your credentials!'
+        });}
+      }, function(err) {
+        $scope.response = err;
+
+          var alertPopup = $ionicPopup.alert({
+         title: 'Failed!',
+         template: 'Please stop!'
+        });
+
       });
-    });
   };
+
+  // $scope.login = function(data) {
+    
+    // AuthService.login(data.username, data.password).then(function(authenticated) {
+    //   $state.go('main.dash', {}, {reload: true});
+    //   $scope.setCurrentUsername(data.username);
+    // }, function(err) {
+    //   var alertPopup = $ionicPopup.alert({
+    //     title: 'Login failed!',
+    //     template: 'Please check your credentials!'
+    //   });
+    // });
+
+
 })
 
-.controller('DashCtrl', function($scope, $state, $http, $ionicPopup, AuthService) {
+.controller('DashCtrl', function($scope, $http, $state, $ionicPopup, AuthService) {
 
-  $scope.placa = $state.params.placa;
-  $scope.codigo_orden = $state.params.codigo_orden;
-
-  $scope.enviar = function(){
-
-  };
+  $scope.data = {};
 
   $scope.logout = function() {
     AuthService.logout();
     $state.go('login');
   };
 
-  $scope.performValidRequest = function() {
-    $http.get('http://localhost:8100/valid').then(
-      function(result) {
-        $scope.response = result.data.message;
+
+  $scope.performValidRequest = function(data) {
+
+    console.log(data)
+
+    $http({
+    method: 'POST',
+    url: 'http://localhost:8000/estadoVehiculo/',
+    data: data,
+    headers: {'Content-Type': 'application/json'}
+    }).then(function(result) {
+
+      if (result.data.estado === 'C'){
+        $scope.response = "Cancelada"
+      }else if(result.data.estado === 'T'){
+        $scope.response = "Terminada"
+      }else if(result.data.estado === 'E'){
+        $scope.response = "En espera"
+      }
+
+      }, function(err) {
+        $scope.response = err;
+
       });
   };
 

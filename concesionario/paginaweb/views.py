@@ -4,7 +4,10 @@ from administracion.views import inicio as index_administracion
 from ventas.views import inicio as index_ventas
 from clientes.views import inicio as index_clientes
 from taller.views import inicio as index_taller
-
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from administracion import models
 
 def es_gerente(user):
     return user.groups.filter(name='Gerentes').exists()
@@ -65,6 +68,56 @@ def logout(request):
 
 # def taller(request):
 #     return render(request, 'paginaweb/contenidoReparacion.html')
+
+@csrf_exempt
+def loginMovil(request):
+    try:
+        print(request)
+        dic = json.loads(request.body.decode('utf-8'))
+        user = dic['username']
+        passwd = dic['password']
+        auth = authenticate(username=user, password=passwd)
+
+    except Exception as e:
+        print(e)
+        return JsonResponse({'auth':"False"})
+
+    if auth is not None:
+        return JsonResponse({'auth':"True"})
+    else:
+        return JsonResponse({'auth':"False"})
+
+@csrf_exempt
+def estadoVehiculo(request):
+
+    try:
+
+        clientes = models.Cliente.objects.all()
+        ordenes = models.Orden.objects.all()
+        ventas = models.Venta.objects.all()
+
+        peticion = json.loads(request.body.decode('utf-8'))
+        codigo_orden = peticion['codigo_orden']
+        placa = peticion['placa']
+
+        venta_placa = ventas.filter(placa=placa).get()
+
+        estado_orden = ordenes.filter(codigo_orden=codigo_orden).get()
+
+        if(venta_placa.placa == placa or str(estado_orden.codigo_orden) == str(codigo_orden)):
+            print(estado_orden.codigo_orden == codigo_orden)
+            print(str(estado_orden.codigo_orden), str(codigo_orden))
+            print('entre')
+
+        return JsonResponse({'estado':estado_orden.estado})
+
+    except Exception as e:
+        print(e)
+
+        return JsonResponse({'estado':"Sin estado, consulte sus compras"})
+
+
+
 
 
 

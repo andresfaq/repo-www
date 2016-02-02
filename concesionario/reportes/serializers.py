@@ -37,7 +37,7 @@ class EmpeadoSerializer(serializers.ModelSerializer):
 
 
 		def create(self, validated_data):
-			return Empleado.objects.create(**validated_data)
+			return models.Empleado.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 
@@ -53,7 +53,7 @@ class ClienteSerializer(serializers.ModelSerializer):
 		fields = ('id_empleado')
 
 		def create(self, validated_data):
-			return Cliente.objects.create(**validated_data)
+			return models.Cliente.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 			instance.codigo_cliente = validated_data.get('codigo_cliente', instance.codigo_cliente)
@@ -66,7 +66,7 @@ class SucursalSerializer(serializers.ModelSerializer):
 		fields = ('codigo_sucursal', 'nombre', 'direccion')
 
 		def create(self, validated_data):
-			return Sucursal.objects.create(**validated_data)
+			return models.Sucursal.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 
@@ -82,7 +82,7 @@ class GerenteSerializer(serializers.ModelSerializer):
 		fields = ('codigo_gerente')
 
 		def create(self, validated_data):
-			return Gerente.objects.create(**validated_data)
+			return models.Gerente.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 			instance.codigo_gerente = validated_data.get('codigo_gerente', instance.codigo_gerente)
@@ -96,7 +96,7 @@ class VendedorSerializer(serializers.ModelSerializer):
 		fields = ('codigo_vendedor', 'codigo_sucursal', 'porcentage_comision', 'salario')
 
 		def create(self, validated_data):
-			return Vendedor.objects.create(**validated_data)
+			return models.Vendedor.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 			instance.codigo_vendedor = validated_data.get('codigo_vendedor', instance.codigo_vendedor)
@@ -111,7 +111,7 @@ class JefeTallerSerializer(serializers.ModelSerializer):
 		fields = ('codigo_jefe_taller', 'codigo_sucursal', 'fin_contraro', 'salario')
 
 		def create(self, validated_data):
-			return JefeTaller.objects.create(**validated_data)
+			return models.JefeTaller.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 			instance.codigo_jefe_taller = validated_data.get('codigo_jefe_taller', instance.codigo_jefe_talller)
@@ -125,7 +125,7 @@ class OrdenSerializer(serializers.ModelSerializer):
 		fields = ('codigo_orden', 'codigo_jefe_taller', 'diagnostico', 'estado')
 
 		def create(self, validated_data):
-			return Orden.objects.create(**validated_data)
+			return models.Orden.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 			instance.codigo_orden = validated_data.get('codigo_orden', instance.codigo_orden)
@@ -141,7 +141,7 @@ class RepuestoSerializer(serializers.ModelSerializer):
 		fields = ('codigo_repuesto', 'nombre', 'descripcion')
 
 		def create(self, validated_data):
-			return Repuesto.objects.create(**validated_data)
+			return models.Repuesto.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 			instance.codigo_repuesto = validated_data.get('codigo_repuesto', instance.ccodigo_repuesto)
@@ -156,7 +156,7 @@ class RepuestosPorOrdenSerializer(serializers.ModelSerializer):
 		fields = ('codigo_orden', 'codigo_repuesto', 'cantidad')
 
 		def create(self, validated_data):
-			return RepuestosPorOrden.objects.create(**validated_data)
+			return models.RepuestosPorOrden.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 			instance.codigo_orden = validated_data.get('codigo_orden', instance.codigo_orden)
@@ -171,7 +171,7 @@ class InventarioRepuestoSerializer(serializers.ModelSerializer):
 		fields = ('codigo_inventario', 'codigo_repuesto', 'cantidad','precio_unidad')
 
 		def create(self, validated_data):
-			return InventarioRepuesto.objects.create(**validated_data)
+			return models.InventarioRepuesto.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 			instance.codigo_inventario = validated_data.get('codigo_inventario', instance.codigo_inventario)
@@ -187,7 +187,7 @@ class VehiculoSerializer(serializers.ModelSerializer):
 		fields = ('codigo_vehiculo', 'marca', 'modelo','descripcion','imagen')
 
 		def create(self, validated_data):
-			return VehiculoRepuesto.objects.create(**validated_data)
+			return models.VehiculoRepuesto.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 			instance.codigo_vehiculo = validated_data.get('codigo_vehiculo', instance.codigo_vehiculo)
@@ -204,7 +204,7 @@ class VentaSerializer(serializers.ModelSerializer):
 		fields = ('codigo_venta', 'codigo_vendedor', 'codigo_cliente','codigo_vehiculo','placa','porcentage_descuento', 'fecha_venta')
 
 		def create(self, validated_data):
-			return Cotizacion.objects.create(**validated_data)
+			return models.Cotizacion.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 			instance.codigo_venta = validated_data.get('codigo_venta', instance.codigo_venta)
@@ -223,7 +223,7 @@ class CotizacionSerializer(serializers.ModelSerializer):
 		fields = ('codigo_cotizacion', 'codigo_vendedor', 'codigo_vehiculo','fecha_cotizacion','porcentage_descuento')
 
 		def create(self, validated_data):
-			return Cotizacion.objects.create(**validated_data)
+			return models.Cotizacion.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 			instance.codigo_cotizacion = validated_data.get('codigo_cotizacion', instance.codigo_cotizacion)
@@ -240,7 +240,7 @@ class InventarioVehiculoSerializer(serializers.ModelSerializer):
 		fields = ('codigo_inventario', 'codigo_vehiculo','color','cantidad','precio_unidad')
 
 		def create(self, validated_data):
-			return InventarioVehiculo.objects.create(**validated_data)
+			return models.InventarioVehiculo.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 			instance.codigo_inventario = validated_data.get('codigo_inventario', instance.codigo_inventario)
@@ -257,7 +257,7 @@ class RevisionVehiculoSerializer(serializers.ModelSerializer):
 		fields = ('codigo_revision', 'codigo_venta','codigo_orden','fecha_revision','kilometraje','fecha_cambio_aceite')
 
 		def create(self, validated_data):
-			return Revision.objects.create(**validated_data)
+			return models.Revision.objects.create(**validated_data)
 
 		def update(self, instance, validated_data):
 			instance.codigo_revision = validated_data.get('codigo_revision', instance.codigo_revision)

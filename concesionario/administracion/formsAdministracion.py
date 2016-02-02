@@ -3,18 +3,82 @@ from paginaweb.static import *
 import datetime
 from functools import partial
 DateInput = partial(forms.DateInput, {'class': 'datepicker'})
-#from administracion.models import Orden,JefeTaller
+from administracion.models import User, JefeTaller, Vendedor, Gerente, Cliente, Empleado
 
-class crearUsuarioForm(forms.Form):
-    
-    usuario = forms.CharField(max_length=30, required=True)
-    contrasenaUsuario = forms.CharField(max_length=128, widget=forms.TextInput(attrs={'type': 'password'}), required=True)
-    TIPO_CHOICES=(('A','Aministrador'),( 'G','Gerente'),('J','Jefe de taller'),( 'V','Vendedor'))
-    tipoUsuario=forms.ChoiceField(choices=TIPO_CHOICES,label="Tipo de usuario")
+class UserForm(forms.ModelForm):
 
-    nombres = forms.CharField(max_length=30, required=True)
-    apellidos = forms.CharField(max_length=30, required=True)
-    cedula = forms.IntegerField(widget=forms.TextInput(attrs={'maxlength': '15' , 'data-mask' : '999999999999999'}), required=True)
-    email = forms.EmailField(max_length=254, required=True)
-    fecha = forms.DateField(required=True)
-    telefono = forms.IntegerField(widget=forms.TextInput(attrs={'maxlength': '15', 'data-mask' : '999999999999999'}), required=True)
+    CHOICES = (('A','Administrador'),( 'G','Gerente'),('J','Jefe de taller'),('V','Vendedor'),('C','Cliente'))
+    tipo = forms.ChoiceField(choices=CHOICES)
+
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'password',
+            'first_name',
+            'last_name',
+            'email',
+            'cedula',
+            'direccion',
+            'fecha_de_nacimiento',
+            'telefono'
+            )
+
+    def identificacion():
+        numID = User.objects.count()
+        return numID
+
+    def tipoUsuario(tipo):
+        if tipo=="C":
+            numID = Cliente.objects.count() + 1
+            return numID
+
+        elif tipo=="V":
+            numID = Vendedor.objects.count() + 1
+            return numID
+        elif tipo=="G":
+            print("G")
+        elif tipo=="J":
+            print("J")
+        elif tipo=="A":
+            print("A")
+
+    def crearCliente(usuario):
+        Cliente.objects.create(id=usuario.id,username=usuario.username,password=usuario.password,is_superuser=usuario.is_superuser,first_name=usuario.first_name,last_name=usuario.last_name,email=usuario.email,is_staff=usuario.is_staff,is_active=usuario.is_active,cedula=usuario.cedula,direccion=usuario.direccion,fecha_de_nacimiento=usuario.fecha_de_nacimiento,telefono=usuario.telefono)
+
+    def crearVendedor(usuario):
+        Vendedor.objects.create(id=usuario.id,username=usuario.username,password=usuario.password,is_superuser=usuario.is_superuser,first_name=usuario.first_name,last_name=usuario.last_name,email=usuario.email,is_staff=usuario.is_staff,is_active=usuario.is_active,cedula=usuario.cedula,direccion=usuario.direccion,fecha_de_nacimiento=usuario.fecha_de_nacimiento,telefono=usuario.telefono,porcentaje_comision=0,salario=0,codigo_sucursal_id=1)
+
+    def crearJefeTaller(usuario):
+        JefeTaller.objects.create(id=usuario.id,username=usuario.username,password=usuario.password,is_superuser=usuario.is_superuser,first_name=usuario.first_name,last_name=usuario.last_name,email=usuario.email,is_staff=usuario.is_staff,is_active=usuario.is_active,cedula=usuario.cedula,direccion=usuario.direccion,fecha_de_nacimiento=usuario.fecha_de_nacimiento,telefono=usuario.telefono,codigo_sucursal_id=1)
+
+    def crearGerente(usuario):
+        Gerente.objects.create(id=usuario.id,username=usuario.username,password=usuario.password,is_superuser=usuario.is_superuser,first_name=usuario.first_name,last_name=usuario.last_name,email=usuario.email,is_staff=usuario.is_staff,is_active=usuario.is_active,cedula=usuario.cedula,direccion=usuario.direccion,fecha_de_nacimiento=usuario.fecha_de_nacimiento,telefono=usuario.telefono,codigo_sucursal_id=1)
+
+class UserFormEliminate(forms.Form):
+    usernameChoice = forms.ModelChoiceField(queryset=User.objects.all().filter(is_active=True).order_by('username'), to_field_name='username')
+
+    def eliminate(usernameX):
+        user = User.objects.get(username=usernameX)
+        User.objects.filter(username=usernameX).update(is_active=False)
+
+    def save(self):
+        print("error")
+
+class UserFormRecuperate(forms.Form):
+    usernameChoice = forms.ModelChoiceField(queryset=User.objects.all().filter(is_active=False).order_by('username'), to_field_name='username')
+
+    def recuperate(usernameX):
+        user = User.objects.get(username=usernameX)
+        User.objects.filter(username=usernameX).update(is_active=True)
+
+    def save(self):
+        print("error")
+
+class UserFormModificateAux(forms.Form):
+
+    usernameChoice = forms.ModelChoiceField(queryset=User.objects.all().filter(is_active=True).order_by('username'), to_field_name='username')
+
+    def get(identificacion):
+        usuario = User.objects.get(username=identificacion)
+        return usuario
