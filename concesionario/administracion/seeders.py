@@ -81,6 +81,7 @@ grp = Group.objects.all()
 for x in grp:
     x.delete()
 
+print('DELETE COMPLETE')
 #===================================================================================
 
 
@@ -144,6 +145,7 @@ for x in range(150):
 for x in range(50):
     Cotizacion.save(CotizacionFactory.create())
 
+print('CREATE COMPLETE')
 
 # Creacion y asignacion de grupos [falta asignar permisos por grupo]
 
@@ -157,6 +159,7 @@ gerentes = Gerente.objects.all()
 jefestaller = JefeTaller.objects.all()
 vendedores = Vendedor.objects.all()
 
+print('INICIANDO ASIGNACION DE GRUPOS')
 
 for x in clientes:
     x.groups = [Group.objects.get(name='Clientes')]
@@ -170,3 +173,4 @@ for x in vendedores:
 for x in jefestaller:
     x.groups = [Group.objects.get(name='JefesTaller')]
 
+print('GROUP COMPLETE')
