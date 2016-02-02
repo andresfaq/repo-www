@@ -72,6 +72,7 @@ def logout(request):
 @csrf_exempt
 def loginMovil(request):
     try:
+        print(request)
         dic = json.loads(request.body.decode('utf-8'))
         user = dic['username']
         passwd = dic['password']
@@ -93,14 +94,22 @@ def estadoVehiculo(request):
 
         clientes = models.Cliente.objects.all()
         ordenes = models.Orden.objects.all()
-        print(request)
-        peticion = json.loads(request.body.decode('utf-8'))
-        print('peticion1',peticion)
-        codigo_orden = peticion['codigo_orden']
-        print('peticion',peticion)
-        estado_orden = ordenes.filter(codigo_orden=codigo_orden).estado
+        ventas = models.Venta.objects.all()
 
-        return JsonResponse({'estado':estado_orden})
+        peticion = json.loads(request.body.decode('utf-8'))
+        codigo_orden = peticion['codigo_orden']
+        placa = peticion['placa']
+
+        venta_placa = ventas.filter(placa=placa).get()
+
+        estado_orden = ordenes.filter(codigo_orden=codigo_orden).get()
+
+        if(venta_placa.placa == placa or str(estado_orden.codigo_orden) == str(codigo_orden)):
+            print(estado_orden.codigo_orden == codigo_orden)
+            print(str(estado_orden.codigo_orden), str(codigo_orden))
+            print('entre')
+
+        return JsonResponse({'estado':estado_orden.estado})
 
     except Exception as e:
         print(e)
