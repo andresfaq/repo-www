@@ -48,7 +48,7 @@ INSTALLED_APPS = (
     'clientes',
     'taller',
     'rest_framework',
-
+)
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

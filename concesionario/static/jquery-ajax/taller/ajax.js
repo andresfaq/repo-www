@@ -32,7 +32,7 @@ $(document).ready(function() {
         function(e){
              e.preventDefault();
              $('#contactModal').appendTo("body").modal('show'); //i have to set it in this way because i don understand why the modal block
-                                                                // the window and i can´t edit neither modal or main page ... and i found this
+                                                                // the window and i canï¿½t edit neither modal or main page ... and i found this
                                                                 // way for resolve the problem. :)  it works!
 
     });
@@ -50,7 +50,41 @@ $(document).ready(function() {
                     data: {'nombreCliente': consulta},
 
                     success:function(data){
-                        console.log(data)
+
+                        //[iteradorobjeto][0]+"campo" campo=nombreCliente, apellidoCliente,codigoVenta
+                        //$('#mensajeTabla').val("");
+
+                        var head="<th>NOMBRE </th> <th>APELLIDO </th> <th>CODIGO VENTA </th>";
+                        var html="";
+                        var color="success";
+                        if(data.length<1){
+                              $('#mensajeTabla').html("NO SE ENCONTRARON REGISTROS");
+                        }else{
+                              $('#mensajeTabla').html("");
+                              for( var i=0; i<data.length;i++){
+
+                                    html+="<tr class="+color+">" +
+                                              " <td>"+data[i][0].nombreCliente+"</td>" +
+                                               "<td>"+data[i][1].apellidoCliente+"</td>" +
+                                               "<td>"+data[i][2].codigoVenta+"</td> </tr>"+
+                                               "<td>" +
+                                                    "<button type='button' class='btn btn-success'>" +
+                                                        "<i class='entypo-check'> </i>"+
+                                                    " </button>" +
+                                               "</td>"
+                                    if(color=="success"){
+                                        color="info";
+                                    }
+                                    else{
+                                        color="success";
+                                    }
+
+                              }
+                              html+="</tbody>";
+                              $('#tablaVentasHead').html(head);
+                              $('#tablaVentasBody').html(html);
+                        }
+                        console.log("paso");
                     },
                     error: function(message){
                         alert(message+"hola error")

@@ -4,8 +4,10 @@ from .formsTaller import tallerForm
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core.context_processors import csrf
-from administracion.models import User, Empleado, Orden,JefeTaller,Venta,Cliente
+from django.db import connection
+from administracion.models import User, Empleado,Orden,JefeTaller,Venta,Cliente,Vendedor
 from django.http import JsonResponse
+
 
 
 
@@ -47,12 +49,30 @@ def busquedaCodigoVenta(request):
     if request.method == 'POST':        
         if request.is_ajax():
             consulta = request.POST.get('nombreCliente')
-            print ("esta es la consulta: ",consulta)
-            clientes = Cliente.objects.all()
-            print ("lista de clientes: ",clientes)
+            print ("esta es la consulta: ", consulta)
+            clientes = Cliente.objects.filter(first_name__icontains=consulta)
+            ventas = Venta.objects.all()
 
-            usuario = {'nombreCliente': 'Eduardo Ismael'}
-            return JsonResponse(usuario)
+            listaCliente=[]
+            for c in clientes:
+                for v in ventas:
+                    if(c.codigo_cliente == v.codigo_cliente.codigo_cliente):
+                        #listaCliente.append([c.first_name,c.last_name,v.codigo_venta])
+                        listaCliente.append([{'nombreCliente':c.first_name},
+                                            {'apellidoCliente':c.last_name},
+                                            {'codigoVenta':v.codigo_venta}])
+
+            if(len(listaCliente)):
+                for l in listaCliente:
+                    print ("algo")
+                    print ("nombre: ", l[0], " apellido :", l[1]," codigo vena: ",l[2])
+            else:
+                print("no hay datos que mostrar")
+
+
+            #usuario = {'nombreCliente': 'Eduardo Ismael'}
+            #datos = {'contenido': listaCliente}
+            return JsonResponse(listaCliente,safe=False)
         else:
             return HttpResponse('SOLO AJAX!')
 
