@@ -54,6 +54,25 @@ def ventas(request):
 	return render(request, 'reportes/ventas.html', {'vendedores':vendedores})
 
 @login_required
+def reparaciones(request):
+
+	jefes_taller = models.JefeTaller.objects.all()
+	sucursales = models.Sucursal.objects.all()
+	ordenes = models.Orden.objects.all()
+
+	for jefetaller in jefes_taller:
+		jefetaller.num_ordenes = len(ordenes.filter(codigo_jefe_taller=jefetaller.codigo_jefe_taller))
+
+	print(sucursales)
+	for sucursal in sucursales:
+		sucursal.num_ordenes = 0
+		for jefetaller in jefes_taller:
+			if jefetaller.codigo_sucursal.codigo_sucursal == sucursal.codigo_sucursal:
+				sucursal.num_ordenes += jefetaller.num_ordenes 
+
+	return(render(request, 'reportes/reparaciones.html', {'sucursales':sucursales}))
+
+@login_required
 def repuesto(request):
 	repuestos = models.Repuesto.objects.all()
 	return render(request, 'reportes/repuesto.html',{'repuestos':repuestos})
