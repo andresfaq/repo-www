@@ -11,7 +11,7 @@ class tallerForm(forms.Form):
     diagnostico=forms.CharField(widget=forms.Textarea(attrs={'class' : ''}),label="Diagnostico")
     estado=forms.ChoiceField(choices=ESTADO_CHOICES,label="Estado Orden")
     jefeTaller= forms.ModelChoiceField(queryset=JefeTaller.objects.all().order_by('first_name'),
-                                       to_field_name='codigo_jefe_taller')
+                                       to_field_name='codigo_jefe_taller',label="Jefe Taller encargado")
     '''jefeTaller= forms.ModelChoiceField(queryset=JefeTaller.objects.all().order_by('first_name').values_list('first_name',flat=True),
                                        to_field_name="codigo_jefe_taller",
                                        empty_label="Seleccione Jefe encargado",
@@ -19,8 +19,9 @@ class tallerForm(forms.Form):
     '''
     fechaRevision =forms.DateField(initial=datetime.date.today)
     codigoVenta=forms.CharField(widget=forms.TextInput(attrs={'readonly': True}),label="Codigo de Venta ")
-
-    buscarVenta = forms.CharField(label="Cliente ")
+    kmVehiculo=forms.CharField(widget=forms.TextInput(),label="Kilometraje del vehiculo ")
+    fechaCAceite=forms.DateField(initial=datetime.date.today)
+    buscarVenta = forms.CharField(label="Cliente ",required = False)
 
 
 
@@ -30,6 +31,12 @@ class tallerForm(forms.Form):
         if num_palabras < 4:
             raise forms.ValidationError("Se requieren minimo 4 palabras!")
         return mensaje
+
+    def clean_codigoVenta(self):
+        dato = int(self.cleaned_data['codigoVenta'])
+        return dato
+
+
 
 
 

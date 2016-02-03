@@ -27,10 +27,10 @@ $(document).ready(function() {
         }
     });
 //*******************************************************************************************************
-    function agregarCodigo(codigoVenta){
+  /*  function agregarCodigo(codigoVenta){
         $('#id_codigoVenta').val(codigoVenta);
     }
-
+*/
 //********************************************************************************************************
 
     $('#btBuscar').click(
@@ -42,6 +42,14 @@ $(document).ready(function() {
 
     });
 
+    $(document).on("click",".boton-seleccionar",function(){
+		var codigo=$(this).parents("tr").find("td").get(2);
+        var txtcodigo=$(codigo).text(); //i get the cell's content
+        $('#id_codigoVenta').val(txtcodigo);
+        $('#contactModal').appendTo("body").modal('hide');
+
+
+	});
     $('#btBuscarVentaCliente').click(
         function(e){
             e.preventDefault();
@@ -72,8 +80,8 @@ $(document).ready(function() {
                                                "<td>"+data[i][0].nombreCliente+"</td>" +
                                                "<td>"+data[i][1].apellidoCliente+"</td>" +
                                                "<td>"+data[i][2].codigoVenta+"</td>"+
-                                               "<td>" +
-                                                    "<button type='button' class='btn btn-success' onclick='"+agregarCodigo( data[i][2].codigoVenta )+"'>" +
+                                               "<td  class='boton-seleccionar'>" +
+                                                    "<button type='button' class='btn btn-success'>" +
                                                         "<i class='entypo-check'></i>"+
                                                     " </button>" +
                                                "</td> </tr>";

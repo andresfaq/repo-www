@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
+from django.template import Context
 from django.shortcuts import render,render_to_response,get_object_or_404
 from .formsTaller import tallerForm
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core.context_processors import csrf
 from django.db import connection
-from administracion.models import User, Empleado,Orden,JefeTaller,Venta,Cliente,Vendedor
+from administracion.models import User, Empleado,Orden,JefeTaller,Venta,Cliente,Vendedor,RevisionVehiculo
 from django.http import JsonResponse
 
 
@@ -21,15 +22,26 @@ def ingresarVehiculo(request):
             form = tallerForm(request.POST)
             if form.is_valid():
                 #jefe=request.POST.get('selectJefeTaller', None)
+                 #jefeT=form.jefeTaller._get_choices(selectionJefe)
+
                 selectionJefe = form.cleaned_data['jefeTaller']
-                #jefeT=form.jefeTaller._get_choices(selectionJefe)
+                diagnostico = form.cleaned_data['diagnostico']
                 estadoOr =  form.cleaned_data['estado']
-                orden=Orden(codigo_jefe_taller=selectionJefe,
-                            diagnostico=form.clean_diagnostico(),
-                            estado=estadoOr)
+                orden=Orden(codigo_jefe_taller=selectionJefe,diagnostico=diagnostico,estado=estadoOr)
                 orden.save()
-                #render(request, 'taller/ingresarVehiculo.html', {'mensaje': "ENTRO EN EL IF"})
-                return HttpResponseRedirect('/')
+
+                codigoOrden=Orden.objects.get(codigo_orden=orden.codigo_orden);
+                codigoVenta= Venta.objects.get(codigo_venta=form.cleaned_data['codigoVenta'])
+                fechaRevision= form.cleaned_data['fechaRevision']
+                cambioAceite=form.cleaned_data['fechaCAceite']
+                km=form.cleaned_data['kmVehiculo']
+
+                revision= RevisionVehiculo(codigo_venta=codigoVenta,codigo_orden=codigoOrden,
+                                           fecha_revision=fechaRevision,kilometraje=km,fecha_cambio_aceite=cambioAceite)
+                revision.save()
+                print("finalio correctamente")
+                render(request, 'taller/ingresarVehiculo.html',Context({'mensaje': "La orden y la revision de vehiculo se han creado exitosamente"}))
+                #return HttpResponseRedirect('/')
 
         else:
             form = tallerForm()
