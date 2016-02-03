@@ -70,7 +70,13 @@ def reparaciones(request):
 			if jefetaller.codigo_sucursal.codigo_sucursal == sucursal.codigo_sucursal:
 				sucursal.num_ordenes += jefetaller.num_ordenes 
 
+	print(sucursales)
+
 	return(render(request, 'reportes/reparaciones.html', {'sucursales':sucursales}))
+
+@login_required
+def ordenes(request):
+	return(render(request,'reportes/ordenes.html'))
 
 @login_required
 def repuesto(request):

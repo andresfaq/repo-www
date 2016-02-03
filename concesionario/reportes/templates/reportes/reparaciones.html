@@ -9,38 +9,16 @@
             var chart;
 
             var chartData = [
-                {
-                    "country": "United States",
-                    "visits": 9252
-                },
-                {
-                    "country": "China",
-                    "visits": 1882
-                },
-                {
-                    "country": "Japan",
-                    "visits": 1809
-                },
-                {
-                    "country": "Germany",
-                    "visits": 1322
-                },
-                {
-                    "country": "United Kingdom",
-                    "visits": 1122
-                },
-                {
-                    "country": "France",
-                    "visits": 1114
-                },
-                {
-                    "country": "India",
-                    "visits": 984
-                },
-                {
-                    "country": "Spain",
-                    "visits": 711
-                }
+
+                {%for sucursal in sucursales%}
+
+                  {"sucursal":'{{sucursal.nombre}}', "num_orden":'{{sucursal.num_ordenes}}'}
+
+                  {% if not forloop.last %}
+                      ,
+                      {% endif %}
+
+                {% endfor%}
             ];
 
 
@@ -49,11 +27,11 @@
                 chart = new AmCharts.AmPieChart();
 
                 // title of the chart
-                chart.addTitle("Visitors countries", 16);
+                chart.addTitle("Ordenes por sucursal", 16);
 
                 chart.dataProvider = chartData;
-                chart.titleField = "country";
-                chart.valueField = "visits";
+                chart.titleField = "sucursal";
+                chart.valueField = "num_orden";
                 chart.sequencedAnimation = true;
                 chart.startEffect = "elastic";
                 chart.innerRadius = "30%";
