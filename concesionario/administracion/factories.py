@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 
 #Genera Superusuario
+
 class SuperUserFactory(factory.Factory):
 
     class Meta:
@@ -24,6 +25,8 @@ class SuperUserFactory(factory.Factory):
     email = factory.Faker('email')
     fecha_de_nacimiento = factory.fuzzy.FuzzyDate(datetime.date(1950, 1, 1), datetime.date(2000, 12, 31))
     telefono = factory.fuzzy.FuzzyInteger(1000000, 9999999)
+
+
 
 #===================================================
 ###Generadores de usuarios###
@@ -120,6 +123,7 @@ class OrdenFactory(factory.django.DjangoModelFactory):
         model = models.Orden
 
     codigo_jefe_taller = factory.Iterator(models.JefeTaller.objects.all())
+    sucursal = factory.SelfAttribute('codigo_jefe_taller.codigo_sucursal')
     diagnostico = factory.Faker('text', max_nb_chars=1200)
     estado = factory.fuzzy.FuzzyChoice(['C', 'T', 'E'])
 
@@ -212,6 +216,7 @@ class VentaFactory(factory.django.DjangoModelFactory):
         model = models.Venta
 
     codigo_vendedor = factory.fuzzy.FuzzyChoice(models.Vendedor.objects.all())
+    sucursal = factory.SelfAttribute('codigo_vendedor.codigo_sucursal')
     codigo_cliente = factory.fuzzy.FuzzyChoice(models.Cliente.objects.all())
     codigo_vehiculo = factory.fuzzy.FuzzyChoice(models.Vehiculo.objects.all())
     porcentaje_descuento = factory.fuzzy.FuzzyInteger(1, 100)
@@ -219,8 +224,11 @@ class VentaFactory(factory.django.DjangoModelFactory):
     placa = factory.Sequence(lambda n: "ABC%03d" % n)
 #===================================================
 
+
 #===================================================
+
 #Generador de Cotizaciones
+
 class CotizacionFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = models.Cotizacion

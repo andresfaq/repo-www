@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,render_to_response,get_object_or_404
-from .formsAdministracion import UserForm, UserFormEliminate, UserFormRecuperate, UserFormModificateAux
+from .formsAdministracion import UserForm, UserFormEliminate, UserFormRecuperate, UserFormModificate, UserFormAux
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core.context_processors import csrf
@@ -9,7 +9,6 @@ from administracion.models import User, Cliente
 from django.template import RequestContext, loader
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.contrib.auth.hashers import make_password
-
 
 @login_required
 def inicio(request):
@@ -44,7 +43,7 @@ def crearUsuario(request):
             if "A" == tipo:
                 usuario.is_superuser = True
                 usuario.is_staff = True
-                usuario.save()
+                UserForm.crearAdministrador(usuario)
             if "V" == tipo:
                 UserForm.crearVendedor(usuario)
             if "J" == tipo:
@@ -65,27 +64,21 @@ def crearUsuario(request):
 @login_required
 def modificarUsuario(request):
     if request.method == 'POST':
-        user_form_aux = UserFormModificateAux(request.POST)
-        user_form = UserForm(request.POST)
-        complete = False
+        user_form_aux = UserFormModificate(request.POST)
+        user_form = UserFormAux(request.POST)
         user = ""
-        if user != "":
-            user_form = UserForm(instance=user)
         
         if user_form_aux.is_valid():
             usernameChoice = user_form_aux.cleaned_data['usernameChoice']
-            user = UserFormModificateAux.get(usernameChoice)
-            complete = True
+            user = UserFormModificate.get(usernameChoice)
 
         if user != "":
-            user_form = UserForm(instance=user)
-
-        else:
-            print("asd")
+            user_form = UserFormAux(instance=user)
 
         if user_form.is_valid():
+
             usuario = user_form
-            usuario.password = user_form.cleaned_data['password']
+            usuario.password = make_password(user_form.cleaned_data['password'])
             usuario.username = user_form.cleaned_data['username']
             usuario.first_name = user_form.cleaned_data['first_name']
             usuario.last_name = user_form.cleaned_data['last_name']
@@ -94,16 +87,11 @@ def modificarUsuario(request):
             usuario.direccion = user_form.cleaned_data['direccion']
             usuario.fecha_de_nacimiento = user_form.cleaned_data['fecha_de_nacimiento']
             usuario.telefono = user_form.cleaned_data['telefono']
-            usuario.save()
-            
-
-        else:
-            print("asdas")
-
+            return HttpResponseRedirect('/AquiDeberíaDeHaberUnMensajeDeError/'+str(usuario.username))
+            #UserFormModificate.actualizar(usuario, idX)
 
     else:
-        # formulario inicial
-        user_form_aux = UserFormModificateAux()
+        user_form_aux = UserFormModificate()
         user_form = UserForm(request.POST)
 
     return render(request, 'administracion/modificarUsuario.html', { 'user_form_aux': user_form_aux, 'user_form': user_form})

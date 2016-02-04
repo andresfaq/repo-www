@@ -105,7 +105,7 @@ for x in range(6):
     JefeTaller.save(JefeTallerFactory.create())
 
 #Creando Ordenes
-for x in range(60):
+for x in range(300):
     Orden.save(OrdenFactory.create())
 
 
@@ -120,7 +120,7 @@ for x in range(50):
 
 
 #Creando RevisionVehiculo = #Ordenes
-for x in range(60):
+for x in range(300):
     RevisionVehiculo.save(RevisionVehiculoFactory.create())
 
 #Creando InventarioVehiculo = #Vehiculos
