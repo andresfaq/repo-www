@@ -106,6 +106,7 @@ class Orden(models.Model):
     codigo_jefe_taller = models.ForeignKey(JefeTaller)
     diagnostico = models.CharField(max_length=2000, null=True, blank=True)
     estado = models.CharField(max_length=1, choices=ESTADOS)
+    sucursal = models.ForeignKey(Sucursal)
     #codigo_cliente = models.ForeignKey(Cliente)
 
 
@@ -146,6 +147,7 @@ class Venta(models.Model):
     placa = models.CharField(max_length=6)
     porcentaje_descuento = models.IntegerField(default=0, validators=[MinValueValidator(0),MaxValueValidator(100)])
     fecha_venta = models.DateField()
+    sucursal = models.ForeignKey(Sucursal)
 
 
 class Cotizacion(models.Model):
