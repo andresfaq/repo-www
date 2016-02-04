@@ -189,7 +189,7 @@ class RevisionVehiculoFactory(factory.django.DjangoModelFactory):
 
     codigo_venta = factory.fuzzy.FuzzyChoice(models.Venta.objects.all())
     codigo_orden = factory.Iterator(models.Orden.objects.all())
-    fecha_revision = factory.fuzzy.FuzzyDate(datetime.date(2015, 1, 1))
+    fecha_revision = factory.fuzzy.FuzzyDate(datetime.date(2016, 1, 1))
     kilometraje = factory.fuzzy.FuzzyInteger(1000, 999999)
     fecha_cambio_aceite = factory.fuzzy.FuzzyDate(datetime.date(2016, 1, 1))
 
