@@ -78,6 +78,8 @@ class DatosVehiculoResource(ModelResource):
 
 #===== API Modulo Clientes =====#
 
+# http://localhost:8000/administracion/api/v1/ordenmovil/?format=json&cedula__exact=298547509
+
 class DatosOrdenMovilResource(ModelResource):
     #codigo_orden = fields.OneToOneField(OrdenResource, 'codigo_orden')
 
@@ -85,9 +87,10 @@ class DatosOrdenMovilResource(ModelResource):
         queryset = models.Cliente.objects.all()
         resource_name = 'ordenmovil'
         #excludes = ['codigo_revision', 'codigo_venta', 'codigo_orden', ]
-        #filtering = {
+        filtering = {
+            'cedula': ALL
             #'codigo_orden': ALL,
             #'user': ALL_WITH_RELATIONS,
             #'created': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
-        #}
+        }
 
