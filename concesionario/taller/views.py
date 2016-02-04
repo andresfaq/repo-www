@@ -21,8 +21,6 @@ def ingresarVehiculo(request):
         if request.POST and 'submit' in request.POST:
             form = tallerForm(request.POST)
             if form.is_valid():
-                #jefe=request.POST.get('selectJefeTaller', None)
-                 #jefeT=form.jefeTaller._get_choices(selectionJefe)
 
                 selectionJefe = form.cleaned_data['jefeTaller']
                 diagnostico = form.cleaned_data['diagnostico']
