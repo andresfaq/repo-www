@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core.context_processors import csrf
 from django.db import connection
-from administracion.models import User, Empleado,Orden,JefeTaller,Venta,Cliente,Vendedor,RevisionVehiculo
+from administracion.models import User, Empleado,Orden,JefeTaller,Venta,Cliente,Vendedor,RevisionVehiculo,Sucursal
 from django.http import JsonResponse
 
 
@@ -19,13 +19,16 @@ def inicio(request):
 @login_required
 def ingresarVehiculo(request):
         if request.POST and 'submit' in request.POST:
-            form = tallerForm(request.POST)
+            form = tallerForm(request.POST,initial={'jefeTaller': request.session['nombre']})
             if form.is_valid():
+                print(' codigo jefe ', request.session["codigo"],
+                      ' nombre ', request.session["nombre"], 'apellido', request.session["apellido"],' cedula', request.session["cedula"])
 
-                selectionJefe = form.cleaned_data['jefeTaller']
+                selectionJefe = JefeTaller.objects.get(codigo_jefe_taller=request.session["codigo"])
                 diagnostico = form.cleaned_data['diagnostico']
                 estadoOr =  form.cleaned_data['estado']
-                orden=Orden(codigo_jefe_taller=selectionJefe,diagnostico=diagnostico,estado=estadoOr)
+                sucursalJefe = Sucursal.objects.get(codigo_sucursal=request.session["codigoSucursal"])
+                orden=Orden(codigo_jefe_taller=selectionJefe,diagnostico=diagnostico,estado=estadoOr,sucursal=sucursalJefe)
                 orden.save()
 
                 codigoOrden=Orden.objects.get(codigo_orden=orden.codigo_orden);
@@ -42,8 +45,8 @@ def ingresarVehiculo(request):
                 #return HttpResponseRedirect('/')
 
         else:
-            form = tallerForm()
-            #form.jefeTaller = JefeTaller.objects.all().order_by('first_name')
+            sucursal=Sucursal.objects.get(codigo_sucursal=request.session["codigoSucursal"])
+            form = tallerForm(initial={'jefeTaller': request.session['nombre']+" "+request.session["apellido"],'sucursal':sucursal.nombre})
             #render(request, 'taller/ingresarVehiculo.html', {'mensaje': "ENTRO EN EL ELSE"})
         args = {}
         args.update(csrf(request))

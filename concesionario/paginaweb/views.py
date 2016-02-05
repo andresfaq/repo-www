@@ -8,6 +8,7 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 from administracion import models
+from administracion.models import User, Empleado,Orden,JefeTaller,Sucursal
 
 def es_gerente(user):
     return user.groups.filter(name='Gerentes').exists()
@@ -47,7 +48,16 @@ def login(request):
                 return redirect(index_clientes) #clientes/index.html
 
             if es_jefetaller(user):
-                return redirect(index_taller) #clientes/index.html
+
+                jefe=JefeTaller.objects.get(username=user)
+                sucur=jefe.codigo_sucursal
+
+                request.session["codigoSucursal"] = sucur.getCodigoS()
+                request.session["codigo"] = jefe.codigo_jefe_taller
+                request.session["nombre"] = jefe.first_name
+                request.session["apellido"] = jefe.last_name
+                request.session["cedula"] = jefe.cedula
+                return redirect(index_taller) #taller/index.html
             else:
                 return redirect(home)
 

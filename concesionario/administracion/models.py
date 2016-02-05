@@ -52,6 +52,9 @@ class Sucursal(models.Model):
     def __str__(self):
         return str(self.codigo_sucursal)
 
+    def getCodigoS(self):
+        return self.codigo_sucursal
+
 class Gerente(Empleado):
     class Meta:
         verbose_name = 'Gerente'

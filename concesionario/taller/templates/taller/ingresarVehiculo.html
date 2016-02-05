@@ -15,9 +15,26 @@
                  <form id='formTallerEntrada'action="" method="post">{% csrf_token %}
                     <!--{{ form.as_p }} -->
                      {% csrf_token %}
+
                      <div class="form-group">
                        <label>Fecha Revisión</label>
                        {{form.fechaRevision}}
+                     </div>
+
+                     <div class="form-group">
+                       {{form.sucursal.label}}
+                       {{form.sucursal}}
+                     </div>
+                          <div class="form-group">
+                        {{form.jefeTaller.label}}
+                        {{form.jefeTaller}}
+                      <!--
+                        <select name=selectJefeTaller>
+                           {%for jefe in form.jefeTaller%}
+                                <option name={{jefe.codigo_jefe_taller}}>{{jefe.first_name}}</option>
+                           {%endfor%}
+                        </select>
+                        -->
                     </div>
 
                      <div class="form-group">
@@ -31,17 +48,6 @@
                         <button class="btn btn-dark-gray" data-toggle="modal"  name="btBuscar" id="btBuscar">Buscar</button>
                     </div>
 
-                    <div class="form-group">
-                        {{form.jefeTaller.label}}
-                        {{form.jefeTaller}}
-                      <!--
-                        <select name=selectJefeTaller>
-                           {%for jefe in form.jefeTaller%}
-                                <option name={{jefe.codigo_jefe_taller}}>{{jefe.first_name}}</option>
-                           {%endfor%}
-                        </select>
-                        -->
-                    </div>
                     <div class="form-group">
                        {{form.kmVehiculo.label}}
                        {{form.kmVehiculo}}
