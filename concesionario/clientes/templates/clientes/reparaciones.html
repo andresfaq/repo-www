@@ -2,6 +2,36 @@
 
 {% block contenido %}
 
-    REPARACIONES
+
+<div class="row" ng-app="clienteApp" ng-controller="clientesCtrl">
+
+    <div id="consultaUsuario" class="col-md-6 col-sm-4">
+        <form role="form" class="form-inline">
+            <input id="idUsuario" type="input" class="form-control" placeholder="Introduce tu nombre de usuario">
+            <button type="submit" class="btn btn-default" ng-click="cargarPlacas()">Consultar</button>
+        </form>
+    </div>
+
+
+
+    <div id="consultaPlacas" class="col-md-7 col-sm-4">
+        <table id="vehiculosUsuario" class="table">
+        <tr>
+            <th> Placa </th>
+             <th> Accion </th>
+        </tr>
+
+        <tr ng-repeat="dato in datos">
+            {% verbatim %}
+            <td>{{ dato.placa }}</td>
+            {% endverbatim %}
+            <td> Holi </td>
+        </tr>
+
+        </table>
+    </div>
+
+
+</div>
 
 {% endblock%}

@@ -94,9 +94,13 @@ def busquedaCodigoVenta(request):
 
 @login_required
 def mostrarVehiculosTaller(request):
-
+    form = tallerForm(request.POST)
     carros=RevisionVehiculo.objects.select_related('codigo_orden','codigo_venta')
-    return render(request, 'taller/carrosTaller.html',{'carros':carros})
+    args = {}
+    args.update(csrf(request))
+    args['form'] = form
+    args['carros']=carros
+    return render(request, 'taller/carrosTaller.html',args)
 '''
 @login_required
 def busquedaCodigoVenta(request):
