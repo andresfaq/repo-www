@@ -11,8 +11,6 @@ urlpatterns = [url(r'^$', views.inicio,name="reporte_inicio"),
 				url(r'^ordenes$', views.ordenes),
 				url(r'^user/$', views.UserList.as_view()),
 				url(r'^user/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
-				url(r'^user/login/$', views.login),
-				url(r'^user/logout/$', views.logout),
 				]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

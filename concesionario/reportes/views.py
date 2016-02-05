@@ -76,7 +76,45 @@ def reparaciones(request):
 
 @login_required
 def ordenes(request):
-	return(render(request,'reportes/ordenes.html'))
+
+	revisiones = models.RevisionVehiculo.objects.all()
+	revision1 = revisiones.filter(codigo_orden__sucursal__codigo_sucursal=1).order_by('fecha_revision')
+	revision2 = revisiones.filter(codigo_orden__sucursal__codigo_sucursal=2).order_by('fecha_revision')
+	revision3 = revisiones.filter(codigo_orden__sucursal__codigo_sucursal=3).order_by('fecha_revision')
+
+	fechas1 = {}
+
+	for revision in revision1:
+
+		if not revision.fecha_revision in fechas1:
+
+			revision.num_ordenes = revision1.filter(fecha_revision=revision.fecha_revision).count()
+			fechas1[revision.fecha_revision]=revision.num_ordenes
+			print(revision.num_ordenes)
+
+	revision1 = revision1.distinct('fecha_revision')
+
+	fechas2 = {}
+
+	for revision in revision2:
+
+		if not revision.fecha_revision in fechas2:
+			revision.num_ordenes = revision2.filter(fecha_revision=revision.fecha_revision).count()
+			fechas2[revision.fecha_revision]=revision.num_ordenes
+
+	revision2 = revision2.distinct('fecha_revision')
+
+	fechas3 = {}
+
+	for revision in revision3:
+
+		if not revision.fecha_revision in fechas3:
+			revision.num_ordenes = revision3.filter(fecha_revision=revision.fecha_revision).count()
+			fechas3[revision.fecha_revision]=revision.num_ordenes
+
+	revision3 = revision3.distinct('fecha_revision')
+
+	return render(request,'reportes/ordenes.html',{'revision1':revision1,'revision2':revision2 ,'revision3':revision3,'fechas1':fechas1,'fechas2':fechas2,'fechas3':fechas3})
 
 @login_required
 def repuesto(request):
@@ -93,25 +131,8 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.User.objects.all()
     serializer_class = UserSerializer
 
-@api_view(('GET',))
-def api_root(request, format=None):
-    return Response({
-        'users': reverse('User-list', request=request, format=format)
-    })
+from django.template.defaulttags import register
 
-
-def login(request):
-	if request.method != 'POST':
-		raise Http404('Únicamente se permiten métodos POSTs') 
-	try:
-		m = Member.objects.get(username=request.POST['username']) 
-		if m.password == request.POST['password']: 
-			request.session['member_id'] = m.id 
-			return JsonResponse({'login': 'True'}) 
-	except Member.DoesNotExist: 
-		return JsonResponse({'login': 'False'}) 
-
-
-def logout(request):
-	return HttpResponse("Haz salido de la sesión") 
- 
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
