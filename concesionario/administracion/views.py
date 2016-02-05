@@ -76,7 +76,6 @@ def modificarUsuario(request):
             user_form = UserFormAux(instance=user)
 
         if user_form.is_valid():
-
             usuario = user_form
             usuario.password = make_password(user_form.cleaned_data['password'])
             usuario.username = user_form.cleaned_data['username']

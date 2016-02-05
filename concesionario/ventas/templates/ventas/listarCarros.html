@@ -1,0 +1,27 @@
+{% extends 'administracion/base.html' %}
+{% load staticfiles %}
+{% block contenido %}
+
+        <!--PRINCIPAL-->
+        <div id="page-wrapper">
+
+            <div class="container-fluid" id="contenedor">
+
+                <!-- Page Heading -->
+                {% for carro in carros %}
+                    <div class="col-sm-4 col-lg-4 col-md-4" style="height: 350px;">
+                        <div class="thumbnail">
+                            <img src="/static/{{carro.imagen}}"  alt="">
+                            <div class="caption">
+                                <h4 class="pull-right">${{carro.valor}}</h4>
+                                <h4><a href="#">{{carro.modelo}}</a>
+                                </h4>
+                                <p>{{carro.descripcion}}</p>
+                                    <a type="submit" class="btn btn-blue btn-icon" href={% url 'ventas.views.comprarCarro' codigo_vehiculo=carro.codigo_vehiculo %}> Comprar {{carro.marca}} </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- /.row -->
+            </div>
+{% endblock%}
