@@ -3228,6 +3228,7 @@ input[type="button"].btn-block {
 .page-container .sidebar-menu .sidebar-user-info .sui-hover.inline-links a + a {
   margin-left: 10px;
 }
+
 .page-container .main-content {
   position: relative;
   float: left;

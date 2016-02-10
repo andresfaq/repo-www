@@ -1,41 +1,39 @@
 {% extends 'reportes/base.html' %}
 
 {% block javas %}
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1.1", {packages:["table"]});
-      google.setOnLoadCallback(drawTable);
-
-      function drawTable() {
-        var data = new google.visualization.DataTable(pageSize=20);
-
-        data.addColumn('string', 'Nombre');
-        data.addColumn('string', 'Cedula');
-        data.addColumn('string', 'Username');
-        data.addColumn('string', 'Correo');
-        data.addColumn('string', 'Telefono');
-        data.addRows([
-
-        	{% for usuario in usuarios %}
-        		
-          		[ '{{ usuario.first_name }}', '{{usuario.cedula}}', '{{usuario.username}}', '{{usuario.email}}', '{{usuario.telefono}}'] 
-          		{% if not forloop.last %} 
-          		,  
-          		{% endif %}
-          	{% endfor %}
-
-        ]);
-
-        var table = new google.visualization.Table(document.getElementById('table_div'));
-        table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
-      }
-    </script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#repuestos").DataTable({
+      responsive:true,
+      "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            }
+    });
+  });
+</script>
 {% endblock %}
 
 {% block contenido %}
-
-
-	<div id="table_div" style='overflow-y: scroll; overflow-x: scroll;'></div>
-
-
+  <table id="repuestos" class="table table-striped table-bordered table-hover dataTables-example">
+    <thead>
+      <tr>
+        <td>Primer Nombre</td>
+        <td>Cedula</td>
+        <td>Username</td>
+        <td>email</td>
+        <td>telefono</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for usuario in usuarios %}
+        <tr>
+          <td>{{usuario.first_name}}</td>
+          <td>{{usuario.cedula}}</td>
+          <td>{{usuario.username}}</td>
+          <td>{{usuario.email}}</td>
+          <td>{{usuario.telefono}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock%}
