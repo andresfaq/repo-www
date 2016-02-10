@@ -2,121 +2,262 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Concesionario - Inicio</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="{% static 'css/bootstrap.min.css'  %}" rel="stylesheet">
-
-    <!-- Custom CSS -->
     <link href="{% static 'css/landing-page.css'  %}" rel="stylesheet">
+<head>
+<title> FreeMotors | Home :: Concecionario</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
 
-    <!-- Custom Fonts -->
-    <link href="{% static 'font-awesome/css/font-awesome.min.css'  %}" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/pagina-web/style.css' %}" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script type="text/javascript" src="{% static 'js/pagina-web/jquery-1.9.0.min.js' %}"></script> 
+    <script src="{% static 'js/pagina-web/jquery.openCarousel.js' %}" type="text/javascript"></script>
+    <script type="text/javascript" src="{% static 'js/pagina-web/easing.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'js/pagina-web/move-top.js' %}"></script>
 
 </head>
 
+
 <body>
-
-    <!-- Navegacion -->
-    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
-        <div class="container topnav">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar">asd</span>
-                    <span class="icon-bar">addd</span>
-                    <span class="icon-bar">ass</span>
-                </button>
-                <a class="navbar-brand topnav" href="#">Concesionario</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="#about">Acerca</a>
-                    </li>
-                    <li>
-                        <a href="#contact">Contacto</a>
-                    </li>
-
-                    <li>
-                    {% if user.is_authenticated %}
-                        <a href="{% url "login" %}">Ingreso</a>
-
-                    {% else %}
-                        <a href="{% url "login" %}">Ingreso</a>
-                    {% endif %}
-
-                    </li>
-
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-    <!-- Contenido -->
-     {% block contenido %}  {% endblock%}
-
-
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="list-inline">
+    <div class="header">
+            <div class="wrap">
+                <div class="header_top">
+                    <div class="logo">
+                        <a href="index.html"><img src="{% static 'images/pagina-web/logo.png' %}" alt="" /></a>
+                    </div>
+                        <div class="header_top_right">
+                              <div class="search_box">
+                                <span>Search</span>
+                                <form>
+                                    <input type="text" value=""><input type="submit" value="">
+                                </form>
+                                <div class="clear"></div>
+                            </div>
+                    </div>
+                 <div class="clear"></div>
+            </div>     
+            <div class="navigation">
+                <a class="toggleMenu" href="#">Menu</a>
+                    <ul class="nav">
                         <li>
-                            <a href="#">Home</a>
+                            <a href="index.html">Home</a>
                         </li>
-                        <li class="footer-menu-divider">&sdot;</li>
                         <li>
-                            <a href="#about">About</a>
+                            <a href="#">Ventas</a>
                         </li>
-                        <li class="footer-menu-divider">&sdot;</li>
                         <li>
-                            <a href="#services">Services</a>
+                            <a href="#">Cotizaciones</a>
                         </li>
-                        <li class="footer-menu-divider">&sdot;</li>
                         <li>
-                            <a href="#contact">Contact</a>
+                            <a href="#">Taller</a>
+                        </li>
+                        <li  class="test">
+                            <a href="#">Ferrari</a>
+                            <ul>
+                                <li>
+                                    <a href="#">Cookware</a>
+                                    <ul>
+                                        <li><a href="#">Pots & Pans</a></li>
+                                        <li><a href="#">Pressure Cookers</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Storage</a>
+                                    <ul>
+                                        <li><a href="#">Bottles & Sippers</a></li>
+                                        <li><a href="#">Containers & Jars</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Cutlery & Tableware</a>
+                                    <ul>
+                                        <li><a href="#">Cutlery</a></li>
+                                        <li><a href="#">Condiment Sets</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Bar Accessories</a>
+                                    <ul>
+                                        <li><a href="#">Bottle Openers</a></li>
+                                        <li><a href="#">Flasks</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">BMW</a>
+                            <ul>
+                                <li>
+                                    <a href="#">Laptops</a>
+                                    <ul>
+                                        <li><a href="#">HP</a></li>
+                                        <li><a href="#">Lenova</a></li>
+                                        <li><a href="#">Dell</a></li>
+                                        <li><a href="#">All Brands</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Computer Accessories</a>
+                                    <ul>
+                                        <li><a href="#">External Hard Disks</a></li>
+                                        <li><a href="#">Pendrives</a></li>
+                                        <li><a href="#">PC Components</a></li>
+                                        <li><a href="#">Computer Peripherals</a></li>
+                                        <li><a href="#">Datacards & Routers</a></li>
+                                        <li><a href="#">Mouse</a></li>
+                                        <li><a href="#">Laptop Skins & Decals</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Mercedes Benz</a>
+                            <ul>
+                                <li><a href="#">Bath & Skin Care</a></li>
+                                <li><a href="#">Health & Safety</a></li>
+                                <li><a href="#">Maternity Care</a></li>
+                                <li><a href="#">Body Care Combos</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Ford</a>
+                            <ul>
+                                <li>
+                                    <a href="#">Home Furnishing</a>
+                                    <ul>
+                                        <li><a href="#">Bed</a></li>
+                                        <li><a href="#">Bath</a></li>
+                                        <li><a href="#">Kitchen</a></li>
+                                        <li><a href="#">Living</a></li>
+                                        
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Home Decor</a>
+                                    <ul>
+                                        <li><a href="#">Flowers & Plants</a></li>
+                                        <li><a href="#">Home Fragrances</a></li>
+                                        <li><a href="#">Spiritual Decor</a></li>
+                                        <li><a href="#">Wall Decor</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Gardening Tools</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Mustang</a>
+                            <ul>
+                                <li>
+                                    <a href="#">Books</a>
+                                    <ul>
+                                        <li><a href="#">Academic & Professional</a></li>
+                                        <li><a href="#">Entrance Exam</a></li>
+                                        <li><a href="#">Literature & Fiction</a></li>
+                                        <li><a href="#">Children & Teens</a></li>
+                                        <li><a href="#">Indian Writing</a></li>
+                                        <li><a href="#">New Releases</a></li>
+                                        <li><a href="#">Bestsellers</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Stationery</a>
+                                    <ul>
+                                        <li><a href="#">Pens</a></li>
+                                        <li><a href="#">Calculators</a></li>
+                                        <li><a href="#">College Supplies</a></li>
+                                        <li><a href="#">Art Supplies</a></li>
+                                        <li><a href="#">Diaries & Notebooks</a></li>
+                                        <li><a href="#">Gifting</a></li>
+                                    </ul>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Bugatti</a>
+                            <ul>
+                                <li>
+                                    <a href="#">Fitness</a>
+                                    <ul>
+                                        <li><a href="#">Yoga Mats</a></li>
+                                        <li><a href="#">Gym Gloves</a></li>
+                                        <li><a href="#">Ab Exercisers</a></li>
+                                        <li><a href="#">Gym Balls</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Indoor Sports</a>
+                                    <ul>
+                                        <li><a href="#">Chess</a></li>
+                                        <li><a href="#">Darts</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Team Sports</a>
+                                    <ul>
+                                        <li><a href="#">Basketball</a></li>
+                                        <li><a href="#">Cricket</a></li>
+                                        <li><a href="#">Football</a></li>
+                                        <li><a href="#">VolleyBall</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Racquet Sports</a>
+                                    <ul>
+                                        <li><a href="#">Badminton</a></li>
+                                        <li><a href="#">Squash</a></li>
+                                        <li><a href="#">Table Tennis</a></li>
+                                        <li><a href="#">Tennis</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="contact.html">Contact Us</a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted small">Copyright &copy; Your Company 2014. All Rights Reserved</p>
-                </div>
+                     <span class="left-ribbon"> </span> 
+                     <span class="right-ribbon"> </span>    
             </div>
+
+            {% block header %}
+
+            {% endblock%}
+
         </div>
-    </footer>
+   </div>
 
+   {% block contenido %}
+   {% endblock%}
 
+   <div class="footer">
+      <div class="wrap">    
+             <div class="copy_right">
+                <p> FreeMotors S.A. Copy rights (2016). All rights Reseverd </p>
+           </div>   
+           <div class="footer-nav">
+            <ul>
+                <li><a href="#">Terms of Use</a> : </li>
+                <li><a href="#">Privacy Policy</a> : </li>
+                <li><a href="contact.html">Contact Us</a> : </li>
+                <li><a href="#">Sitemap</a></li>
+            </ul>
+           </div>       
+        </div>
+    </div>
 
-
-
-
-    <!-- jQuery -->
-    <script src="{% static 'js/jquery.js'  %}"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'js/bootstrap.min.js'  %}"></script>
-
+    <script type="text/javascript">
+        $(document).ready(function() {          
+            $().UItoTop({ easingType: 'easeOutQuart' });
+            
+        });
+    </script>
+    <a href="#" id="toTop"> </a>
+    <script type="text/javascript" src="{% static 'js/pagina-web/navigation.js' %}"></script>
 </body>
 
 </html>

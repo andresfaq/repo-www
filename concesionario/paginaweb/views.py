@@ -22,7 +22,8 @@ def es_jefetaller(user):
 def es_cliente(user):
     return user.groups.filter(name='Clientes').exists()
 
-
+def descripcion(requst):
+    return render(request, 'paginaweb/descripcion.html')
 
 def home(request):
     return render(request, 'paginaweb/index.html')
