@@ -16,6 +16,14 @@
     <script type="text/javascript" src="{% static 'js/pagina-web/easing.js' %}"></script>
     <script type="text/javascript" src="{%  static 'js/pagina-web/move-top.js' %}"></script>
 
+    <script> 
+        $(document).ready(function(){
+            $( "login-bar" ).click(function() {
+              $( this ).hide( "drop", { direction: "down" }, "slow" );
+            });
+        });
+    </script>
+
 </head>
 
 
@@ -27,12 +35,8 @@
                         <a href="index.html"><img src="{% static 'images/pagina-web/logo.png' %}" alt="" /></a>
                     </div>
                         <div class="header_top_right">
-                              <div class="search_box">
-                                <span>Search</span>
-                                <form>
-                                    <input type="text" value=""><input type="submit" value="">
-                                </form>
-                                <div class="clear"></div>
+                            <div id="login-bar" class="banner-desc">
+                                <a href={% url "paginaweb.views.login" %} >Login</a>
                             </div>
                     </div>
                  <div class="clear"></div>
