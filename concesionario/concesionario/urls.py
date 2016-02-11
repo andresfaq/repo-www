@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 from django.contrib import admin
-from paginaweb.views import home, login, logout, loginMovil, estadoVehiculo
+from paginaweb.views import home, login, logout, loginMovil, estadoVehiculo, descripcion
 admin.autodiscover() #registra todos los archivos admin.py del proyecto
 
 from django.contrib.auth.models import User
@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^taller/', include('taller.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', home, name='home'),
+    url(r'^descripcion/$', descripcion, name='descripcion'),
     url(r'^login/$', login, name='login'),
     url(r'^logout/$', logout, name='logout'),
     url(r'^loginMovil/$', loginMovil),

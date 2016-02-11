@@ -3,6 +3,44 @@
 
 
 {% block header  %}
+
+<head>
+<title> FreeMotors| Preview </title>
+
+ 
+<script src="{% static 'js/pagina-web/jquery.openCarousel.js' %}" type="text/javascript"></script>
+<script type="text/javascript" src="{% static 'js/pagina-web/easing.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/pagina-web/move-top.js' %}"></script>
+<script src="{% static 'js/pagina-web/easyResponsiveTabs.js' %}" type="text/javascript"></script>
+<link href="{% static 'css/pagina-web/easy-responsive-tabs.css' %}" rel="stylesheet" type="text/css" media="all"/>
+ <script type="text/javascript">
+    $(document).ready(function () {
+        $('#horizontalTab').easyResponsiveTabs({
+            type: 'default', //Types: default, vertical, accordion           
+            width: 'auto', //auto or any width like 600px
+            fit: true   // 100% fit in a container
+        });
+    });
+   </script>		
+<link rel="stylesheet" href="{% static 'css/pagina-web/etalage.css' %}">
+<script src="{% static 'js/pagina-web/jquery.etalage.min.js' %}"></script>
+<script>
+			jQuery(document).ready(function($){
+
+				$('#etalage').etalage({
+					thumb_image_width: 300,
+					thumb_image_height: 400,
+					source_image_width: 900,
+					source_image_height: 1200,
+					show_hint: true,
+					click_callback: function(image_anchor, instance_id){
+						alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+					}
+				});
+
+			});
+		</script>
+	  <script src="js/star-rating.js" type="text/javascript"></script>
 {% endblock %}
 
 {% block contenido %}
@@ -23,21 +61,21 @@
 							<ul id="etalage">
 							<li>
 								<a href="optionallink.html">
-									<img class="etalage_thumb_image" src="{% static 'images/preview-small-img1.png' %}" />
-									<img class="etalage_source_image" src="{% static 'images/preview-large-img1.jpg' %}" title="" />
+									<img class="etalage_thumb_image" src="{% static 'images/pagina-web/preview7.png' %}" />
+									<img class="etalage_source_image" src="{% static 'images/pagina-web/preview7.png' %}" title="" />
 								</a>
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="{% static 'images/preview-small-img2.png' %}"  />
-								<img class="etalage_source_image" src="{% static 'images/preview-large-img2.jpg' %}" title="" />
+								<img class="etalage_thumb_image" src="{% static 'images/pagina-web/preview8.jpg' %}"  />
+								<img class="etalage_source_image" src="{% static 'images/pagina-web/preview8.jpg' %}" title="" />
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="{% static 'images/preview-small-img3.png' %}"  />
-								<img class="etalage_source_image" src="{% static 'images/preview-large-img3.jpg' %}" />
+								<img class="etalage_thumb_image" src="{% static 'images/pagina-web/preview11.png' %}"  />
+								<img class="etalage_source_image" src="{% static 'images/pagina-web/preview11.png' %}" />
 							</li>
 							<li>
-								<img class="etalage_thumb_image" src="{% static 'images/preview-small-img4.png' %}" />
-								<img class="etalage_source_image" src="{% static 'images/preview-large-img4.jpg' %}" />
+								<img class="etalage_thumb_image" src="{% static 'images/pagina-web/preview9.png' %}" />
+								<img class="etalage_source_image" src="{% static 'images/pagina-web/preview9.png' %}" />
 							</li>
 						</ul>
 				     </div>
@@ -172,7 +210,7 @@
 		<ul class="popular-products">
 			<li>
 				 <h4><a href="preview.html">BMW Cambioneta serie 1 </a></h4>
-				  <a href="preview.html"><img width="120" height="120" src="{% static 'images/paginaweb/preview1.png' %}" alt="" /></a>
+				  <a href="preview.html"><img width="120" height="120" src="{% static 'images/pagina-web/preview1.png' %}" alt="" /></a>
 				  <div class="price-details">
 			       <div class="price-number">
 						<p><span class="rupees line-through">$899.95 </span> &nbsp; <span class="rupees">$839.93 </span></p>
@@ -185,7 +223,7 @@
 			</li>
 			<li>
 				 <h4><a href="preview.html">BMW Cambioneta serie 2 </a></h4>
-				  <a href="preview.html"><img width="120" height="120" src="{% static 'images/paginaweb/preview2.png' %}" alt="" /></a>
+				  <a href="preview.html"><img width="120" height="120" src="{% static 'images/pagina-web/preview2.png' %}" alt="" /></a>
 				  <div class="price-details">
 			       <div class="price-number">
 						<p><span class="rupees line-through">$899.95 </span> &nbsp; <span class="rupees">$839.93 </span></p>
@@ -198,7 +236,7 @@
 			</li>
 			<li>
 				 <h4><a href="preview.html">BMW Cambioneta serie 3 </a></h4>
-				  <a href="preview.html"><img width="120" height="120" src="{% static 'images/paginaweb/preview3.PNG' %}" alt="" /></a>
+				  <a href="preview.html"><img width="120" height="120" src="{% static 'images/pagina-web/preview3.PNG' %}" alt="" /></a>
 				  <div class="price-details">
 			       <div class="price-number">
 						<p><span class="rupees line-through">$899.95 </span> &nbsp; <span class="rupees">$839.93 </span></p>
@@ -258,18 +296,18 @@
   	 <div class="ocarousel_slider">  
 			<div class="ocarousel example_photos" data-ocarousel-perscroll="3">
             <div class="ocarousel_window">
-               <a href="#" title="img1"> <img width="130" height="100" src="images/preview1.png" alt="" /><p>BMW Camioneta Serie 1</p></a>
-               <a href="#" title="img2"> <img width="130" height="100"src="images/preview2.png" alt="" /><p>BMW Camioneta Serie 2</p></a>
-               <a href="#" title="img3"> <img width="140" height="100"src="images/preview3.PNG" alt="" /><p>BMW Camioneta Serie 3</p></a>
-               <a href="#" title="img4"> <img width="100" height="100"src="images/preview4.png" alt="" /><p>BMW Camioneta Serie 4</p></a>
-               <a href="#" title="img5"> <img width="130" height="100"src="images/preview5.png" alt="" /><p>BMW Deportivo Serie 1</p></a>
-               <a href="#" title="img6"> <img width="130" height="100"src="images/preview6.jpg" alt="" /><p>BMW Camioneta Serie 5</p></a>
-               <a href="#" title="img1"> <img width="170" height="100"src="images/preview7.png" alt="" /><p>FORD Camaro serie 1</p></a>
-               <a href="#" title="img2"> <img width="120" height="100"src="images/preview8.jpg" alt="" /><p>FORD Camaro serie 2</p></a>
-               <a href="#" title="img3"> <img width="120" height="100"src="images/preview9.png" alt="" /><p>Mustang GT Serie 1</p></a>
-               <a href="#" title="img4"> <img width="130" height="100"src="images/preview10.jpg" alt="" /><p>Mustang GT Serie 2</p></a>
-               <a href="#" title="img5"> <img width="130" height="100"src="images/preview11.png" alt="" /><p>Ford Raptor</p></a>
-               <a href="#" title="img6"> <img width="130" height="100"src="images/preview12.jpg" alt="" /><p>Mercedes Benz</p></a>
+               <a href="#" title="img1"> <img width="130" height="100" src="{% static 'images/pagina-web/preview1.png' %}" alt="" /><p>BMW Camioneta Serie 1</p></a>
+               <a href="#" title="img2"> <img width="130" height="100"src="{% static 'images/pagina-web/preview2.png' %}" alt="" /><p>BMW Camioneta Serie 2</p></a>
+               <a href="#" title="img3"> <img width="140" height="100"src="{% static 'images/pagina-web/preview3.PNG' %}" alt="" /><p>BMW Camioneta Serie 3</p></a>
+               <a href="#" title="img4"> <img width="100" height="100"src="{% static 'images/pagina-web/preview4.png' %}" alt="" /><p>BMW Camioneta Serie 4</p></a>
+               <a href="#" title="img5"> <img width="130" height="100"src="{% static 'images/pagina-web/preview5.png' %}" alt="" /><p>BMW Deportivo Serie 1</p></a>
+               <a href="#" title="img6"> <img width="130" height="100"src="{% static 'images/pagina-web/preview6.jpg' %}" alt="" /><p>BMW Camioneta Serie 5</p></a>
+               <a href="#" title="img1"> <img width="170" height="100"src="{% static 'images/pagina-web/preview7.png' %}" alt="" /><p>FORD Camaro serie 1</p></a>
+               <a href="#" title="img2"> <img width="120" height="100"src="{% static 'images/pagina-web/preview8.jpg' %}" alt="" /><p>FORD Camaro serie 2</p></a>
+               <a href="#" title="img3"> <img width="120" height="100"src="{% static 'images/pagina-web/preview9.png' %}" alt="" /><p>Mustang GT Serie 1</p></a>
+               <a href="#" title="img4"> <img width="130" height="100"src="{% static 'images/pagina-web/preview10.jpg' %}" alt="" /><p>Mustang GT Serie 2</p></a>
+               <a href="#" title="img5"> <img width="130" height="100"src="{% static 'images/pagina-web/preview11.png' %}" alt="" /><p>Ford Raptor</p></a>
+               <a href="#" title="img6"> <img width="130" height="100"src="{% static 'images/pagina-web/preview12.jpg' %}" alt="" /><p>Mercedes Benz</p></a>
             </div>
            <span>           
             <a href="#" data-ocarousel-link="left" style="float: left;" class="prev"> </a>

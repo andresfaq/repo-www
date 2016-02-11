@@ -22,12 +22,11 @@ def es_jefetaller(user):
 def es_cliente(user):
     return user.groups.filter(name='Clientes').exists()
 
-def descripcion(requst):
+def descripcion(request):
     return render(request, 'paginaweb/descripcion.html')
 
 def home(request):
     return render(request, 'paginaweb/index.html')
-
 
 def login(request):
     user = request.POST.get('username')
