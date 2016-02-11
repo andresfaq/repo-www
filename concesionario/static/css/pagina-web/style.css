@@ -37,6 +37,15 @@ body {
 	font-family: 'Ubuntu Condensed', sans-serif;
 	background:#ebebeb;
 }
+
+.estado{
+	
+    padding-top: 10px;
+    padding-right: 100px;
+    padding-bottom: 200px;
+    padding-left: 100px;
+
+}
 .wrap {
 	width:80%;
 	margin: 0 auto;

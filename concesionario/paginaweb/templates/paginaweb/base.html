@@ -41,16 +41,40 @@
                 <a class="toggleMenu" href="#">Menu</a>
                     <ul class="nav">
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href={% url "paginaweb.views.home" %}>Home</a>
                         </li>
                         <li>
                             <a href="#">Ventas</a>
                         </li>
                         <li>
-                            <a href="#">Cotizaciones</a>
+                            <a href={% url "administracion.views.inicio" %}>Administracion</a>
+                            <ul>
+                                <li>
+                                    <a href={% url "administracion.views.inicio" %}>Administracion de usuarios</a>
+                                    <ul>
+                                        <li><a href={% url 'administracion.views.crearUsuario' %}>Creacion de usuarios</a></li>
+                                        <li><a href={% url 'administracion.views.modificarUsuario' %}>Modificar usuarios</a></li>
+                                        <li><a href={% url 'administracion.views.eliminarUsuario' %}>Eliminar usuarios</a></li>
+                                        <li><a href={% url 'administracion.views.recuperarUsuario' %}>Actualizar usuarios</a></li>
+                                        
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href={% url "reportes.views.inicio" %}>Reportes</a>
+                                    <ul>
+                                        <li><a href={% url "reportes.views.usuarios" %}>Reporte de usuarios</a></li>
+                                        <li><a href={% url "reportes.views.ventas" %}>Reporte de ventas</a></li>
+                                        <li><a href={% url "reportes.views.inventario" %}>Reporte de vehiculos</a></li>
+                                        <li><a href={% url "reportes.views.inicio" %}>Reporte ventas sucursales</a></li>
+                                        <li><a href={% url "reportes.views.repuesto" %}>Reporte de repuestos</a></li>
+                                        <li><a href={% url "reportes.views.reparaciones" %}>Reporte de reparaciones</a></li>
+                                        <li><a href={% url "reportes.views.ordenes" %}>Reporte de Ordenes</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <a href="#">Taller</a>
+                            <a href={% url "taller.views.inicio" %}>Taller</a>
                         </li>
                         <li  class="test">
                             <a href="#">Ferrari</a>
@@ -175,45 +199,6 @@
                                     </ul>
                                 </li>
                                 
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#">Bugatti</a>
-                            <ul>
-                                <li>
-                                    <a href="#">Fitness</a>
-                                    <ul>
-                                        <li><a href="#">Yoga Mats</a></li>
-                                        <li><a href="#">Gym Gloves</a></li>
-                                        <li><a href="#">Ab Exercisers</a></li>
-                                        <li><a href="#">Gym Balls</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Indoor Sports</a>
-                                    <ul>
-                                        <li><a href="#">Chess</a></li>
-                                        <li><a href="#">Darts</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Team Sports</a>
-                                    <ul>
-                                        <li><a href="#">Basketball</a></li>
-                                        <li><a href="#">Cricket</a></li>
-                                        <li><a href="#">Football</a></li>
-                                        <li><a href="#">VolleyBall</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Racquet Sports</a>
-                                    <ul>
-                                        <li><a href="#">Badminton</a></li>
-                                        <li><a href="#">Squash</a></li>
-                                        <li><a href="#">Table Tennis</a></li>
-                                        <li><a href="#">Tennis</a></li>
-                                    </ul>
-                                </li>
                             </ul>
                         </li>
                         <li>
