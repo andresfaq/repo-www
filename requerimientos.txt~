@@ -1,8 +1,0 @@
-Django==1.8.4
-psycopg2
-Pillow
-django-tastypie
-fake-factory
-factory-boy
-django_verbatim
-django-cors-headers
