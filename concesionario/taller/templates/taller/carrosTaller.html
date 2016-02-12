@@ -23,11 +23,11 @@
           <td>{{carro.fecha_revision}}</td>
           <td>{{carro.kilometraje}}</td>
             {% if carro.codigo_orden.estado == 'T'%}
-                <td style="color: limegreen">{{carro.codigo_orden.estado}}</td>
+                <td style="color: limegreen">Terminado</td>
             {% elif carro.codigo_orden.estado == 'C'%}
-                <td style="color: crimson">{{carro.codigo_orden.estado}}</td>
+                <td style="color: crimson">Cancelado</td>
             {% else %}
-                <td style="color: deepskyblue">{{carro.codigo_orden.estado}}</td>
+                <td style="color: deepskyblue">En espera</td>
             {%endif%}
         </tr>
       {% endfor %}
