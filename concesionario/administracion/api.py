@@ -84,7 +84,9 @@ class DatosOrdenMovilResource(ModelResource):
     #codigo_orden = fields.OneToOneField(OrdenResource, 'codigo_orden')
 
     class Meta:
-        queryset = models.Cliente.objects.all()
+        cliente = models.Cliente.objects.get(codigo_cliente=503).venta_set.all()
+        var = models.Cliente.objects.all()
+        queryset = cliente
         resource_name = 'ordenmovil'
         #excludes = ['codigo_revision', 'codigo_venta', 'codigo_orden', ]
         filtering = {
@@ -94,3 +96,35 @@ class DatosOrdenMovilResource(ModelResource):
             #'created': ['exact', 'range', 'gt', 'gte', 'lt', 'lte'],
         }
 
+
+
+#Se va a usar para sacar la lista con las placas de los vehiculos de un cliente
+#http://localhost:8000/administracion/api/v1/datosventas/?format=json&usuario=Cliente001
+class DatosVentasClienteResource(ModelResource):
+
+    class Meta:
+        ventas = models.Venta.objects.all()
+        queryset = ventas
+        resource_name = 'datosventas'
+
+    def obj_get_list(self, bundle, **kwargs):
+        cliente = bundle.request.GET['usuario']
+        ventas = models.Cliente.objects.get(username=cliente).venta_set.all()
+        return ventas
+
+
+
+
+#Se va a usar para obtener las revisiones de un vehiculo en particular
+#http://localhost:8000/administracion/api/v1/datosrevision/?format=json&cod_ven=58
+class DatosRevisionesVehiculoResource(ModelResource):
+
+    class Meta:
+        ventas = models.RevisionVehiculo.objects.all()
+        queryset = ventas
+        resource_name = 'datosrevision'
+
+    def obj_get_list(self, bundle, **kwargs):
+        param = bundle.request.GET['cod_ven']
+        ventas = models.RevisionVehiculo.objects.filter(codigo_venta=param)
+        return ventas
