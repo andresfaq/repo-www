@@ -1,0 +1,50 @@
+----------------------------------------------------------------------------------
+1) - Antes de realizar pull del repositorio asegurense de que han hecho commit de sus cambios
+(Que este hecho el commit no implica que tenga que estar actualizado en el repositorio de github)
+NOTA>> Si estan SEGUROS de que sus cambios ya estan dentro de un commit entonces omitan este paso
+
+De lo contrario entrar a repo-www
+
+git add --all
+git commit -m 'hago un commit antes de hacer pull'
+
+----------------------------------------------------------------------------------
+
+2)- Ahora si pueden hacer pull
+
+git pull 
+
+
+----------------------------------------------------------------------------------
+
+
+3)- Resuelven conflictos si existen (ustedes ven si dejan lo que esta en (1) o en (2))
+
+<<<<<<< HEAD
+(1)Lo que usted tiene
+=======
+(2)Lo nuevo que esta haciendo el conflicto con lo que usted tiene
+>>>>>>>
+
+----------------------------------------------------------------------------------
+
+4)- Ahora si trabajan comodamente
+
+lalalalalalala soy feliz 
+
+----------------------------------------------------------------------------------
+
+5)- Cuando ya terminen de hacer sus cambios
+
+git add --all
+git commit -m 'sus cambios'
+git push origin master
+
+----------------------------------------------------------------------------------
+
+6)- Es posible que alguien haya hecho un push mientras ustedes trabajaban asi que puede que no les deje hacer su push, si pasa esto hacen los puntos 2) y 3)  y realizan de nuevo el push
+
+git push origin master
+
+----------------------------------------------------------------------------------
+
