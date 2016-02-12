@@ -91,6 +91,12 @@ def busquedaCodigoVenta(request):
 
     return HttpResponse()
 
+
+@login_required
+def mostrarVehiculosTaller(request):
+
+    carros=RevisionVehiculo.objects.select_related('codigo_orden','codigo_venta')
+    return render(request, 'taller/carrosTaller.html',{'carros':carros})
 '''
 @login_required
 def busquedaCodigoVenta(request):

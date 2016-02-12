@@ -24,6 +24,9 @@
 
 
 	<script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs-3.3.5/dt-1.10.10,r-2.0.0,sc-1.4.0/datatables.min.css"/>
+	<script type="text/javascript" src="https://cdn.datatables.net/s/bs-3.3.5/dt-1.10.10,r-2.0.0,sc-1.4.0/datatables.min.js"></script>
 
 
 	<!--[if lt IE 9]><script src="{% static 'js/ie8-responsive-file-warning.js' %}"></script><![endif]-->
@@ -92,7 +95,7 @@
 						</a>
 					</li>
                     <li class="active">
-						<a href="">
+						<a href="{% url "mostrarVehiculosTaller" %}">
 							<span>Vehiculos en reparación</span>
 						</a>
 					</li>
@@ -158,7 +161,6 @@
 		{% block popBuscar %}
 
 		{% endblock%}
-
         {% block contenido %}
 
 		{% endblock%}

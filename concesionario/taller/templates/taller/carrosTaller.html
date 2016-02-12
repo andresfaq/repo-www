@@ -1,0 +1,40 @@
+{% extends 'taller/base.html' %}
+{% load staticfiles %}
+{% block contenido %}
+<h3> Vehículos Registrados</h3>
+<table id="carrosTaller" class="table table-striped table-bordered table-hover dataTables-example">
+    <thead>
+      <tr>
+        <td>Placa</td>
+        <td>Código Revisión</td>
+        <td>Código Orden</td>
+        <td>Fecha Revisión</td>
+        <td>Kilometraje</td>
+        <td>Estado</td>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for carro in carros %}
+        <tr>
+          <td>{{carro.codigo_venta.placa}}</td>
+          <td>{{carro.codigo_revision}}</td>
+          <td>{{carro.codigo_orden.codigo_orden}}</td>
+          <td>{{carro.fecha_revision}}</td>
+          <td>{{carro.kilometraje}}</td>
+            {% if carro.codigo_orden.estado == 'T'%}
+                <td style="color: limegreen">{{carro.codigo_orden.estado}}</td>
+            {% elif carro.codigo_orden.estado == 'C'%}
+                <td style="color: crimson">{{carro.codigo_orden.estado}}</td>
+            {% else %}
+                <td style="color: deepskyblue">{{carro.codigo_orden.estado}}</td>
+            {%endif%}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock%}
+{% block js %}
+    <script src="{% static 'jquery-ajax/taller/ajax.js' %}"></script>
+{% endblock %}
