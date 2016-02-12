@@ -84,9 +84,9 @@ class DatosOrdenMovilResource(ModelResource):
     #codigo_orden = fields.OneToOneField(OrdenResource, 'codigo_orden')
 
     class Meta:
-        cliente = models.Cliente.objects.get(codigo_cliente=503).venta_set.all()
+        #Hay cliente = models.Cliente.objects.get(codigo_cliente=503).venta_set.all()
         var = models.Cliente.objects.all()
-        queryset = cliente
+        queryset = var
         resource_name = 'ordenmovil'
         #excludes = ['codigo_revision', 'codigo_venta', 'codigo_orden', ]
         filtering = {

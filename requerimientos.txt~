@@ -6,4 +6,3 @@ fake-factory
 factory-boy
 django_verbatim
 django-cors-headers
-djangorestframework
