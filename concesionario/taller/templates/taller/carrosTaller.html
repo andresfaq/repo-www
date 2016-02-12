@@ -11,6 +11,7 @@
         <td>Fecha Revisión</td>
         <td>Kilometraje</td>
         <td>Estado</td>
+        <td>Opciones</td>
 
       </tr>
     </thead>
@@ -29,11 +30,63 @@
             {% else %}
                 <td style="color: deepskyblue">En espera</td>
             {%endif%}
+          <td class="btmodificarRevision"align="center"> <button type="button" class="btn btn-darkgray"><i class="glyphicon glyphicon-random"></i></button></td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
+{% endblock%}
+
+{% block pop%}
+    <div class="modal fade"  id="revisionModal"  role="dialog" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                   <h4 class="modal-title">Orden no.{{numeroOrden}} , vehículo {{vehiculo}}</h4>
+                </div>
+                <div id="nuevaAventura" class="modal-body">
+                    <form role="form">
+                        {% csrf_token %}
+                        <div class="form-group">
+                           {{form.estado.label}}
+                           {{form.estado}}
+                        </div>
+                        <div class="form-group">
+                            <table id="repuestosCarro" class="table table-striped table-bordered table-hover dataTables-example">
+                            <thead>
+                              <tr>
+                                <td>Código Repuesto</td>
+                                <td>Repuesto</td>
+                                <td>Cantidad</td>
+                                <td>Precio</td>
+                                <td>Opciones</td>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for repuesto in repuestos %}
+                                <tr>
+                                  <td>{{repuesto}}</td>
+                                  <td>{{repuesto}}</td>
+                                  <td>{{repuesto}}</td>
+                                  <td>{{repuesto}}</td>
+                                  <td>{{repuesto}}</td>
+                                  <td class="btmodificarRevision"align="center"><input type="checkbox"></td>
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                <button type="button" id="btAgregarRepuesto" name="btAgregarRepuesto">Agregar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock%}
 {% block js %}
     <script src="{% static 'jquery-ajax/taller/ajax.js' %}"></script>
