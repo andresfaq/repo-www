@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'django_verbatim',
     'corsheaders',
+    'autofixture',
 )
 
 MIDDLEWARE_CLASSES = (
