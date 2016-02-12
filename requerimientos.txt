@@ -5,3 +5,4 @@ django-tastypie
 fake-factory
 factory-boy
 django_verbatim
+pip install django-cors-headers
