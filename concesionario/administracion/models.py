@@ -53,7 +53,7 @@ class Sucursal(models.Model):
         return str(self.nombre)
 
     def getCodigoS(self):
-        return self.nombre
+        return self.codigo_sucursal
 
 class Gerente(Empleado):
     class Meta:
