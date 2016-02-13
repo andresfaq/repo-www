@@ -36,7 +36,7 @@ $(document).ready(function() {
     $('#btBuscar').click(
         function(e){
              e.preventDefault();
-             $('#contactModal').appendTo("body").modal('show'); //i have to set it in this way because i don understand why the modal block
+             $('#contactModal').appendTo("body").modal('show'); //i have to set it in this way because i dont understand why the modal block
                                                                 // the window and i can�t edit neither modal or main page ... and i found this
                                                                 // way for resolve the problem. :)  it works!
 
@@ -153,8 +153,13 @@ $(document).ready(function() {
 
             var txtCD = $(cantidadDisponible).text();
             var select = $('input', cantidadSeleccionada).val(); //this way we get the input's value
-            console.log(txtCD + " dsd " + select);
-            if (txtCD < select) {
+            $('#lbAdvertencia').text("");
+
+            if(select==null || select=="" || select==0){
+                $(this).click();
+                $('#lbAdvertencia').text(" Por favor indique la cantidad del repuesto");
+            }
+            else if (txtCD < select) {
                 $('input', cantidadSeleccionada).val(txtCD);
             }
         }else{
