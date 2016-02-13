@@ -88,17 +88,17 @@ class UserFormModificate(forms.Form):
         usuario = User.objects.get(username=identificacion)
         return usuario
 
-    def actualizar(usuario,identificacion):
-        usuario = User.objects.get(username=identificacion)
-        idX = usuario.id
-        User.objects.filter(id=idX).update(password=usuario.password,first_name=usuario.first_name,last_name=usuario.last_name,email=usuario.email,cedula=usuario.cedula,direccion=usuario.direccion,fecha_de_nacimiento=usuario.fecha_de_nacimiento,telefono=usuario.telefono)
+    def getID(identificacion):
+        usuario = User.objects.get(id=identificacion)
+        return usuario
+
+    def actualizarAdministrador(usuario,identificacion):
+        User.objects.filter(id=identificacion).update(first_name=usuario.first_name,last_name=usuario.last_name,email=usuario.email,cedula=usuario.cedula,direccion=usuario.direccion,fecha_de_nacimiento=usuario.fecha_de_nacimiento,telefono=usuario.telefono)
 
 class UserFormAux(forms.ModelForm):
     class Meta:
         model = User
         fields = (
-            'username',
-            'password',
             'first_name',
             'last_name',
             'email',
@@ -107,4 +107,29 @@ class UserFormAux(forms.ModelForm):
             'fecha_de_nacimiento',
             'telefono'
             )
+
+class EmpleadoFormAux(forms.ModelForm):
+
+    sucursalChoice = forms.ModelChoiceField(queryset=Sucursal.objects.all().order_by('nombre'))
     
+    class Meta:
+        model = Empleado
+        fields = (
+            'first_name',
+            'last_name',
+            'email',
+            'cedula',
+            'direccion',
+            'fecha_de_nacimiento',
+            'telefono',
+            'salario',
+            )
+
+    def actualizarVendedor(usuario, identificacion):
+        Vendedor.objects.filter(id=identificacion).update(first_name=usuario.first_name,last_name=usuario.last_name,email=usuario.email,cedula=usuario.cedula,direccion=usuario.direccion,fecha_de_nacimiento=usuario.fecha_de_nacimiento,telefono=usuario.telefono,codigo_sucursal_id=usuario.sucursal,salario=usuario.salario)
+
+    def actualizarGerente(usuario, identificacion):
+        Gerente.objects.filter(id=identificacion).update(first_name=usuario.first_name,last_name=usuario.last_name,email=usuario.email,cedula=usuario.cedula,direccion=usuario.direccion,fecha_de_nacimiento=usuario.fecha_de_nacimiento,telefono=usuario.telefono,codigo_sucursal_id=usuario.sucursal,salario=usuario.salario)
+
+    def actualizarJefeTaller(usuario, identificacion):
+        JefeTaller.objects.filter(id=identificacion).update(first_name=usuario.first_name,last_name=usuario.last_name,email=usuario.email,cedula=usuario.cedula,direccion=usuario.direccion,fecha_de_nacimiento=usuario.fecha_de_nacimiento,telefono=usuario.telefono,codigo_sucursal_id=usuario.sucursal,salario=usuario.salario)
