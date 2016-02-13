@@ -1,0 +1,31 @@
+{% extends 'ventas/base.html' %}
+
+{% block contenido %}
+
+        <!--PRINCIPAL-->
+        <div id="page-wrapper">
+
+            <div class="container-fluid" id="contenedor">
+
+                <!-- Page Heading -->
+                    <div class="col-sm-12 col-lg-12 col-md-12" style="height: 350px;">
+                        <div class="thumbnail">
+                            <img src="/static/{{vehiculo.imagen}}"  alt="">
+                            <div class="caption">
+                                <h4 class="pull-right">${{vehiculo.valor}}</h4>
+                                <h1><a href="#">{{vehiculo.modelo}}</a>
+                                </h1>
+                                <h2>{{vehiculo.marca}}</h2>
+                                <p>{{vehiculo.descripcion}}</p>
+                                <form action="" method="post" class="form-horizontal form-groups-bordered">{% csrf_token %}
+                                	{{user_form.clienteChoice}}
+                                <input type="submit" class="btn btn-blue btn-icon" value="Comprar"></input>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                <!-- /.row -->
+            </div>
+
+{% endblock%}

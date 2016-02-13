@@ -6,7 +6,7 @@ from administracion.views import eliminarUsuario
 from administracion.views import recuperarUsuario
 
 from tastypie.api import Api
-from administracion.api import UserResource, OrdenResource, DatosVehiculoResource, GerenteResource, JefeTallerResource, VendedorResource, DatosOrdenMovilResource, ClienteResource
+from administracion.api import UserResource, OrdenResource, DatosVehiculoResource, GerenteResource, JefeTallerResource, VendedorResource, DatosOrdenMovilResource, ClienteResource, DatosVentasClienteResource, DatosRevisionesVehiculoResource
 
 v1_api = Api(api_name='v1')
 v1_api.register(UserResource())
@@ -17,6 +17,8 @@ v1_api.register(JefeTallerResource())
 v1_api.register(VendedorResource())
 v1_api.register(DatosOrdenMovilResource())
 v1_api.register(ClienteResource())
+v1_api.register(DatosVentasClienteResource())
+v1_api.register(DatosRevisionesVehiculoResource())
 
 urlpatterns = [url(r'^$', inicio),
 			   url(r'^api/', include(v1_api.urls)),

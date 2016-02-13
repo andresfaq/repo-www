@@ -11,7 +11,7 @@
 		
 		<div class="panel panel-primary" data-collapsed="0">
 		{% if user_form_aux.errors %}
-		    {% for field in user_form %}
+		    {% for field in user_form_aux %}
 		        {% for error in field.errors %}
 		            <div class="alert alert-error">
 		                <strong>{{field.name}} {{ error|escape }}</strong>
@@ -19,6 +19,21 @@
 		        {% endfor %}
 		    {% endfor %}
 		    {% for error in user_form_aux.non_field_errors %}
+		        <div class="alert alert-error">
+		            <strong>{{field.name}} {{ error|escape }}</strong>
+		        </div>
+		    {% endfor %}
+		{% endif %}
+		-----------------------------------
+				{% if user_form.errors %}
+		    {% for field in user_form %}
+		        {% for error in field.errors %}
+		            <div class="alert alert-error">
+		                <strong>{{field.name}} {{ error|escape }}</strong>
+		            </div>
+		        {% endfor %}
+		    {% endfor %}
+		    {% for error in user_form.non_field_errors %}
 		        <div class="alert alert-error">
 		            <strong>{{field.name}} {{ error|escape }}</strong>
 		        </div>

@@ -35,6 +35,7 @@ class Cliente(User):
 
     #id_usuario = models.OneToOneField(User)
     codigo_cliente = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=30, unique=True, null=True, blank=True)
 
 #    def __str__(self):
 #        return str(self.codigo_cliente)
@@ -140,6 +141,7 @@ class Vehiculo(models.Model):
     modelo = models.CharField(max_length=50, null=False)
     descripcion = models.CharField(max_length=200, null=True, blank=True)
     imagen = models.ImageField(upload_to='vehiculos/') # Ver settings.py MEDIA_ROOT para ver el directorio donde se guardan las imagenes
+    valor = models.IntegerField(null=False, default=0)
 
 
 class Venta(models.Model):

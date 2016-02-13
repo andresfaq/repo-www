@@ -115,7 +115,7 @@ for x in range(20):
 
 
 #Creando Ventas
-for x in range(50):
+for x in range(250):
     Venta.save(VentaFactory.create())
 
 

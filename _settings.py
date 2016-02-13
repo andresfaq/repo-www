@@ -17,7 +17,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -40,7 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tastypie',
-    'autofixture',
     'paginaweb',
     'administracion',
     'ventas',
@@ -48,6 +46,7 @@ INSTALLED_APPS = (
     'clientes',
     'taller',
     'rest_framework',
+    'django_verbatim',
     'corsheaders',
 )
 
@@ -62,7 +61,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-
 )
 
 CORS_ORIGIN_ALLOW_ALL = True
