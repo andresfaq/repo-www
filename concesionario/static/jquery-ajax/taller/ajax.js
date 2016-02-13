@@ -166,6 +166,25 @@ $(document).ready(function() {
             $('input', cantidadSeleccionada).val(0);
         }
     });
+    $('#btAgregarRepuesto').click(function(e){
+        e.preventDefault();
+        $.ajax(
+                {
+                    url:'/taller/carrosTaller/agregarRepuestosVehiculo/',
+                    type:'post',
+                    datatype:'json',
+                    data: {'nombreCliente': consulta},
+
+                    success:function(data){
+
+                    },
+                    error:function(data){
+
+                    }
+                }
+        )
+    });
+
     //*****************************************************************
 
 

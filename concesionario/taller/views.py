@@ -104,6 +104,10 @@ def mostrarVehiculosTaller(request):
     args['repuestos']=repuestos
     return render(request, 'taller/carrosTaller.html',args)
 
+@login_required
+def agregarRepuestosVehiculo(request):
+
+    return
 
 
 '''

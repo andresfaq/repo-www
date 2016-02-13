@@ -32,7 +32,9 @@
             {%endif%}
           <td align="center">
               <button  type="button" class=" btVerRevision btn btn-info"><i class="entypo-info"></i></button>
+              {% if carro.codigo_orden.estado == 'E' %}
               <button  type="button" class=" btmodificarRevision btn btn-darkgray"><i class="glyphicon glyphicon-random"></i></button>
+              {%endif%}
           </td>
         </tr>
       {% endfor %}
@@ -85,7 +87,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                <button type="button" id="btAgregarRepuesto" name="btAgregarRepuesto">Agregar</button>
+                <button type="button" class="btn btn-success" id="btAgregarRepuesto" name="btAgregarRepuesto">Agregar</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>
