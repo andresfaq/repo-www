@@ -117,6 +117,12 @@ $(document).ready(function() {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             }
     });
+    $("#repuestosCarro").DataTable({
+      responsive:true,
+      "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+       }
+    });
     $(document).on("click",".btmodificarRevision",function(){
         var estado=$(this).parents("tr").find("td").get(5);
         var codigoOrden=$(this).parents("tr").find("td").get(2);

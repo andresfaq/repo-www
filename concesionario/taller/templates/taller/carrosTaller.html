@@ -56,21 +56,22 @@
                             <table id="repuestosCarro" class="table table-striped table-bordered table-hover dataTables-example">
                             <thead>
                               <tr>
-                                <td>Código Repuesto</td>
+                                <td>Código</td>
                                 <td>Repuesto</td>
-                                <td>Cantidad</td>
+                                <td>Cantidad Disponible</td>
                                 <td>Precio</td>
-                                <td>Opciones</td>
+                                <td>Cantidad</td>
+                                <td>Opcion</td>
                               </tr>
                             </thead>
                             <tbody>
                               {% for repuesto in repuestos %}
                                 <tr>
-                                  <td>{{repuesto}}</td>
-                                  <td>{{repuesto}}</td>
-                                  <td>{{repuesto}}</td>
-                                  <td>{{repuesto}}</td>
-                                  <td>{{repuesto}}</td>
+                                  <td>{{repuesto.codigo_repuesto.codigo_repuesto}}</td>
+                                  <td>{{repuesto.codigo_repuesto.nombre}}</td>
+                                  <td>{{repuesto.cantidad}}</td>
+                                  <td>{{repuesto.precio_unidad}}</td>
+                                  <td align="center"><input  type="number" name="cantidadRepuesto"  min="0"></td>
                                   <td class="btmodificarRevision"align="center"><input type="checkbox"></td>
                                 </tr>
                               {% endfor %}

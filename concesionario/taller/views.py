@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core.context_processors import csrf
 from django.db import connection
-from administracion.models import User, Empleado,Orden,JefeTaller,Venta,Cliente,Vendedor,RevisionVehiculo,Sucursal
+from administracion.models import User, Empleado,Orden,JefeTaller,Venta,Cliente,Vendedor,RevisionVehiculo,Sucursal,InventarioRepuesto,RepuestosPorOrden,Repuesto
 from django.http import JsonResponse
 
 
@@ -96,11 +96,16 @@ def busquedaCodigoVenta(request):
 def mostrarVehiculosTaller(request):
     form = tallerForm(request.POST)
     carros=RevisionVehiculo.objects.select_related('codigo_orden','codigo_venta')
+    repuestos=InventarioRepuesto.objects.select_related('codigo_repuesto')
     args = {}
     args.update(csrf(request))
     args['form'] = form
     args['carros']=carros
+    args['repuestos']=repuestos
     return render(request, 'taller/carrosTaller.html',args)
+
+
+
 '''
 @login_required
 def busquedaCodigoVenta(request):

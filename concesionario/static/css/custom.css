@@ -4,6 +4,9 @@
  *
 */
 
+input[type=number]{
+    width: 30%;
+}
 .boton-seleccionar {
         cursor:pointer;
 
