@@ -147,12 +147,19 @@ $(document).ready(function() {
 	    $('#revisionModal').appendTo("body").modal('show');
 	});
     $(document).on("click",".checkRepuesto",function(){
-        var cantidadDisponible=$(this).parents("tr").find("td").get(2);
-        var cantidadSeleccionada=$(this).parents("tr").find("td").get(4);
+        if($(this).is( ":checked" )) {
+            var cantidadDisponible = $(this).parents("tr").find("td").get(2);
+            var cantidadSeleccionada = $(this).parents("tr").find("td").get(4);
 
-        var txtCD=$(cantidadDisponible).text();
-        var select=$('input', cantidadSeleccionada).val(); //this way we get the input's value
-        console.log(txtCD+" dsd "+select);
+            var txtCD = $(cantidadDisponible).text();
+            var select = $('input', cantidadSeleccionada).val(); //this way we get the input's value
+            console.log(txtCD + " dsd " + select);
+            if (txtCD < select) {
+                $('input', cantidadSeleccionada).val(txtCD);
+            }
+        }else{
+            $('input', cantidadSeleccionada).val(0);
+        }
     });
     //*****************************************************************
 
