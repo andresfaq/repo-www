@@ -118,6 +118,26 @@ $(document).ready(function() {
             }
     });
     $(document).on("click",".btmodificarRevision",function(){
+        var estado=$(this).parents("tr").find("td").get(5);
+        var codigoOrden=$(this).parents("tr").find("td").get(2);
+        var placa=$(this).parents("tr").find("td").get(0);
+
+        var txtEstado=$(estado).text();
+        var txtOrden=$(codigoOrden).text();
+        var txtPlaca=$(placa).text();
+
+        $('#lbNumeroOrden').text(txtOrden);//we set text in the labels
+        $('#lbNumeroPlaca').text(txtPlaca);
+
+        if(txtEstado.toLowerCase()=="Cancelado".toLowerCase()){
+            $('#id_estado').val('C');
+        }
+        else if(txtEstado.toLowerCase()=="Terminado".toLowerCase()){
+            $('#id_estado').val('T');
+        }
+        else {
+            $('#id_estado').val('E');
+        }
 	    $('#revisionModal').appendTo("body").modal('show');
 	});
     //*****************************************************************
