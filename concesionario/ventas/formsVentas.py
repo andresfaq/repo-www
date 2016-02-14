@@ -6,7 +6,18 @@ DateInput = partial(forms.DateInput, {'class': 'datepicker'})
 from administracion.models import Vehiculo, Cliente, Venta, Vendedor
 
 class VehiculoFormAll(forms.Form):
+    CHOICES1 = (('Hyundai','Hyundai'),( 'Chevrolet','Chevrolet'),('Mazda','Mazda'),('Toyota','Toyota'),('Nissan','Nissan'),('Ford','Ford'))
+    marcaChoice = forms.ChoiceField(choices=CHOICES1)
+    CHOICES2 = (('A','Ascendente'),('D','Descendente'))
+    precioChoice = forms.ChoiceField(choices=CHOICES2)
     vehiculos = Vehiculo.objects.all()
+
+    def vehiculosFiltro(marca, orden):
+        if orden == 'A':
+            vehiculos = Vehiculo.objects.all().filter(marca=marca).order_by('valor')
+        else:
+            vehiculos = Vehiculo.objects.all().filter(marca=marca).order_by('valor').reverse()
+        return vehiculos
 
 class VehiculoFormOne(forms.Form):
     vehiculos = Vehiculo.objects.all()

@@ -5,21 +5,26 @@ from administracion.models import Vehiculo
 from django.http import HttpResponseRedirect
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
-
+from django.contrib import messages
 
 # Create your views here.
 @login_required
 def inicio(request):
-    return render(request, 'ventas/index.html')
+	return render(request, 'ventas/index.html')
 
 @login_required
 def listarCarros(request):
-    if request.method == 'POST':
-        print("Faltan cosas")
-    else:
-        user_form = VehiculoFormAll()
+	carros = VehiculoFormAll.vehiculos
+	user_form = VehiculoFormAll(request.POST)
+	if request.method == 'POST':
+		if user_form.is_valid():
+			marca = user_form.cleaned_data['marcaChoice']
+			precio = user_form.cleaned_data['precioChoice']
+			carros = VehiculoFormAll.vehiculosFiltro(marca,precio)
+	else:
+		user_form = VehiculoFormAll()
 
-    return render(request, 'ventas/listarCarros.html', { 'user_form': user_form, 'carros': VehiculoFormAll.vehiculos})
+	return render(request, 'ventas/listarCarros.html', { 'user_form': user_form, 'carros': carros})
 
 @login_required
 def comprarCarro(request, codigo_vehiculo):
@@ -35,8 +40,7 @@ def comprarCarro(request, codigo_vehiculo):
 			user = User.objects.get(pk=uid)
 
 			VehiculoFormOne.save(vehiculo.codigo_vehiculo, username, user)
-			return HttpResponseRedirect('ventas')
-
+			messages.success(request, "El "+vehiculo.marca+" del modelo "+vehiculo.modelo+" ha sido vendido exitosamente a "+username.username+" por "+user.username+"!")
 	else:
 		vehiculo = VehiculoFormOne.get(codigo_vehiculo)
 		user_form = ClienteForm()

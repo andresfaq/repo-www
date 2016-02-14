@@ -10,6 +10,8 @@ from django.template import RequestContext, loader
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import redirect
+from django.contrib import messages
+
 
 @login_required
 def inicio(request):
@@ -51,10 +53,10 @@ def crearUsuario(request):
                 UserForm.crearJefeTaller(usuario)
             if "G" == tipo:
                 UserForm.crearGerente(usuario)
-
+            messages.success(request,"El usuario "+usuario.username+" se ha creado satisfactoriamente")
 
         else:
-            print("asd")
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
 
     else:
         # formulario inicial
@@ -80,6 +82,8 @@ def modificarUsuario(request):
                 return redirect('/administracion/modificarUsuarioJefeTaller/' + str(user.id) +'/')
             else:
                 return redirect('/administracion/modificarUsuarioAdministrador/' + str(user.id) +'/')
+        else:
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
 
     else:
         user_form_aux = UserFormModificate()
@@ -98,8 +102,9 @@ def eliminarUsuario(request):
             #usuario = user_form.save()
             username = user_form.cleaned_data['usernameChoice']
             UserFormEliminate.eliminate(username)
+            messages.success(request,"El usuario "+username.username+" se ha eliminado satisfactoriamente")
         else:
-            print("asd")
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
 
     else:
         # formulario inicial
@@ -119,8 +124,9 @@ def recuperarUsuario(request):
             #usuario = user_form.save()
             username = user_form.cleaned_data['usernameChoice']
             UserFormRecuperate.recuperate(username)
+            messages.success(request,"El usuario "+username.username+" se ha recuperado satisfactoriamente")
         else:
-            return HttpResponseRedirect('/AquiDeberíaDeHaberUnMensajeDeError/')
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
 
     else:
         # formulario inicial
@@ -144,6 +150,9 @@ def modificarUsuarioAdministrador(request, idX):
             usuario.fecha_de_nacimiento = user_form.cleaned_data['fecha_de_nacimiento']
             usuario.telefono = user_form.cleaned_data['telefono']
             UserFormModificate.actualizarAdministrador(usuario, idX)
+            messages.success(request,"El usuario "+usernameText+" se ha modificado satisfactoriamente")
+        else:
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
 
     else:
         user = UserFormModificate.getID(idX)
@@ -166,6 +175,9 @@ def modificarUsuarioCliente(request, idX):
             usuario.fecha_de_nacimiento = user_form.cleaned_data['fecha_de_nacimiento']
             usuario.telefono = user_form.cleaned_data['telefono']
             UserFormModificate.actualizarAdministrador(usuario, idX)
+            messages.success(request,"El usuario "+usernameText+" se ha modificado satisfactoriamente")
+        else:
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
 
     else:
         user = UserFormModificate.getID(idX)
@@ -194,6 +206,9 @@ def modificarUsuarioVendedor(request, idX):
             usuario.fecha_de_nacimiento = user_form.cleaned_data['fecha_de_nacimiento']
             usuario.telefono = user_form.cleaned_data['telefono']
             EmpleadoFormAux.actualizarVendedor(usuario, idX)
+            messages.success(request,"El usuario "+usernameText+" se ha modificado satisfactoriamente")
+        else:
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
 
     else:
         user = UserFormModificate.getID(idX)
@@ -222,6 +237,9 @@ def modificarUsuarioGerente(request, idX):
             usuario.fecha_de_nacimiento = user_form.cleaned_data['fecha_de_nacimiento']
             usuario.telefono = user_form.cleaned_data['telefono']
             EmpleadoFormAux.actualizarGerente(usuario, idX)
+            messages.success(request,"El usuario "+usernameText+" se ha modificado satisfactoriamente")
+        else:
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
 
     else:
         user = UserFormModificate.getID(idX)
@@ -250,6 +268,9 @@ def modificarUsuarioJefeTaller(request, idX):
             usuario.fecha_de_nacimiento = user_form.cleaned_data['fecha_de_nacimiento']
             usuario.telefono = user_form.cleaned_data['telefono']
             EmpleadoFormAux.actualizarJefeTaller(usuario, idX)
+            messages.success(request,"El usuario "+usernameText+" se ha modificado satisfactoriamente")
+        else:
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
 
     else:
         user = UserFormModificate.getID(idX)
