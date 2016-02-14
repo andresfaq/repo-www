@@ -3,7 +3,7 @@ from paginaweb.static import *
 import datetime
 from functools import partial
 DateInput = partial(forms.DateInput, {'class': 'datepicker'})
-from administracion.models import Vehiculo, Cliente, Venta, Vendedor
+from administracion.models import Vehiculo, Cliente, Venta, Vendedor, InventarioVehiculo
 import string
 import random
 
@@ -14,12 +14,45 @@ class VehiculoFormAll(forms.Form):
     precioChoice = forms.ChoiceField(choices=CHOICES2)
     vehiculos = Vehiculo.objects.all()
 
+    def vehiculoCompleto(vehiculos):
+        lista = []
+        i=0
+        for vehiculo in vehiculos:
+            invent = InventarioVehiculo.objects.get(codigo_vehiculo_id=vehiculo.codigo_vehiculo)
+            if invent.cantidad != 0:
+                vehiculo.valor = invent.precio_unidad
+                vehiculo.color = invent.color
+                lista.insert(i,vehiculo)
+                i=i+1
+        return lista
+
+    def soloCosto(vehiculo):
+        return InventarioVehiculo.objects.get(codigo_vehiculo_id=vehiculo.codigo_vehiculo).precio_unidad
+
     def vehiculosFiltro(marca, orden):
         if orden == 'A':
-            vehiculos = Vehiculo.objects.all().filter(marca=marca).order_by('valor')
+            vehiculos = Vehiculo.objects.all().filter(marca=marca)
+            vehiculos = VehiculoFormAll.vehiculoCompleto(vehiculos)
+            vehiculos.sort(key=lambda x: x.valor)
+
         else:
-            vehiculos = Vehiculo.objects.all().filter(marca=marca).order_by('valor').reverse()
+            vehiculos = Vehiculo.objects.all().filter(marca=marca)
+            vehiculos = VehiculoFormAll.vehiculoCompleto(vehiculos)
+            vehiculos.sort(key=lambda x: x.valor, reverse=True)
         return vehiculos
+
+    def sinCotizar(vehiculos):
+        lista = []
+        i=0
+        for vehiculo in vehiculos:
+            if vehiculo.cart != 0:
+                print("Este carro no esta cotizado")
+            else:
+                lista.insert(i,vehiculo)
+                i=i+1
+        return lista
+
+    vehiculos = vehiculoCompleto(vehiculos)
 
 class VehiculoFormOne(forms.ModelForm):
     vehiculos = Vehiculo.objects.all()
@@ -28,7 +61,7 @@ class VehiculoFormOne(forms.ModelForm):
         vehiculo = Vehiculo.objects.get(codigo_vehiculo=codigo)
         return vehiculo
 
-    def save(codigo_vehiculo,username,user,placa,descuento):
+    def save(codigo_vehiculo,username,user,placa,descuento):#Venta
         cliente = Cliente.objects.get(username=username)
         vendido = True
         try:
@@ -37,10 +70,14 @@ class VehiculoFormOne(forms.ModelForm):
             vendido = False
         else:
             Venta.objects.create(placa=placa,porcentaje_descuento=descuento,codigo_cliente_id=cliente.codigo_cliente,codigo_vehiculo_id=codigo_vehiculo,codigo_vendedor_id=vendedor.codigo_vendedor,sucursal_id=vendedor.codigo_sucursal_id,fecha_venta=datetime.datetime.now())
+            cant = InventarioVehiculo.objects.get(codigo_vehiculo_id=codigo_vehiculo).cantidad
+            InventarioVehiculo.objects.filter(codigo_vehiculo_id=codigo_vehiculo).update(cantidad=cant-1)
         return vendido
 
     def marcar(vehiculo):
+        cartX = Vehiculo.objects.get(codigo_vehiculo=vehiculo.codigo_vehiculo).cart
         Vehiculo.objects.filter(codigo_vehiculo=vehiculo.codigo_vehiculo).update(cart=1)
+        return cartX
 
     def cotizados():
         vehiculos = Vehiculo.objects.all().exclude(cart=0)

@@ -79,7 +79,7 @@
                                 <h4><a href="#">{{carro.modelo}}</a>
                                 </h4>
                                 <p>{{carro.descripcion}}</p>
-                                    <a type="submit" class="btn btn-blue btn-icon" href={% url 'ventas.views.cotizarCarro' codigo_vehiculo=carro.codigo_vehiculo %}> Cotizar carro {{carro.marca}} </a>
+                                    <a type="submit" class="btn btn-blue btn-icon" href={% url 'ventas.views.cotizarCarro' codigo_vehiculo=carro.codigo_vehiculo %}> Cotizar {{carro.marca}} </a>
                             </div>
                         </div>
                     </div>

@@ -51,6 +51,7 @@ def comprarCarro(request, codigo_vehiculo):
 			messages.warning(request, "No has diligenciado correctamente todos los campos")
 	else:
 		vehiculo = VehiculoFormOne.get(codigo_vehiculo)
+		vehiculo.valor = VehiculoFormAll.soloCosto(vehiculo)
 		user_form = ClienteForm()
 	return render(request, 'ventas/comprarCarro.html', { 'user_form': user_form, 'vehiculo': vehiculo})
 
@@ -71,8 +72,11 @@ def cotizarCarros(request):
 @login_required
 def cotizarCarro(request,codigo_vehiculo):
 	vehiculo = VehiculoFormOne.get(codigo_vehiculo)
-	VehiculoFormOne.marcar(vehiculo)
-	messages.success(request, "El "+vehiculo.marca+" del modelo "+vehiculo.modelo+ " ha sido agregado a la cotizacion")
+	cartX =VehiculoFormOne.marcar(vehiculo)
+	if cartX != 0:
+		messages.warning(request, "El "+vehiculo.marca+" del modelo "+vehiculo.modelo+ " ya había sido cotizado")
+	else:
+		messages.success(request, "El "+vehiculo.marca+" del modelo "+vehiculo.modelo+ " ha sido agregado a la cotizacion")
 
 	carros = VehiculoFormAll.vehiculos
 	user_form = VehiculoFormAll(request.POST)
@@ -88,7 +92,7 @@ def cotizarCarro(request,codigo_vehiculo):
 
 @login_required
 def cotizacion(request):
-	vehiculos = VehiculoFormOne.cotizados()
+	vehiculos = VehiculoFormAll.vehiculoCompleto(VehiculoFormOne.cotizados())
 	costo = VehiculoFormOne.costoCotizados(vehiculos)
 	user_form = ClienteForm(request.POST)
 	if request.method == 'POST' and "vender" in request.POST:
