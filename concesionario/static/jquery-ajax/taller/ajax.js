@@ -100,11 +100,11 @@ $(document).ready(function() {
                         console.log("paso");
                     },
                     error: function(message){
-                        alert(message+"hola error")
+                        alert(message+"hola error");
                         console.log(message);
                     }
                 }
-            )
+            );
         }
     );
 
@@ -151,7 +151,7 @@ $(document).ready(function() {
             var cantidadDisponible = $(this).parents("tr").find("td").get(2);
             var cantidadSeleccionada = $(this).parents("tr").find("td").get(4);
 
-            var txtCD = $(cantidadDisponible).text();
+            var txtCD = parseInt($(cantidadDisponible).text());
             var select = $('input', cantidadSeleccionada).val(); //this way we get the input's value
             $('#lbAdvertencia').text("");
 
@@ -163,26 +163,39 @@ $(document).ready(function() {
                 $('input', cantidadSeleccionada).val(txtCD);
             }
         }else{
-            $('input', cantidadSeleccionada).val(0);
+            $('input', $(this).parents("tr").find("td")).val(0);
         }
     });
     $('#btAgregarRepuesto').click(function(e){
-        e.preventDefault();
+          e.preventDefault();
+          var codigoOrden = $('#lbNumeroOrden').val();
+          var repuestos=[];
+
+        $("input:checkbox:checked").each(function(){
+            var codigoRepuesto=$(this).parents("tr").find("td").get(0);//val());
+            var cantidadS=$(this).parents("tr").find("td").get(4);//val());
+            var txtCR=$(codigoRepuesto).text();
+            var cantidadR=$('input', cantidadS).val();
+            var arrayRepuesto={codigo:txtCR, cantidad:cantidadR};
+            repuestos.push(arrayRepuesto);//we add the new spare in the array
+        });
+
         $.ajax(
                 {
                     url:'/taller/carrosTaller/agregarRepuestosVehiculo/',
                     type:'post',
                     datatype:'json',
-                    data: {'nombreCliente': consulta},
+                    data: {'codigo_Orden': codigoOrden,
+                           'repuestos_array':repuestos},
 
                     success:function(data){
-
+                        console.log("buen");
                     },
                     error:function(data){
-
+                        console.log("error ljsdlfjsldfj"+data.error);
                     }
                 }
-        )
+        );
     });
 
     //*****************************************************************

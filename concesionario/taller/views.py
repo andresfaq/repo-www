@@ -106,8 +106,15 @@ def mostrarVehiculosTaller(request):
 
 @login_required
 def agregarRepuestosVehiculo(request):
-
-    return
+    print(" llego al view ")
+    if request.method == 'POST':
+        if request.is_ajax():
+            codigoOrden = request.POST.get('codigo_Orden')
+            repuestosArray = request.POST.get('repuestos_array')
+            print ("esta es la consulta: ", codigoOrden,"  el array rep: ",repuestosArray)
+            algo={'mensaje':"Proceso realizado"}
+            return JsonResponse(algo,safe=False)
+    return HttpResponse()
 
 
 '''
