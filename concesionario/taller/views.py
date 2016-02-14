@@ -8,6 +8,8 @@ from django.core.context_processors import csrf
 from django.db import connection
 from administracion.models import User, Empleado,Orden,JefeTaller,Venta,Cliente,Vendedor,RevisionVehiculo,Sucursal,InventarioRepuesto,RepuestosPorOrden,Repuesto
 from django.http import JsonResponse
+import json
+
 
 
 
@@ -110,7 +112,7 @@ def agregarRepuestosVehiculo(request):
     if request.method == 'POST':
         if request.is_ajax():
             codigoOrden = request.POST.get('codigo_Orden')
-            repuestosArray = request.POST.get('repuestos_array')
+            repuestosArray =request.POST.get('repuestos_array')
             print ("esta es la consulta: ", codigoOrden,"  el array rep: ",repuestosArray)
             algo={'mensaje':"Proceso realizado"}
             return JsonResponse(algo,safe=False)

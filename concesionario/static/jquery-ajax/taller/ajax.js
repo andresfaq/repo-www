@@ -168,9 +168,9 @@ $(document).ready(function() {
     });
     $('#btAgregarRepuesto').click(function(e){
           e.preventDefault();
-          var codigoOrden = $('#lbNumeroOrden').val();
-          var repuestos=[];
-
+          var codigoOrden = $('#lbNumeroOrden').text();
+          var repuestos=new Array();
+          console.log("codigo orden es: "+codigoOrden);
         $("input:checkbox:checked").each(function(){
             var codigoRepuesto=$(this).parents("tr").find("td").get(0);//val());
             var cantidadS=$(this).parents("tr").find("td").get(4);//val());
@@ -178,8 +178,13 @@ $(document).ready(function() {
             var cantidadR=$('input', cantidadS).val();
             var arrayRepuesto={codigo:txtCR, cantidad:cantidadR};
             repuestos.push(arrayRepuesto);//we add the new spare in the array
+            console.log("codigoRepuesto: "+arrayRepuesto['codigo']);
+            console.log("cantidadR: "+arrayRepuesto['cantidad']);
         });
 
+        for( i=0; i<repuestos.length;i++){
+            console.log(repuestos[i]);
+        }
         $.ajax(
                 {
                     url:'/taller/carrosTaller/agregarRepuestosVehiculo/',
