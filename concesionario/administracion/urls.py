@@ -4,6 +4,12 @@ from administracion.views import crearUsuario
 from administracion.views import modificarUsuario
 from administracion.views import eliminarUsuario
 from administracion.views import recuperarUsuario
+from administracion.views import modificarUsuarioAdministrador
+from administracion.views import modificarUsuarioCliente
+from administracion.views import modificarUsuarioVendedor
+from administracion.views import modificarUsuarioGerente
+from administracion.views import modificarUsuarioJefeTaller
+
 
 from tastypie.api import Api
 from administracion.api import UserResource, OrdenResource, DatosVehiculoResource, GerenteResource, JefeTallerResource, VendedorResource, DatosOrdenMovilResource, ClienteResource, DatosVentasClienteResource, DatosRevisionesVehiculoResource
@@ -24,6 +30,11 @@ urlpatterns = [url(r'^$', inicio),
 			   url(r'^api/', include(v1_api.urls)),
                url(r'^crearUsuario/$', crearUsuario, name='crearUsuario'),
 			   url(r'^modificarUsuario/$', modificarUsuario, name='modificarUsuario'),
+			   url(r'^modificarUsuarioAdministrador/(?P<idX>\d+)/$', modificarUsuarioAdministrador, name='modificarUsuarioAdministrador'),
+			   url(r'^modificarUsuarioCliente/(?P<idX>\d+)/$', modificarUsuarioCliente, name='modificarUsuarioCliente'),
+			   url(r'^modificarUsuarioVendedor/(?P<idX>\d+)/$', modificarUsuarioVendedor, name='modificarUsuarioVendedor'),
+			   url(r'^modificarUsuarioGerente/(?P<idX>\d+)/$', modificarUsuarioGerente, name='modificarUsuarioGerente'),
+			   url(r'^modificarUsuarioJefeTaller/(?P<idX>\d+)/$', modificarUsuarioJefeTaller, name='modificarUsuarioJefeTaller'),
 			   url(r'^eliminarUsuario/$', eliminarUsuario, name='eliminarUsuario'),
 			   url(r'^recuperarUsuario/$', recuperarUsuario, name='recuperarUsuario'),
 			   ]

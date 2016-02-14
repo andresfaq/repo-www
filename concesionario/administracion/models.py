@@ -35,7 +35,6 @@ class Cliente(User):
 
     #id_usuario = models.OneToOneField(User)
     codigo_cliente = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=30, unique=True, null=True, blank=True)
 
 #    def __str__(self):
 #        return str(self.codigo_cliente)
@@ -51,7 +50,7 @@ class Sucursal(models.Model):
     direccion = models.CharField(max_length=150, null=False)
 
     def __str__(self):
-        return str(self.codigo_sucursal)
+        return str(self.nombre)
 
     def getCodigoS(self):
         return self.codigo_sucursal
