@@ -49,6 +49,11 @@
                         </li>
                         <li>
                             <a href={% url "ventas.views.inicio" %}>Ventas</a>
+                            <ul>
+                                <li><a href={% url 'ventas.views.listarCarros' %}>Vender carros</a></li>
+                                <li><a href={% url 'ventas.views.cotizarCarros' %}>Cotizar carros</a></li>
+                                <li><a href={% url 'ventas.views.cotizacion' %}>Cotizacion</a></li>
+                            </ul>
                         </li>
                         <li>
                             <a href={% url "administracion.views.inicio" %}>Administracion</a>
@@ -80,8 +85,9 @@
                         <li>
                             <a href={% url "taller.views.inicio" %}>Taller</a>
                             <ul>
-                                        <li><a href={% url "taller.views.ingresarVehiculo" %}>Ingresar Vehiculo</a></li>
-                                    </ul>
+                                <li><a href={% url "taller.views.ingresarVehiculo" %}>Ingresar Vehiculo</a></li>
+                                <li><a href={% url "taller.views.mostrarVehiculosTaller" %}>Vehiculos en reparacion</a></li>
+                            </ul>
                         </li>
                         <li  class="test">
                             <a href="#">Ferrari</a>
