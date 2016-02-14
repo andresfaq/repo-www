@@ -141,6 +141,7 @@ class Vehiculo(models.Model):
     descripcion = models.CharField(max_length=200, null=True, blank=True)
     imagen = models.ImageField(upload_to='vehiculos/') # Ver settings.py MEDIA_ROOT para ver el directorio donde se guardan las imagenes
     valor = models.IntegerField(null=False, default=0)
+    cart = models.IntegerField(null=False, default=0)
 
 
 class Venta(models.Model):

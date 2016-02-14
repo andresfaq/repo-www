@@ -18,10 +18,12 @@
                                 <h2>{{vehiculo.marca}}</h2>
                                 <p>{{vehiculo.descripcion}}</p>
                                 <form action="" method="post" class="form-horizontal form-groups-bordered">{% csrf_token %}
-                                	A nombre de: {{user_form.clienteChoice}}
+                                	<div>A nombre de: {{user_form.clienteChoice}}</div>
+                                    <div>Con un porcentaje de descuento del: {{user_form.porcentaje_descuento}}</div>
                                 <div>
-                                    <input type="submit" class="btn btn-blue btn-icon" value="Vender"></input>
+                                    <input type="submit" class="btn btn-blue btn-icon" value="Vender" style="margin-top:15px;margin-left:10px;"></input>
                                 </div>
+
                                 </form>
 
                             </div>

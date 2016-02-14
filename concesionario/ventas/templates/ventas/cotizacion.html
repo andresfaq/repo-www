@@ -1,0 +1,54 @@
+{% extends 'ventas/base.html' %}
+{% load staticfiles %}
+{% block contenido %}
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Cotizacion</h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Modelo</th>
+                                        <th>Marca</th>
+                                        <th>Descripcion</th>
+                                        <th>Costo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for vehiculo in vehiculos %}
+                                    <tr>
+                                        <td>{{vehiculo.modelo}}</td>
+                                        <td>{{vehiculo.marca}}</td>
+                                        <td>{{vehiculo.descripcion}}</td>
+                                        <td>{{vehiculo.valor}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th align="LEFT" colspan="3"></th>
+                                        <th>{{costo}}</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <form action="" method="post" class="form-horizontal form-groups-bordered">{% csrf_token %}
+                                    <div>A nombre de: {{user_form.clienteChoice}}</div>
+                                    <div>Con un porcentaje de descuento del: {{user_form.porcentaje_descuento}}</div>
+                                <input type="submit" name="vender" class="btn btn-blue btn-icon" value="Vender"></input>
+                                <input type="submit" name="eliminar" class="btn btn-red btn-icon" value="Eliminar cotizacion"></input>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+
+
+
+{% endblock%}
