@@ -86,8 +86,8 @@
 					</button>
 				</form>
 			</li>
-			<li class="active opened active">
-				<a href="crear-usuario.html">
+			<li class="">
+				<a href="#">
 					<span>Gestion de usuarios</span>
 				</a>
 				<ul>
@@ -109,6 +109,28 @@
 					<li>
 						<a href={% url 'administracion.views.recuperarUsuario' %}>
 							<span>Recuperar usuario</span>
+						</a>
+					</li>
+					<li>
+						<a href={% url 'administracion.views.modificarContrasena' %}>
+							<span>Cambiar contraseñas</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="">
+				<a href="#">
+					<span>Gestion de sucursales</span>
+				</a>
+				<ul>
+					<li>
+						<a href={% url 'administracion.views.crearSucursal' %}>
+							<span>Crear sucursal</span>
+						</a>
+					</li>
+					<li>
+						<a href={% url 'administracion.views.modificarSucursalSeleccion' %}>
+							<span>Modificar sucursal</span>
 						</a>
 					</li>
 				</ul>

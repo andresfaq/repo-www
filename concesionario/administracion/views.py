@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,render_to_response,get_object_or_404
-from .formsAdministracion import UserForm, UserFormEliminate, UserFormRecuperate, UserFormModificate, UserFormAux, EmpleadoFormAux
+from .formsAdministracion import UserForm, UserFormContrasena, UserFormEliminate, UserFormRecuperate, UserFormModificate, UserFormAux, EmpleadoFormAux
+from .formsAdministracion import SucursalForm, FormSucursalModificar
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core.context_processors import csrf
@@ -276,3 +277,85 @@ def modificarUsuarioJefeTaller(request, idX):
         user = UserFormModificate.getID(idX)
         user_form = EmpleadoFormAux(instance=user, initial={"salario": vendedorAux.salario, 'sucursalChoice': vendedorAux.codigo_sucursal_id})
     return render(request, 'administracion/modificarUsuarioEmpleado.html', {'user_form': user_form, 'usernameText': usernameText, 'sucursalActual': sucursalActual})
+
+@login_required
+def modificarContrasena(request):
+    if request.method == 'POST':
+
+        # formulario enviado
+        user_form = UserFormContrasena(request.POST)
+
+        if user_form.is_valid():
+            # formulario validado correctamente
+            #usuario = user_form.save()
+            username = user_form.cleaned_data['usernameChoice']
+            password = user_form.cleaned_data['password']
+            UserFormContrasena.modificar(username,make_password(password))
+            messages.success(request,"La contrasena del usuario "+username.username+" se ha modificada satisfactoriamente")
+        else:
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
+
+    else:
+        # formulario inicial
+        user_form = UserFormContrasena()
+
+    return render(request, 'administracion/modificarContrasena.html', { 'user_form': user_form})
+
+@login_required
+@csrf_exempt
+def crearSucursal(request):
+    if request.method == 'POST':
+
+        # formulario enviado
+        user_form = SucursalForm(request.POST)
+
+        if user_form.is_valid():
+            nombre = user_form.cleaned_data['nombre']
+            direccion = user_form.cleaned_data['direccion']
+            SucursalForm.guardarSucursal(nombre, direccion)
+            messages.success(request,"La sucursal "+nombre+" se ha creado satisfactoriamente")
+
+        else:
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
+
+    else:
+        # formulario inicial
+        user_form = SucursalForm()
+
+    return render(request, 'administracion/crearSucursal.html', { 'user_form': user_form})
+
+@login_required
+def modificarSucursalSeleccion(request):
+    if request.method == 'POST':
+        user_form_aux = FormSucursalModificar(request.POST)
+        
+        if user_form_aux.is_valid():
+            sucursal = user_form_aux.cleaned_data['sucursalChoice']
+            return redirect('/administracion/modificarSucursal/' + str(sucursal.codigo_sucursal) +'/')
+        else:
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
+
+    else:
+        user_form_aux = FormSucursalModificar()
+
+    return render(request, 'administracion/modificarSucursalSeleccion.html', { 'user_form_aux': user_form_aux})
+
+@login_required
+def modificarSucursal(request, idX):
+    sucursalAux = FormSucursalModificar.get(idX)
+    usernameText = sucursalAux.nombre
+    if request.method == 'POST':
+        user_form = SucursalForm(request.POST)
+
+        if user_form.is_valid():
+            nombre = user_form.cleaned_data['nombre']
+            direccion = user_form.cleaned_data['direccion']
+            FormSucursalModificar.update(sucursalAux, nombre, direccion)
+            messages.success(request,"La sucursal "+usernameText+" se ha modificado satisfactoriamente")
+        else:
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
+
+    else:
+        user = FormSucursalModificar.get(idX)
+        user_form = SucursalForm(instance=user)
+    return render(request, 'administracion/modificarSucursal.html', {'user_form': user_form, 'usernameText': usernameText})

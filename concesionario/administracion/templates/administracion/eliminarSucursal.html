@@ -1,0 +1,93 @@
+{% extends 'administracion/base.html' %}
+{% load staticfiles %}
+{% block contenido %}
+
+        <!--PRINCIPAL-->
+        <div id="page-wrapper">
+
+            <div class="container-fluid" id="contenedor">
+
+<form class="row" action="" method="post">{% csrf_token %}
+	<div class="col-md-12">
+		
+		<div class="panel panel-primary" data-collapsed="0">
+		{% if user_form.errors %}
+		    {% for field in user_form %}
+		        {% for error in field.errors %}
+		            <div class="alert alert-error">
+		                <strong>{{field.name}} {{ error|escape }}</strong>
+		            </div>
+		        {% endfor %}
+		    {% endfor %}
+		    {% for error in user_form.non_field_errors %}
+		        <div class="alert alert-error">
+		            <strong>{{field.name}} {{ error|escape }}</strong>
+		        </div>
+		    {% endfor %}
+		{% endif %}
+		
+			<div class="panel-heading">
+				<div class="panel-title">
+					Sucursal a eliminar
+				</div>
+				
+				<div class="panel-options">
+					<a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
+				</div>
+			</div>
+			
+			<div class="panel-body">
+				
+	
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Sucursal</label>
+						
+						<div class="col-sm-5">
+							{{ user_form.sucursalChoice }}
+						</div>
+					</div>
+					
+				
+			</div>
+		
+		</div>
+	
+	</div>
+	<div class="col-sm-5 ">
+		<input type="submit" class="btn btn-danger btn-icon" value="Eliminar sucursal">
+			
+	</div>
+</form>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+<br />
+
+<!-- Footer -->
+	</div>
+
+	</div>
+
+	<div class="modal fade" id="confirmar-usuario" data-backdrop="static">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			
+			<div class="modal-header">
+				<h4 class="modal-title">Eliminación de usuario exitosa</h4>
+			</div>
+			
+			<div class="modal-body">
+			
+				Su usario fue eliminado con éxito... O tal vez no.
+				
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal">Finalizar</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock%}
