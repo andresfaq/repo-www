@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block contenido %}
 
-		<h3>Modificaciones del administrador: {{usernameText}}</h3>
+		<h3>Modificaciones de administrador ({{usernameText}})</h3>
 
 		
 
@@ -35,7 +35,7 @@
 			<div class="panel-body">
 				
 				<form action="" method="post" role="form" class="form-horizontal form-groups-bordered">{% csrf_token %}
-				<br>
+				
 
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label">Nombres</label>
@@ -44,7 +44,7 @@
 							{{ user_form.first_name }}
 						</div>
 					</div>
-					<br>
+					
 
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label">Apellidos</label>
@@ -53,7 +53,7 @@
 							{{ user_form.last_name }}
 						</div>
 					</div>
-					<br>
+					
 
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label">Documento de identidad</label>
@@ -65,7 +65,7 @@
 							</div>
 						</div>
 					</div>
-					<br>
+					
 					
 					<div class="form-group">
 					<label for="field-1" class="col-sm-3 control-label">Correo electrónico</label>						
@@ -76,7 +76,7 @@
 							</div>
 						</div>
 					</div>
-					<br>
+					
 
 					<div class="form-group">
 						<label class="col-sm-3 control-label">Fecha de nacimiento</label>
@@ -87,7 +87,7 @@
 							</div>
 						</div>
 					</div>
-					<br>
+					
 
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label">Teléfono</label>
@@ -96,7 +96,7 @@
 							{{ user_form.telefono }}
 						</div>
 					</div>
-					<br>
+					
 
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label">Teléfono</label>
@@ -105,11 +105,11 @@
 							{{ user_form.direccion }}
 						</div>
 					</div>
-					<br>
+					
 
 					<div class="row">
 						<div class="col-sm-5 ">
-							<input type="submit" class="btn btn-default btn-icon" value="Actualizar usuario">
+							<input type="submit" class="mybutton" value="Actualizar usuario">
 											
 							</input>
 						</div>

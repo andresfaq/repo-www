@@ -2,7 +2,7 @@
 {% load staticfiles %}
 {% block contenido %}
 
-			<h3>Usuario a cambiar contraseña</h3>
+			<h3>Modificación de contraseña</h3>
 
 
         <!--PRINCIPAL-->
@@ -31,7 +31,7 @@
 			
 			<div class="panel-body">
 				<form action="" method="post" class="form-horizontal form-groups-bordered">{% csrf_token %}
-				<br>
+				
 	
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label">Usuario</label>
@@ -40,7 +40,7 @@
 							{{ user_form.usernameChoice }}
 						</div>
 					</div>
-					<br>
+					
 
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label">Contraseña</label>
@@ -49,8 +49,8 @@
 							{{ user_form.password }}
 						</div>
 					</div>
-					<br>
-						<input type="submit" class="btn btn-blue btn-icon" value="Cambiar contraseña">					
+					
+						<input type="submit" class="mybutton" value="Cambiar contraseña">					
 					</form>
 				
 			</div>
@@ -70,25 +70,4 @@
 	</div>
 
 	</div>
-
-	<div class="modal fade" id="confirmar-usuario" data-backdrop="static">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			
-			<div class="modal-header">
-				<h4 class="modal-title">Eliminación de usuario exitosa</h4>
-			</div>
-			
-			<div class="modal-body">
-			
-				Su usario fue eliminado con éxito... O tal vez no.
-				
-			</div>
-			
-			<div class="modal-footer">
-				<button type="button" class="btn btn-info" data-dismiss="modal">Finalizar</button>
-			</div>
-		</div>
-	</div>
-</div>
 {% endblock%}

@@ -2,6 +2,8 @@
 {% load staticfiles %}
 {% block contenido %}
 
+<h3>Listado de carros</h3>
+
         <!--PRINCIPAL-->
         <div id="page-wrapper">
 
@@ -27,16 +29,7 @@
             {% endfor %}
         {% endif %}
         
-            <div class="panel-heading">
-                <div class="panel-title">
-                    Filtros
-                </div>
-                
-                <div class="panel-options">
-                    <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
-                </div>
-            </div>
-            
+
             <div class="panel-body">
                 
     
@@ -61,7 +54,7 @@
                 
             </div>
             <div>
-            <input type="submit" class="btn btn-green btn-icon" value="Aplicar filtros" style="margin-bottom:15px; margin-left:25px;">
+            <input type="submit" class="mybutton" value="Aplicar filtros" style="margin-bottom:15px; margin-left:25px;">
             </div>
         
         </div>
@@ -85,5 +78,6 @@
                     </div>
                 {% endfor %}
                 <!-- /.row -->
+                </div>
             </div>
 {% endblock%}
