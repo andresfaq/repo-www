@@ -9,7 +9,7 @@
 
             <div class="container-fluid" id="contenedor">
 
-<div class="row">
+<form action="" method="post" role="" class="row">{% csrf_token %}
 	<div class="col-md-12">
 		
 		<div class="panel panel-primary" data-collapsed="0">
@@ -30,7 +30,7 @@
 			
 			<div class="panel-body">
 				
-				<form action="" method="post" role="form" class="form-horizontal form-groups-bordered">{% csrf_token %}
+				
 					
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label">Usuario</label>
@@ -40,21 +40,21 @@
 						</div>
 						
 
-						<div class="col-sm-5 ">
-						<input type="submit" class="mybutton" value="Consultar">
 						
-						</input>
-						</div>
 					</div>
 					
-				</form>
+				
 				
 			</div>
 		
 		</div>
 	
 	</div>
-</div>
+	<div class="col-sm-5 ">
+							<input type="submit" class="mybutton" value="Consultar">
+						
+						</div>
+</form>
 
             </div>
             <!-- /.container-fluid -->
