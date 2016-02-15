@@ -176,10 +176,13 @@ $(document).ready(function() {
             var cantidadS=$(this).parents("tr").find("td").get(4);//val());
             var txtCR=$(codigoRepuesto).text();
             var cantidadR=$('input', cantidadS).val();
-            var arrayRepuesto={codigo:txtCR, cantidad:cantidadR};
+            //var arrayRepuesto={codigo:txtCR, cantidad:cantidadR};
+            var arrayRepuesto=[txtCR, cantidadR];
             repuestos.push(arrayRepuesto);//we add the new spare in the array
-            console.log("codigoRepuesto: "+arrayRepuesto['codigo']);
-            console.log("cantidadR: "+arrayRepuesto['cantidad']);
+           // console.log("codigoRepuesto: "+arrayRepuesto['codigo']);
+              console.log("codigoRepuesto: "+arrayRepuesto[0]);
+            //console.log("cantidadR: "+arrayRepuesto['cantidad']);
+              console.log("cantidadR: "+arrayRepuesto[0]);
         });
 
         for( i=0; i<repuestos.length;i++){
@@ -191,7 +194,7 @@ $(document).ready(function() {
                     type:'post',
                     datatype:'json',
                     data: {'codigo_Orden': codigoOrden,
-                           'repuestos_array':repuestos},
+                           'repuestos_array[]':repuestos},
 
                     success:function(data){
                         console.log("buen");

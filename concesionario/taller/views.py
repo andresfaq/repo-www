@@ -14,6 +14,7 @@ import json
 
 
 
+
 @login_required
 def inicio(request):
     return render(request, 'taller/index.html')
@@ -112,8 +113,23 @@ def agregarRepuestosVehiculo(request):
     if request.method == 'POST':
         if request.is_ajax():
             codigoOrden = request.POST.get('codigo_Orden')
-            repuestosArray =request.POST.get('repuestos_array')
+            repuestosArray =request.POST.getlist('repuestos_array[]')
+
             print ("esta es la consulta: ", codigoOrden,"  el array rep: ",repuestosArray)
+            for repuesto in repuestosArray:
+               infoRepuesto=[int(x) for x in repuesto.split(',')]
+               print("repuesto: ",infoRepuesto[0]," cantidad : ", infoRepuesto[1])
+
+               orden = Orden.objects.get(codigo_orden=codigoOrden)
+               repuestoAdd= Repuesto.objects.get(codigo_repuesto=infoRepuesto[0])
+               repuesto_Orden=RepuestosPorOrden(codigo_orden=orden,
+                                                codigo_repuesto=repuestoAdd,
+                                                cantidad=infoRepuesto[1])
+               invRepuesto = InventarioRepuesto.objects.get(codigo_repuesto=repuestoAdd)
+               invRepuesto.cantidad = invRepuesto.cantidad - infoRepuesto[1]
+               repuesto_Orden.save()
+               invRepuesto.save()
+     
             algo={'mensaje':"Proceso realizado"}
             return JsonResponse(algo,safe=False)
     return HttpResponse()
