@@ -118,7 +118,7 @@ class DatosVentasClienteResource(ModelResource):
 #Se va a usar para obtener las revisiones de un vehiculo en particular
 #http://localhost:8000/administracion/api/v1/datosrevision/?format=json&cod_ven=58
 class DatosRevisionesVehiculoResource(ModelResource):
-
+    codigo_orden = fields.OneToOneField(OrdenResource, 'codigo_orden')
     class Meta:
         ventas = models.RevisionVehiculo.objects.all()
         queryset = ventas

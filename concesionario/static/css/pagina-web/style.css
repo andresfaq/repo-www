@@ -141,25 +141,25 @@ body {
      border-bottom:1px solid #DB3C15;
      background:url("../../images/pagina-web/nav-icon.png") no-repeat 98% center;
 }
-.nav {
+.navi {
     list-style: none;
-     *zoom: 1;
+     zoom: 1;
      background:#e44f2b;
      border-bottom:1px solid #DB3C15;
 }
-.nav:before,
-.nav:after {
+.navi:before,
+.navi:after {
     content: " "; 
     display: table; 
 }
-.nav:after {
+.navi:after {
     clear: both;
 }
-.nav ul {
+.navi ul {
     list-style: none;
     width:11em;
 }
-.nav a {
+.navi a {
     padding:16px 33px;
     color:#ffb29f;
     border-top:1px solid #DB3C15;
@@ -168,38 +168,38 @@ body {
 	-o-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
-.nav a:hover {
-	color:#FFF;
+.navi a:hover {
+	color: #ffffff;
 }
-.nav li {
+.navi li {
     position: relative;
 }
-.nav > li {
+.navi > li {
     float: left;
 }
-.nav > li:first-child,.nav > li:last-child {
+.navi > li:first-child,.navi > li:last-child {
 	background-image:none;
 }
-.nav > li {
+.navi > li {
     background-image: url("../../images/pagina-web/line-divider.png");
     background-repeat: no-repeat;
     background-position:left;
 }
-.nav > li > a {
+.navi > li > a {
     display: block;
 }
-.nav li  ul {
+.navi li  ul {
     position: absolute;
     left: -9999px;
 }
-.nav > li.hover > ul {
+.navi > li.hover > ul {
     left: 0;
 }
-.nav li li.hover ul {
+.navi li li.hover ul {
     left: 100%;
     top: 0;
 }
-.nav li li a {
+.navi li li a {
     display: block;
     background:#EA5E3C;
     position: relative;
@@ -208,12 +208,12 @@ body {
     padding:10px;
     font-size:15px;
 }
-.nav li li a:hover {
+.navi li li a:hover {
 	  background:#DB502E;
 }
-.nav li li li a {
+.navi li li li a {
     background:#ED6A4A;
-    z-index:200;
+    z-index:0;
     border-top:1px solid #EF7A5D;
 }
 
@@ -221,29 +221,28 @@ body {
     .active {
         display: block;
     }
-    .nav > li {
+    .navi > li {
         float: none;
     }
-    .nav > li > .parent {
+    .navi > li > .parent {
         background-position: 95% 50%;
     }
-    .nav li li .parent {
-        background-image: url("../../images/pagina-web/downArrow.png");
-        background-repeat: no-repeat;
-        background-position: 95% 50%;
-    }
-    .nav ul {
+    .navi li li .parent {
+		background: url("../../images/pagina-web/downArrow.png") no-repeat 95% 50%;
+	}
+    .navi ul {
         display: block;
         width: 100%;
     }
-   .nav > li.hover > ul , .nav li li.hover ul {
+   .navi > li.hover > ul , .navi li li.hover ul {
         position: static;
     }
-    .nav > li {
+
+	.navi > li {
     	 background-image: url("../../images/pagina-web/nav-arrow.png");
     	 background-position:96% 55%;
     }
-    .nav > li > .parent{
+    .navi > li > .parent{
     	background-position:96% 55%;
    }
 
@@ -609,7 +608,7 @@ body {
 }
 .product-articles p a{
 	color:#e44f2b;
-	font-size;14px;
+	font-size: 14px;
 }
 .product-articles p a:hover{
 	text-decoration:underline;
@@ -920,7 +919,7 @@ body {
 	width:27px;
 	height:27px;
 	display:block;
-	background:url("../images/social-share.png") no-repeat;
+	background:url("../../images/social-share.png") no-repeat;
 }
 .social-share li a.share-face {
 	background-position: 0px 0px; 
@@ -1302,19 +1301,19 @@ body {
 .wrap {
 		width: 95%;
 	}
-	.nav a{
+	.navi a{
 	  padding:16px 20px;
 	}
 	.navigation{
 		margin:0 30px;
 	}
-	.nav li li a{
+	.navi li li a{
 		font-size:14px;
 	}
-	.nav ul{
+	.navi ul{
 		width:9em;
 	}
-	.nav > li > a{
+	.navi > li > a{
 		font-size:14px;
 	}
 	.slider-img img{
@@ -1340,11 +1339,11 @@ body {
 }
 @media only screen and (max-width: 800px) {
 
-	.nav {
+	.navi {
 		border-bottom:none;
 		border-top:none;
 	}
-	.nav ul{
+	.navi ul{
 		width:100%;
 	}
 	.header_bottom{
@@ -1362,7 +1361,7 @@ body {
 	.header_top{
 		padding-bottom:10px;
    }
-   .nav > li > a{
+   .navi > li > a{
    	padding:10px;
    }
    .content-bottom-left,.content-bottom-right {
