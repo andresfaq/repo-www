@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,render_to_response,get_object_or_404
 from .formsAdministracion import UserForm, UserFormContrasena, UserFormEliminate, UserFormRecuperate, UserFormModificate, UserFormAux, EmpleadoFormAux
-from .formsAdministracion import SucursalForm, FormSucursalModificar
+from .formsAdministracion import SucursalForm, FormSucursalModificar, VehiculoForm, FormVehiculoModificar
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core.context_processors import csrf
@@ -359,3 +359,49 @@ def modificarSucursal(request, idX):
         user = FormSucursalModificar.get(idX)
         user_form = SucursalForm(instance=user)
     return render(request, 'administracion/modificarSucursal.html', {'user_form': user_form, 'usernameText': usernameText})
+
+@login_required
+def crearVehiculo(request):
+    if request.method == 'POST':
+
+        # formulario enviado
+        user_form = VehiculoForm(request.POST)
+        if user_form.is_valid():
+            vehiculo = user_form
+            vehiculo.marca = user_form.cleaned_data['marca']
+            vehiculo.modelo = user_form.cleaned_data['modelo']
+            vehiculo.descripcion = user_form.cleaned_data['descripcion']
+            #vehiculo.imagen = user_form.cleaned_data['imagen']
+            vehiculo.color = user_form.cleaned_data['color']
+            vehiculo.cantidad = user_form.cleaned_data['cantidad']
+            vehiculo.precio_unidad = user_form.cleaned_data['precio_unidad']
+            VehiculoForm.guardar(vehiculo)
+            messages.success(request,"El vehiculo "+vehiculo.modelo+" se ha creado satisfactoriamente")
+        else:
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
+
+    else:
+        # formulario inicial
+        user_form = VehiculoForm()
+
+    return render(request, 'administracion/crearVehiculo.html', { 'user_form': user_form})
+@login_required
+def modificarVehiculo(request,idX):
+    return render(request, 'administracion/modificarVehiculo.html')
+
+@login_required
+def modificarVehiculoSeleccion(request):
+    if request.method == 'POST':
+        user_form_aux = FormVehiculoModificar(request.POST)
+        
+        if user_form_aux.is_valid():
+            return redirect('/Hey/')
+            vehiculo = user_form_aux.cleaned_data['vehiculoChoice']
+            #return redirect('/administracion/modificarSucursal/' + str(vehiculo.codigo_vehiculo) +'/')
+        else:
+            messages.warning(request, "No has diligenciado correctamente todos los campos")
+
+    else:
+        user_form_aux = FormVehiculoModificar()
+
+    return render(request, 'administracion/modificarVehiculoSeleccion.html', { 'user_form_aux': user_form_aux})

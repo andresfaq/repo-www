@@ -3,7 +3,7 @@ from paginaweb.static import *
 import datetime
 from functools import partial
 DateInput = partial(forms.DateInput, {'class': 'datepicker'})
-from administracion.models import User, JefeTaller, Vendedor, Gerente, Cliente, Empleado, Sucursal
+from administracion.models import User, JefeTaller, Vendedor, Gerente, Cliente, Empleado, Sucursal, InventarioVehiculo, Vehiculo
 
 class UserForm(forms.ModelForm):
 
@@ -161,3 +161,27 @@ class FormSucursalModificar(forms.Form):
 
     def update(sucursal, nombre, direccion):
         Sucursal.objects.filter(codigo_sucursal=sucursal.codigo_sucursal).update(nombre=nombre,direccion=direccion)
+
+class VehiculoForm(forms.ModelForm):
+    color = forms.CharField()
+    cantidad = forms.IntegerField(min_value=1,initial=1,widget=forms.NumberInput(attrs={'style': "width: 48px;"}))
+    precio_unidad = forms.IntegerField(min_value=1,widget=forms.NumberInput(attrs={'style': "width: 80px;"}))
+
+    CHOICES1 = (('Hyundai','Hyundai'),( 'Chevrolet','Chevrolet'),('Mazda','Mazda'),('Toyota','Toyota'),('Nissan','Nissan'),('Ford','Ford'))
+    marca = forms.ChoiceField(choices=CHOICES1)
+
+    class Meta:
+        model = Vehiculo
+        fields = (
+            #'marca',
+            'modelo',
+            'descripcion',
+            #'imagen'
+            )
+
+    def guardar(vehiculo):
+        vehiculoX = Vehiculo.objects.create(marca=vehiculo.marca,modelo=vehiculo.modelo,descripcion=vehiculo.descripcion)
+        InventarioVehiculo.objects.create(color=vehiculo.color,cantidad=vehiculo.cantidad,precio_unidad=vehiculo.precio_unidad,codigo_vehiculo_id=vehiculoX.codigo_vehiculo)
+
+class FormVehiculoModificar(forms.Form):
+    vehiculoChoice = forms.ModelChoiceField(queryset=Vehiculo.objects.all().order_by('marca'), to_field_name='marca')

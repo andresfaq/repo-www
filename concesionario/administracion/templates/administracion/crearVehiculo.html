@@ -1,0 +1,116 @@
+{% extends 'administracion/base.html' %}
+{% load staticfiles %}
+{% block contenido %}
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid" id="contenedor">
+            	<div class="row">
+	<div class="col-md-12">
+		
+		<div class="panel panel-primary" data-collapsed="0">
+		{% if user_form.errors %}
+		    {% for field in user_form %}
+		        {% for error in field.errors %}
+		            <div class="alert alert-error">
+		                <strong>{{field.name}} {{ error|escape }}</strong>
+		            </div>
+		        {% endfor %}
+		    {% endfor %}
+		    {% for error in user_form.non_field_errors %}
+		        <div class="alert alert-error">
+		            <strong>{{field.name}} {{ error|escape }}</strong>
+		        </div>
+		    {% endfor %}
+		{% endif %}
+		
+			<div class="panel-heading">
+				<div class="panel-title">
+					Datos del vehiculo
+				</div>
+				
+				<div class="panel-options">
+					<a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
+				</div>
+			</div>
+			
+			<div class="panel-body">
+				
+				<form action="" method="post" class="form-horizontal form-groups-bordered">{% csrf_token %}
+	
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Modelo</label>
+						
+						<div class="col-sm-5">
+							{{ user_form.modelo }}							
+						</div>
+
+					</div>
+					
+					<div class="form-group">
+						<label for="field-3" class="col-sm-3 control-label">Marca</label>
+						
+						<div class="col-sm-5">
+							{{ user_form.marca }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-3" class="col-sm-3 control-label">Descripcion</label>
+						
+						<div class="col-sm-5">
+							{{ user_form.descripcion }}
+						</div>
+					</div>
+					<!--
+					<div class="form-group">
+						<label for="field-3" class="col-sm-3 control-label">Imagen</label>
+						
+						<div class="col-sm-5">
+							{{ user_form.imagen }}
+						</div>
+					</div>
+					-->
+					<div class="form-group">
+						<label for="field-3" class="col-sm-3 control-label">Color</label>
+						
+						<div class="col-sm-5">
+							{{ user_form.color }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-3" class="col-sm-3 control-label">Cantidad</label>
+						
+						<div class="col-sm-5">
+							{{ user_form.cantidad }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-3" class="col-sm-3 control-label">Precio</label>
+						
+						<div class="col-sm-5">
+							{{ user_form.precio_unidad }}
+						</div>
+					</div>
+
+					<input type="submit" class="btn btn-default btn-icon" value="Crear vehiculo">
+						
+					</input>
+								
+				</form>
+				
+			</div>
+		
+		</div>
+	
+	</div>
+</div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+
+{% endblock%}

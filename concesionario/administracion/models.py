@@ -142,6 +142,9 @@ class Vehiculo(models.Model):
     imagen = models.ImageField(upload_to='vehiculos/') # Ver settings.py MEDIA_ROOT para ver el directorio donde se guardan las imagenes
     cart = models.IntegerField(null=False, default=0)
 
+    def __str__(self):
+        return str(self.modelo + " - " + self.marca)
+
 
 class Venta(models.Model):
     codigo_venta = models.AutoField(primary_key=True)
