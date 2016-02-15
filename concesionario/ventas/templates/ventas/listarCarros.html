@@ -1,4 +1,4 @@
-{% extends 'administracion/base.html' %}
+{% extends 'ventas/base.html' %}
 {% load staticfiles %}
 {% block contenido %}
 
@@ -8,6 +8,66 @@
             <div class="container-fluid" id="contenedor">
 
                 <!-- Page Heading -->
+                <form class="row" action="" method="post">{% csrf_token %}
+    <div class="col-md-12">
+        
+        <div class="panel panel-primary" data-collapsed="0">
+        {% if user_form.errors %}
+            {% for field in user_form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-error">
+                        <strong>{{field.name}} {{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in user_form.non_field_errors %}
+                <div class="alert alert-error">
+                    <strong>{{field.name}} {{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+        
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Filtros
+                </div>
+                
+                <div class="panel-options">
+                    <a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
+                </div>
+            </div>
+            
+            <div class="panel-body">
+                
+    
+                    <div class="form-group">
+                        <label for="field-1" class="col-sm-1 control-label">Marca</label>
+                        
+                        <div class="col-sm-2">
+                            {{ user_form.marcaChoice }}
+                        </div>
+
+                        <label for="field-1" class="col-sm-1 control-label">Valor</label>
+                        
+                        <div class="col-sm-1">
+                            {{ user_form.precioChoice }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        
+                    </div>
+                    
+                
+            </div>
+            <input type="submit" class="btn btn-green btn-icon" value="Aplicar filtros">
+        
+        </div>
+    
+    </div>
+        
+</form>
+
                 {% for carro in carros %}
                     <div class="col-sm-4 col-lg-4 col-md-4" style="height: 350px;">
                         <div class="thumbnail">

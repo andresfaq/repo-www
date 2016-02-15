@@ -133,3 +133,31 @@ class EmpleadoFormAux(forms.ModelForm):
 
     def actualizarJefeTaller(usuario, identificacion):
         JefeTaller.objects.filter(id=identificacion).update(first_name=usuario.first_name,last_name=usuario.last_name,email=usuario.email,cedula=usuario.cedula,direccion=usuario.direccion,fecha_de_nacimiento=usuario.fecha_de_nacimiento,telefono=usuario.telefono,codigo_sucursal_id=usuario.sucursal,salario=usuario.salario)
+
+class UserFormContrasena(forms.Form):
+    usernameChoice = forms.ModelChoiceField(queryset=User.objects.all().filter(is_active=True).order_by('username'), to_field_name='username')
+    password = forms.CharField()
+
+    def modificar(usernameX,password):
+        user = User.objects.get(username=usernameX)
+        User.objects.filter(username=usernameX).update(password=password)
+
+class SucursalForm(forms.ModelForm):
+    class Meta:
+        model = Sucursal
+        fields = (
+            'nombre',
+            'direccion'
+            )
+    def guardarSucursal(nombre, direccion):
+        Sucursal.objects.create(nombre=nombre,direccion=direccion)
+
+class FormSucursalModificar(forms.Form):
+    sucursalChoice = forms.ModelChoiceField(queryset=Sucursal.objects.all().order_by('nombre'), to_field_name='nombre')
+
+    def get(identificacion):
+        sucursal = Sucursal.objects.get(codigo_sucursal=identificacion)
+        return sucursal
+
+    def update(sucursal, nombre, direccion):
+        Sucursal.objects.filter(codigo_sucursal=sucursal.codigo_sucursal).update(nombre=nombre,direccion=direccion)

@@ -9,7 +9,10 @@ from administracion.views import modificarUsuarioCliente
 from administracion.views import modificarUsuarioVendedor
 from administracion.views import modificarUsuarioGerente
 from administracion.views import modificarUsuarioJefeTaller
-
+from administracion.views import modificarContrasena
+from administracion.views import crearSucursal
+from administracion.views import modificarSucursal
+from administracion.views import modificarSucursalSeleccion
 
 from tastypie.api import Api
 from administracion.api import UserResource, OrdenResource, DatosVehiculoResource, GerenteResource, JefeTallerResource, VendedorResource, DatosOrdenMovilResource, ClienteResource, DatosVentasClienteResource, DatosRevisionesVehiculoResource
@@ -35,6 +38,10 @@ urlpatterns = [url(r'^$', inicio),
 			   url(r'^modificarUsuarioVendedor/(?P<idX>\d+)/$', modificarUsuarioVendedor, name='modificarUsuarioVendedor'),
 			   url(r'^modificarUsuarioGerente/(?P<idX>\d+)/$', modificarUsuarioGerente, name='modificarUsuarioGerente'),
 			   url(r'^modificarUsuarioJefeTaller/(?P<idX>\d+)/$', modificarUsuarioJefeTaller, name='modificarUsuarioJefeTaller'),
+			   url(r'^modificarContrasena/$', modificarContrasena, name='modificarContrasena'),
 			   url(r'^eliminarUsuario/$', eliminarUsuario, name='eliminarUsuario'),
 			   url(r'^recuperarUsuario/$', recuperarUsuario, name='recuperarUsuario'),
+			   url(r'^crearSucursal/$', crearSucursal, name='crearSucursal'),
+			   url(r'^modificarSucursal/(?P<idX>\d+)/$', modificarSucursal, name='modificarSucursal'),
+			   url(r'^modificarSucursalSeleccion/$', modificarSucursalSeleccion, name='modificarSucursalSeleccion')
 			   ]

@@ -1,5 +1,5 @@
 {% extends 'ventas/base.html' %}
-
+{% load staticfiles %}
 {% block contenido %}
 
         <!--PRINCIPAL-->
@@ -18,8 +18,10 @@
                                 <h2>{{vehiculo.marca}}</h2>
                                 <p>{{vehiculo.descripcion}}</p>
                                 <form action="" method="post" class="form-horizontal form-groups-bordered">{% csrf_token %}
-                                	{{user_form.clienteChoice}}
-                                <input type="submit" class="btn btn-blue btn-icon" value="Comprar"></input>
+                                	A nombre de: {{user_form.clienteChoice}}
+                                <div>
+                                    <input type="submit" class="btn btn-blue btn-icon" value="Vender"></input>
+                                </div>
                                 </form>
 
                             </div>

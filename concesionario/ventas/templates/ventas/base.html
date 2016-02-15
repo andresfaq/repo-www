@@ -11,7 +11,7 @@
 	<meta name="description" content="Neon Admin Panel" />
 	<meta name="author" content="" />
 
-	<title> Adminsitacion | Concesionario </title>
+	<title> Ventas | Concesionario </title>
 
 
 	<link rel="stylesheet" type="text/css" href="{% static 'js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css' %}" />
@@ -168,7 +168,7 @@
 			
 			
 			<li>
-				<a href="extra-login.html">
+				<a href="{% url "logout" %}">
 					Log Out <i class="entypo-logout right"></i>
 				</a>
 			</li>
@@ -179,6 +179,10 @@
 </div>
 
 <hr />
+
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+{% endfor %}
         {% block contenido %}
 
 		{% endblock%}
