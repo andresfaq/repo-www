@@ -123,6 +123,15 @@ $(document).ready(function() {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
        }
     });
+    $(document).on("click","btVerRevision",function(){
+        var estado=$(this).parents("tr").find("td").get(5);
+        var codigoOrden=$(this).parents("tr").find("td").get(2);
+        var placa=$(this).parents("tr").find("td").get(0);
+
+        var txtEstado=$(estado).text();
+        var txtOrden=$(codigoOrden).text();
+        var txtPlaca=$(placa).text();
+    });
     $(document).on("click",".btmodificarRevision",function(){
         var estado=$(this).parents("tr").find("td").get(5);
         var codigoOrden=$(this).parents("tr").find("td").get(2);
@@ -197,9 +206,15 @@ $(document).ready(function() {
                            'repuestos_array[]':repuestos},
 
                     success:function(data){
+                        $('#lbMensaje').text("Se ha registrado los repuestos a la orden "+codigoOrden);
+                        $("#lbMensaje").css("color","MediumSeaGreen ");
+                        $('#revisionModal').appendTo("body").modal('hide');
                         console.log("buen");
                     },
                     error:function(data){
+                        $('#lbMensaje').text("Error al registrar repuestos en la orden "+codigoOrden);
+                          $("#lbMensaje").css("color","Tomato");
+                        $('#revisionModal').appendTo("body").modal('hide');
                         console.log("error ljsdlfjsldfj"+data.error);
                     }
                 }

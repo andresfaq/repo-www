@@ -99,7 +99,7 @@ def busquedaCodigoVenta(request):
 def mostrarVehiculosTaller(request):
     form = tallerForm(request.POST)
     carros=RevisionVehiculo.objects.select_related('codigo_orden','codigo_venta')
-    repuestos=InventarioRepuesto.objects.select_related('codigo_repuesto')
+    repuestos=InventarioRepuesto.objects.select_related('codigo_repuesto')#tengo que cambiar, no se debe cargar aquí
     args = {}
     args.update(csrf(request))
     args['form'] = form
@@ -129,7 +129,7 @@ def agregarRepuestosVehiculo(request):
                invRepuesto.cantidad = invRepuesto.cantidad - infoRepuesto[1]
                repuesto_Orden.save()
                invRepuesto.save()
-     
+
             algo={'mensaje':"Proceso realizado"}
             return JsonResponse(algo,safe=False)
     return HttpResponse()
