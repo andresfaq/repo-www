@@ -176,7 +176,8 @@ class VehiculoFactory(factory.django.DjangoModelFactory):
     modelo = factory.fuzzy.FuzzyChoice(['X1', 'z350', 'F150', 'M91', 'ZX889', 'TX556'])
     descripcion = factory.Faker('text', max_nb_chars=200)
     imagen = factory.django.ImageField()
-    valor = factory.fuzzy.FuzzyInteger(1000, 50000)
+    #valor = factory.fuzzy.FuzzyInteger(1000, 50000)
+    cart = factory.fuzzy.FuzzyInteger(10, 100) #Que putas es esto?
 
 #===================================================
 
