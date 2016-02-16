@@ -91,18 +91,18 @@
 			</li>
 			<li>
 				<a href={% url 'ventas.views.listarCarros' %}>
-					<span>Consultar Carros</span>
+					<span>Vender Carros</span>
 				</a>
 			</li>
 			<li>
-				<a onclick="error404();">
+				<a href={% url 'ventas.views.cotizarCarros' %}>
 
-					<span>Datos cliente (SIN IMPLEMENTAR)</span>
+					<span>Cotizar carros</span>
 				</a>
 			</li>
 			<li>
-				<a onclick="error404();">
-					<span>Facturar (SIN IMPLEMENTAR)</span>
+				<a href={% url 'ventas.views.cotizacion' %}>
+					<span>Cotizacion</span>
 				</a>
 			</li>
 
