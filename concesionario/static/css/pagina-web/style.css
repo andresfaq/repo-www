@@ -102,7 +102,7 @@ body {
 .search_box form input[type="submit"] {
 	border: none;
 	cursor: pointer;
-	background: url(http://localhost:8000/static/images/pagina-web/search.png) no-repeat center;
+	background: url(../../images/pagina-web/search.png) no-repeat center;
 	display:inline-block;
 	width:24px;
 	height:24px;
@@ -122,7 +122,7 @@ body {
 	top: 8px;
 	width: 40px;
 	height:60px;
-	background: url(http://localhost:8000/static/images/pagina-web/left-fold.png) no-repeat;
+	background: url(../../images/pagina-web/left-fold.png) no-repeat;
 	}
 .navigation span.right-ribbon{
 	position: absolute;
@@ -130,7 +130,7 @@ body {
 	top: 8px;
 	width: 40px;
 	height:60px;
-	background: url(http://localhost:8000/static/images/pagina-web/right-fold.png) no-repeat;
+	background: url(../../images/pagina-web/right-fold.png) no-repeat;
 }
 .toggleMenu {
     display:  none;
@@ -139,7 +139,7 @@ body {
     width:95%;
      border-top:1px solid #DB3C15;
      border-bottom:1px solid #DB3C15;
-     background:url("http://localhost:8000/static/images/pagina-web/nav-icon.png") no-repeat 98% center;
+     background:url("../../images/pagina-web/nav-icon.png") no-repeat 98% center;
 }
 .nav {
     list-style: none;
@@ -181,7 +181,7 @@ body {
 	background-image:none;
 }
 .nav > li {
-    background-image: url("http://localhost:8000/static/images/pagina-web/line-divider.png");
+    background-image: url("../../images/pagina-web/line-divider.png");
     background-repeat: no-repeat;
     background-position:left;
 }
@@ -228,7 +228,7 @@ body {
         background-position: 95% 50%;
     }
     .nav li li .parent {
-        background-image: url("http://localhost:8000/static/images/pagina-web/downArrow.png");
+        background-image: url("../../images/pagina-web/downArrow.png");
         background-repeat: no-repeat;
         background-position: 95% 50%;
     }
@@ -240,7 +240,7 @@ body {
         position: static;
     }
     .nav > li {
-    	 background-image: url("http://localhost:8000/static/images/pagina-web/nav-arrow.png");
+    	 background-image: url("../../images/pagina-web/nav-arrow.png");
     	 background-position:96% 55%;
     }
     .nav > li > .parent{
@@ -338,7 +338,7 @@ body {
 	width:30px;
 	height:30px;
 	text-align:center;
-	background:#e44f2b url("http://localhost:8000/static/images/pagina-web/arrows.png") no-repeat;
+	background:#e44f2b url("../../images/pagina-web/arrows.png") no-repeat;
 	border-radius:2em;
 	-webkit-border-radius:2em;
 	-moz-border-radius:2em;
@@ -440,7 +440,7 @@ body {
 	font-size:15px;
 	padding:10px 15px;
     color: #9C9C9C;
-    background:url(http://localhost:8000/static/images/pagina-web/drop_arrow.png) no-repeat 0;
+    background:url(../../images/pagina-web/drop_arrow.png) no-repeat 0;
     border-bottom:1px solid #D6D6D6;
 }
 .categories li:last-child a{
@@ -489,7 +489,7 @@ body {
 	background:#D03D1A !important;
 }
 .add-banner2{
-	background:url("http://localhost:8000/static/images/pagina-web/banner-bg.png") repeat-x;
+	background:url("../../images/pagina-web/banner-bg.png") repeat-x;
 }
 .add-banner2 h4{
 	color:#23272a;
@@ -670,7 +670,7 @@ body {
 	height:50px;
 	border: none;
 	text-indent: 100%;
-	background: url(http://localhost:8000/static/images/pagina-web/arrow_up.png) no-repeat right top;
+	background: url(../../images/pagina-web/arrow_up.png) no-repeat right top;
 }
 
 /*  Preview  ============================================================================= */
@@ -843,10 +843,10 @@ body {
 	text-decoration:none;
 }
 .wish-list li.wish{
-	background:url(http://localhost:8000/static/images/pagina-web/wishlist.png) no-repeat 0;
+	background:url(../../images/pagina-web/wishlist.png) no-repeat 0;
 }
 .wish-list li.compare{
-	background:url(http://localhost:8000/static/images/pagina-web/compare.png) no-repeat 0;
+	background:url(../../images/pagina-web/compare.png) no-repeat 0;
 	margin-right:0;
 }
 /* Checkbox Buttons */
@@ -1026,7 +1026,7 @@ body {
 	color: #333;
 }
 .input-box {
-	background: url(http://localhost:8000/static/images/pagina-web/tag.png) no-repeat 0 8px;
+	background: url(../../images/pagina-web/tag.png) no-repeat 0 8px;
 	padding-left: 35px;
 }
 .input-box input[type="text"] {
@@ -1174,7 +1174,7 @@ body {
 .rating > ul > li {
 	display:inline-block;
 	margin-left:2px;
-	background:url("http://localhost:8000/static/images/pagina-web/price-rating.png") no-repeat;
+	background:url("../../images/pagina-web/price-rating.png") no-repeat;
 	background-position:-20px 0px;
 	width:18px;
 	height:18px;
