@@ -1,194 +1,132 @@
 {% load staticfiles %}
-{%load verbatim %}
-
 
 <!DOCTYPE html>
 <html lang="en">
+
+    <link href="{% static 'css/landing-page.css'  %}" rel="stylesheet">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title> FreeMotors | Home :: Concecionario</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="Neon Admin Panel" />
-	<meta name="author" content="" />
+    <!-- CSS -->
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/pagina-web/style.css' %}" rel="stylesheet" type="text/css">
 
-	<title> Concesioanrio | Ventas </title>
-
-
-	<link rel="stylesheet" type="text/css" href="{% static 'js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/font-icons/entypo/css/entypo.css' %}" />
-	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/neon-core.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/neon-theme.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/neon-forms.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}" />
+    <!--Modulo-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/clientes/clientes.css' %}" />
+    <!--Bootstrap-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css-bootstrap/bootstrap.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css-bootstrap/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css-bootstrap/bootstrap-theme.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/css-bootstrap/bootstrap-theme.min.css' %}" />
 
 
-	<script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
 
-
-	<!--[if lt IE 9]><script src="{% static 'js/ie8-responsive-file-warning.js' %}"></script><![endif]-->
-
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	<![endif]-->
 
 </head>
-<body class="page-body  page-fade" data-url="http://neon.dev">
-
-<div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->
-
-	<div class="sidebar-menu">
 
 
-		<header class="logo-env">
+<body>
+    <div class="header">
+            <div class="wrap">
+                <div class="header_top">
+                    <div class="logo">
+                        <a href={% url "paginaweb.views.home" %}><img src="{% static 'images/centres-claro-peq.png' %}" alt="" /></a>
+                    </div>
+                        <div class="header_top_right">
+                            <!-- <div id="login-bar" class="banner-desc">
+                                <a href={% url "paginaweb.views.login" %} >Login</a>
+                            </div> -->
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="navigation">
+                    <a class="toggleMenu" href="#">Menu</a>
+                        <ul class="nav">
+                            <li>
+                                <a href={% url "paginaweb.views.home" %}>Inicio</a>
+                            </li>
+                            <li>
+                                <a href={% url "clientes.views.reparaciones" %}>Consultar Reparaciones</a>
+                            </li>
+                        </ul>
+                         <span class="left-ribbon"> </span>
+                         <span class="right-ribbon"> </span>
+                </div>
 
-			<!-- logo -->
-			<div class="logo">
-				<a href="index.html">
-					<img src="{% static 'images/centres-claro-peq.png' %}" width="" alt="" />
-				</a>
-			</div>
+                {% block header %}
 
-						<!-- logo collapse icon -->
-
-			<div class="sidebar-collapse">
-				<a href="#" class="sidebar-collapse-icon with-animation"><!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
-					<i class="entypo-menu"></i>
-				</a>
-			</div>
-
-
-
-			<!-- open/close menu icon (do not remove if you want to enable menu on mobile devices) -->
-			<div class="sidebar-mobile-menu visible-xs">
-				<a href="#" class="with-animation"><!-- add class "with-animation" to support animation -->
-					<i class="entypo-menu"></i>
-				</a>
-			</div>
-
-		</header>
-
-
-
-
-
-
-		<ul id="main-menu" class="">
-			<!-- add class "multiple-expanded" to allow multiple submenus to open -->
-			<!-- class "auto-inherit-active-class" will automatically add "active" class for parent elements who are marked already with class "active" -->
-			<!-- Search Bar -->
-
-			<li class="active opened active">
-				<a href="index.html">
-					<i class="entypo-gauge"></i>
-					<span>Mis Vehiculos</span>
-				</a>
-				<ul>
-					<li class="active">
-						<a href="{% url "clientes.views.reparaciones" %}">
-							<span>Reparaciones Pendientes</span>
-						</a>
-					</li>
-                    <li class="active">
-						<a href="">
-							<span>Historial Revisiones</span>
-						</a>
-					</li>
-
-				</ul>
-			</li>
-
-
-		</ul>
-
-	</div>
-
-
-
-    <div class="main-content">
-
-        <div class="row pull-right">
-
-            <!-- Raw Links -->
-            <div class="col-md-6 col-sm-4 clearfix hidden-xs">
-
-                <ul class="list-inline links-list pull-right">
-
-                    <li>
-                        <a>
-                             Bienvenido {{ user.username }}
-                        </a>
-                    </li>
-
-                    <li class="sep"></li>
-
-                    <li>
-                        <a href="{% url "logout" %}">
-                             Log Out <i class="entypo-logout right"></i>
-                        </a>
-                    </li>
-
-
-                </ul>
+                {% endblock%}
 
             </div>
+   </div>
 
+   <section class="contenido">
+
+   {% block contenido %}
+   {% endblock%}
+
+   </section>
+
+
+
+   <div class="footer">
+      <div class="wrap">    
+             <div class="copy_right">
+                <p> FreeMotors S.A. Copy rights (2016). All rights Reseverd </p>
+           </div>   
+           <div class="footer-nav">
+            <ul>
+                <li><a href="#">Terms of Use</a> : </li>
+                <li><a href="#">Privacy Policy</a> : </li>
+                <li><a href="contact.html">Contact Us</a> : </li>
+                <li><a href="#">Sitemap</a></li>
+            </ul>
+           </div>       
         </div>
-
-        <br>
-
-
-            {% block contenido %} {% endblock%}
-
-
-
-
-
-
     </div>
+    <a href="#" id="toTop"> </a>
 
+    <!-- Seccion de Scripts -->
 
+    <!-- JQuery -->
+    <!-- <script type="text/javascript" src="{% static 'js/pagina-web/jquery-1.9.0.min.js' %}"></script> -->
+    <script type="text/javascript" src="{% static 'js/js-jquery/jquery-1.12.0.min.js' %}"></script>
 
-
-
-
-
-</div>
-
-
-
-
-    <link rel="stylesheet" type="text/css" href="{% static 'js/jvectormap/jquery-jvectormap-1.2.2.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'js/rickshaw/rickshaw.min.css' %}" />
-	<!-- Bottom Scripts -->
-
-
-	<script src="{% static 'js/gsap/main-gsap.js' %}"></script>
-	<script src="{% static 'js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js' %}"></script>
-	<script src="{% static 'js/bootstrap.js' %}"></script>
-	<script src="{% static 'js/joinable.js' %}"></script>
-	<script src="{% static 'js/resizeable.js' %}"></script>
-	<script src="{% static 'js/neon-api.js' %}"></script>
-	<script src="{% static 'js/jvectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
-	<script src="{% static 'js/jvectormap/jquery-jvectormap-europe-merc-en.js' %}"></script>
-	<script src="{% static 'js/jquery.sparkline.min.js' %}"></script>
-	<script src="{% static 'js/rickshaw/vendor/d3.v3.js' %}"></script>
-	<script src="{% static 'js/rickshaw/rickshaw.min.js' %}"></script>
-	<script src="{% static 'js/raphael-min.js' %}"></script>
-	<script src="{% static 'js/morris.min.js' %}"></script>
-	<script src="{% static 'js/toastr.js' %}"></script>
-	<script src="{% static 'js/neon-chat.js' %}"></script>
-	<script src="{% static 'js/neon-custom.js' %}"></script>
-	<script src="{% static 'js/neon-demo.js' %}"></script>
-
+    <!-- Angular -->
     <script src="{% static 'js/angular.min.js' %}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{% static 'js/js-bootstrap/bootstrap.min.js' %}"></script>
+
+    <!-- Plantilla -->
+    <script type="text/javascript">
+        $(document).ready(function() {          
+            $().UItoTop({ easingType: 'easeOutQuart' });
+            
+        });
+    </script>
+
+    <script type="text/javascript" src="{% static 'js/pagina-web/navigation.js' %}"></script>
+    <script src="{% static 'js/pagina-web/jquery.openCarousel.js' %}" type="text/javascript"></script>
+    <script type="text/javascript" src="{% static 'js/pagina-web/easing.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'js/pagina-web/move-top.js' %}"></script>
+
+
+    <script>
+        $(document).ready(function(){
+            $( "login-bar" ).click(function() {
+              $( this ).hide( "drop", { direction: "down" }, "slow" );
+            });
+        });
+    </script>
+
+    <!-- Modulo -->
     <script src="{% static 'js/clientes/clientes.js' %}"></script>
 
+    <!-- Otros -->
 
 </body>
+
 </html>
