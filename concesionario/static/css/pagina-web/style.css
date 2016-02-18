@@ -213,7 +213,7 @@ body {
 }
 .navi li li li a {
     background:#ED6A4A;
-    z-index:0;
+    z-index:10;
     border-top:1px solid #EF7A5D;
 }
 
