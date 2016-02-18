@@ -11,13 +11,19 @@
 
     <link href="{% static 'css/pagina-web/style.css' %}" rel="stylesheet" type="text/css">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs-3.3.5/dt-1.10.10,r-2.0.0,sc-1.4.0/datatables.min.css"/>
-	<script type="text/javascript" src="https://cdn.datatables.net/s/bs-3.3.5/dt-1.10.10,r-2.0.0,sc-1.4.0/datatables.min.js"></script>
-	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="{% static 'js/pagina-web/jquery-1.9.0.min.js' %}"></script> 
+    <script src="{% static 'js/pagina-web/jquery.openCarousel.js' %}" type="text/javascript"></script>
+    <script type="text/javascript" src="{% static 'js/pagina-web/easing.js' %}"></script>
+    <script type="text/javascript" src="{%  static 'js/pagina-web/move-top.js' %}"></script>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/bs-3.3.5/dt-1.10.10,r-2.0.0,sc-1.4.0/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/s/bs-3.3.5/dt-1.10.10,r-2.0.0,sc-1.4.0/datatables.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
     {% block javas %}
-   {% endblock%}
+    {% endblock %}
 
 </head>
 
@@ -30,12 +36,8 @@
                         <a href="index.html"><img src="{% static 'images/pagina-web/logo.png' %}" alt="" /></a>
                     </div>
                         <div class="header_top_right">
-                              <div class="search_box">
-                                <span>Search</span>
-                                <form>
-                                    <input type="text" value=""><input type="submit" value="">
-                                </form>
-                                <div class="clear"></div>
+                            <div id="login-bar" class="banner-desc">
+                                <a href={% url "paginaweb.views.login" %} >Login</a>
                             </div>
                     </div>
                  <div class="clear"></div>
@@ -46,6 +48,13 @@
                         <li>
                             <a href={% url "paginaweb.views.home" %}>Home</a>
                         </li>
+                        <li><a href={% url "reportes.views.usuarios" %}>Usuarios</a></li>
+                        <li><a href={% url "reportes.views.ventas" %}>Ventas</a></li>
+                        <li><a href={% url "reportes.views.inventario" %}>Vehiculos</a></li>
+                        <li><a href={% url "reportes.views.inicio" %}>Ventas sucursales</a></li>
+                        <li><a href={% url "reportes.views.repuesto" %}>Repuestos</a></li>
+                        <li><a href={% url "reportes.views.reparaciones" %}>Reparaciones</a></li>
+                        <li><a href={% url "reportes.views.ordenes" %}>Ordenes</a></li>
                     </ul>
                      <span class="left-ribbon"> </span> 
                      <span class="right-ribbon"> </span>    
@@ -58,79 +67,10 @@
         </div>
    </div>
 
-   <div class="main">
-      <div class="content">
-{% for message in messages %}
-    <div class="content_top">
-    <div class="alert alert-{{ message.tags }}" style="text-align: center;">{{ message }}</div>
-    </div>
-{% endfor %}                    
-          <div class="content_bottom">
-            <div class="wrap">
-                <div class="content-bottom-left">
-                    <div class="categories">
-                           <ul>
-                               <h4>Reportes</h4>
+   {% block contenido %}
+   {% endblock%}
 
-                               <li>
-                                    <a href={% url 'reportes.views.usuarios' %}>
-                                        <span>Reporte de usuarios</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href={% url 'reportes.views.ventas' %}>
-                                        <span>Reporte de ventas</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href={% url 'reportes.views.inventario' %}>
-                                        <span>Reporte inventario</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href={% url 'reportes.views.inicio' %}>
-                                        <span>Reporte ventas sucursales</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href={% url 'reportes.views.repuesto' %}>
-                                        <span>Reporte de repuestos</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href={% url 'reportes.views.reparaciones' %}>
-                                        <span>Reporte de reparaciones</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href={% url 'reportes.views.ordenes' %}>
-                                        <span>Reporte de ordenes</span>
-                                    </a>
-                                </li>
-                                <br> 
-                             </ul>
-                        </div>      
-
-                </div>
-                
-                <div class="content-bottom-right">
-               {% block contenido %}
-                {% endblock%}
-                <br>
-                <br>
-                <br>
-              </div>
-              <div class="clear"></div>
-           </div>
-         </div>
-      </div>
-    </div>
-
-   
-</body>
-
-<footer>
-<div class="footer">
+   <div class="footer">
       <div class="wrap">    
              <div class="copy_right">
                 <p> FreeMotors S.A. Copy rights (2016). All rights Reseverd </p>
@@ -146,19 +86,8 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-        $(document).ready(function() {  
-
-            function click_m($target){
-  			$($target).children().slideToggle(300); 
-}
-
-            
-        });
-    </script>
     <a href="#" id="toTop"> </a>
     <script type="text/javascript" src="{% static 'js/pagina-web/navigation.js' %}"></script>
-	
-</footer>
+</body>
 
 </html>
