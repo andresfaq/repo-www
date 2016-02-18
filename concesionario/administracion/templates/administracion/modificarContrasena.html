@@ -2,6 +2,9 @@
 {% load staticfiles %}
 {% block contenido %}
 
+			<h3>Usuario a cambiar contraseña</h3>
+
+
         <!--PRINCIPAL-->
         <div id="page-wrapper">
 
@@ -25,18 +28,10 @@
 		    {% endfor %}
 		{% endif %}
 		
-			<div class="panel-heading">
-				<div class="panel-title">
-					Usuario a cambiar contraseña
-				</div>
-				
-				<div class="panel-options">
-					<a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
-				</div>
-			</div>
 			
 			<div class="panel-body">
 				<form action="" method="post" class="form-horizontal form-groups-bordered">{% csrf_token %}
+				<br>
 	
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label">Usuario</label>
@@ -45,6 +40,7 @@
 							{{ user_form.usernameChoice }}
 						</div>
 					</div>
+					<br>
 
 					<div class="form-group">
 						<label for="field-1" class="col-sm-3 control-label">Contraseña</label>
@@ -53,6 +49,7 @@
 							{{ user_form.password }}
 						</div>
 					</div>
+					<br>
 						<input type="submit" class="btn btn-blue btn-icon" value="Cambiar contraseña">					
 					</form>
 				
