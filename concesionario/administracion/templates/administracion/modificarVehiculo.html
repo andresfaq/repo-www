@@ -32,18 +32,50 @@
 				<form action="" method="post" role="form" class="form-horizontal form-groups-bordered">{% csrf_token %}
 					
 					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label">Nombre</label>
+						<label for="field-1" class="col-sm-3 control-label">Modelo</label>
 						
 						<div class="col-sm-5">
-							{{ user_form.nombre }}
+							{{ user_form.modelo }}
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label for="field-1" class="col-sm-3 control-label">Dirección</label>
+						<label for="field-1" class="col-sm-3 control-label">Marca</label>
 						
 						<div class="col-sm-5">
-							{{ user_form.direccion }}
+							{{ user_form.marca }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Descripcion</label>
+						
+						<div class="col-sm-5">
+							{{ user_form.descripcion }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Color</label>
+						
+						<div class="col-sm-5">
+							{{ user_form.color }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Cantidad</label>
+						
+						<div class="col-sm-5">
+							{{ user_form.cantidad }}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Precio</label>
+						
+						<div class="col-sm-5">
+							{{ user_form.precio_unidad }}
 						</div>
 					</div>
 					

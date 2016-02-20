@@ -384,10 +384,34 @@ def crearVehiculo(request):
         # formulario inicial
         user_form = VehiculoForm()
 
-    return render(request, 'administracion/crearVehiculo.html', { 'user_form': user_form})
+    return render(request, 'administracion/crearVehiculo.html', {'user_form': user_form})
 @login_required
 def modificarVehiculo(request,idX):
-    return render(request, 'administracion/modificarVehiculo.html')
+    if request.method == 'POST':
+        user_form = VehiculoForm(request.POST)
+        if user_form.is_valid():
+            vehiculo = user_form
+            vehiculo.marca = user_form.cleaned_data['marca']
+            vehiculo.modelo = user_form.cleaned_data['modelo']
+            vehiculo.descripcion = user_form.cleaned_data['descripcion']
+            #vehiculo.imagen = user_form.cleaned_data['imagen']
+            vehiculo.color = user_form.cleaned_data['color']
+            vehiculo.cantidad = user_form.cleaned_data['cantidad']
+            vehiculo.precio_unidad = user_form.cleaned_data['precio_unidad']
+            VehiculoForm.actualizar(vehiculo,idX)
+            messages.success(request,"El vehiculo "+vehiculo.modelo+" se ha actualizado satisfactoriamente")
+            usernameText = vehiculo.modelo + " - " + vehiculo.marca
+
+    else:
+        
+        vehiculo = VehiculoForm.get(idX)
+        user_form = VehiculoForm(instance=vehiculo)
+        user_form.fields['color'] = VehiculoForm.setColor(vehiculo)
+        user_form.fields['cantidad'] = VehiculoForm.setCantidad(vehiculo)
+        user_form.fields['precio_unidad'] = VehiculoForm.setPrecio(vehiculo)
+        usernameText = vehiculo.modelo + " - " + vehiculo.marca
+
+    return render(request, 'administracion/modificarVehiculo.html', { 'user_form': user_form, 'usernameText': usernameText})
 
 @login_required
 def modificarVehiculoSeleccion(request):
@@ -395,9 +419,8 @@ def modificarVehiculoSeleccion(request):
         user_form_aux = FormVehiculoModificar(request.POST)
         
         if user_form_aux.is_valid():
-            return redirect('/Hey/')
             vehiculo = user_form_aux.cleaned_data['vehiculoChoice']
-            #return redirect('/administracion/modificarSucursal/' + str(vehiculo.codigo_vehiculo) +'/')
+            return redirect('/administracion/modificarVehiculo/' + str(vehiculo.codigo_vehiculo) +'/')
         else:
             messages.warning(request, "No has diligenciado correctamente todos los campos")
 

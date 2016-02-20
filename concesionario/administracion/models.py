@@ -46,7 +46,7 @@ class Sucursal(models.Model):
         verbose_name_plural = 'Sucursales'
 
     codigo_sucursal = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=100, null=False)
+    nombre = models.CharField(max_length=100, null=False,unique=True)
     direccion = models.CharField(max_length=150, null=False)
 
     def __str__(self):
