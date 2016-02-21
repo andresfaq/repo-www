@@ -46,7 +46,7 @@ class Sucursal(models.Model):
         verbose_name_plural = 'Sucursales'
 
     codigo_sucursal = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=100, null=False)
+    nombre = models.CharField(max_length=100, null=False,unique=True)
     direccion = models.CharField(max_length=150, null=False)
 
     def __str__(self):
@@ -141,6 +141,9 @@ class Vehiculo(models.Model):
     descripcion = models.CharField(max_length=200, null=True, blank=True)
     imagen = models.ImageField(upload_to='vehiculos/') # Ver settings.py MEDIA_ROOT para ver el directorio donde se guardan las imagenes
     cart = models.IntegerField(null=False, default=0)
+
+    def __str__(self):
+        return str(self.modelo + " - " + self.marca)
 
 
 class Venta(models.Model):

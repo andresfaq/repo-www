@@ -1,7 +1,7 @@
 {% extends 'administracion/base.html' %}
 {% load staticfiles %}
 {% block contenido %}
-
+<h3>Creación de sucursal</h3>
         <div id="page-wrapper">
 
             <div class="container-fluid" id="contenedor">
@@ -23,12 +23,10 @@
 		        </div>
 		    {% endfor %}
 		{% endif %}
+
+		
 		
 			<div class="panel-heading">
-				<div class="panel-title">
-					Datos de la sucursal
-				</div>
-				
 				<div class="panel-options">
 					<a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
 				</div>
@@ -54,8 +52,9 @@
 							{{ user_form.direccion }}
 						</div>
 					</div>
+					
 
-					<input type="submit" class="btn btn-default btn-icon" value="Crear sucursal">
+					<input type="submit" class="mybutton" value="Crear sucursal">
 						
 						<i class="entypo-user-add"></i>
 					</input>

@@ -6,3 +6,19 @@
 #consultaPlacas {
     padding: 20px;
 }
+
+.col-centered{
+
+    float: none;
+    margin: 0 auto;
+
+}
+
+.contenido{
+    background-color: #23272a;
+    float: none;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}

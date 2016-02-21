@@ -13,6 +13,9 @@ from administracion.views import modificarContrasena
 from administracion.views import crearSucursal
 from administracion.views import modificarSucursal
 from administracion.views import modificarSucursalSeleccion
+from administracion.views import crearVehiculo
+from administracion.views import modificarVehiculo
+from administracion.views import modificarVehiculoSeleccion
 
 from tastypie.api import Api
 from administracion.api import UserResource, OrdenResource, DatosVehiculoResource, GerenteResource, JefeTallerResource, VendedorResource, DatosOrdenMovilResource, ClienteResource, DatosVentasClienteResource, DatosRevisionesVehiculoResource
@@ -43,5 +46,8 @@ urlpatterns = [url(r'^$', inicio),
 			   url(r'^recuperarUsuario/$', recuperarUsuario, name='recuperarUsuario'),
 			   url(r'^crearSucursal/$', crearSucursal, name='crearSucursal'),
 			   url(r'^modificarSucursal/(?P<idX>\d+)/$', modificarSucursal, name='modificarSucursal'),
-			   url(r'^modificarSucursalSeleccion/$', modificarSucursalSeleccion, name='modificarSucursalSeleccion')
+			   url(r'^modificarSucursalSeleccion/$', modificarSucursalSeleccion, name='modificarSucursalSeleccion'),
+			   url(r'^crearVehiculo/$', crearVehiculo, name='crearVehiculo'),
+			   url(r'^modificarVehiculo/(?P<idX>\d+)/$', modificarVehiculo, name='modificarVehiculo'),
+			   url(r'^modificarVehiculoSeleccion/$', modificarVehiculoSeleccion, name='modificarVehiculoSeleccion')
 			   ]

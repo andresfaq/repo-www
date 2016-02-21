@@ -102,7 +102,7 @@ body {
 .search_box form input[type="submit"] {
 	border: none;
 	cursor: pointer;
-	background: url(http://localhost:8000/static/images/pagina-web/search.png) no-repeat center;
+	background: url(../../images/pagina-web/search.png) no-repeat center;
 	display:inline-block;
 	width:24px;
 	height:24px;
@@ -122,7 +122,7 @@ body {
 	top: 8px;
 	width: 40px;
 	height:60px;
-	background: url(http://localhost:8000/static/images/pagina-web/left-fold.png) no-repeat;
+	background: url(../../images/pagina-web/left-fold.png) no-repeat;
 	}
 .navigation span.right-ribbon{
 	position: absolute;
@@ -130,7 +130,7 @@ body {
 	top: 8px;
 	width: 40px;
 	height:60px;
-	background: url(http://localhost:8000/static/images/pagina-web/right-fold.png) no-repeat;
+	background: url(../../images/pagina-web/right-fold.png) no-repeat;
 }
 .toggleMenu {
     display:  none;
@@ -139,27 +139,27 @@ body {
     width:95%;
      border-top:1px solid #DB3C15;
      border-bottom:1px solid #DB3C15;
-     background:url("http://localhost:8000/static/images/pagina-web/nav-icon.png") no-repeat 98% center;
+     background:url("../../images/pagina-web/nav-icon.png") no-repeat 98% center;
 }
-.nav {
+.navi {
     list-style: none;
-     *zoom: 1;
+     zoom: 1;
      background:#e44f2b;
      border-bottom:1px solid #DB3C15;
 }
-.nav:before,
-.nav:after {
+.navi:before,
+.navi:after {
     content: " "; 
     display: table; 
 }
-.nav:after {
+.navi:after {
     clear: both;
 }
-.nav ul {
+.navi ul {
     list-style: none;
     width:11em;
 }
-.nav a {
+.navi a {
     padding:16px 33px;
     color:#ffb29f;
     border-top:1px solid #DB3C15;
@@ -168,38 +168,38 @@ body {
 	-o-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
-.nav a:hover {
-	color:#FFF;
+.navi a:hover {
+	color: #ffffff;
 }
-.nav li {
+.navi li {
     position: relative;
 }
-.nav > li {
+.navi > li {
     float: left;
 }
-.nav > li:first-child,.nav > li:last-child {
+.navi > li:first-child,.navi > li:last-child {
 	background-image:none;
 }
-.nav > li {
-    background-image: url("http://localhost:8000/static/images/pagina-web/line-divider.png");
+.navi > li {
+    background-image: url("../../images/pagina-web/line-divider.png");
     background-repeat: no-repeat;
     background-position:left;
 }
-.nav > li > a {
+.navi > li > a {
     display: block;
 }
-.nav li  ul {
+.navi li  ul {
     position: absolute;
     left: -9999px;
 }
-.nav > li.hover > ul {
+.navi > li.hover > ul {
     left: 0;
 }
-.nav li li.hover ul {
+.navi li li.hover ul {
     left: 100%;
     top: 0;
 }
-.nav li li a {
+.navi li li a {
     display: block;
     background:#EA5E3C;
     position: relative;
@@ -208,12 +208,12 @@ body {
     padding:10px;
     font-size:15px;
 }
-.nav li li a:hover {
+.navi li li a:hover {
 	  background:#DB502E;
 }
-.nav li li li a {
+.navi li li li a {
     background:#ED6A4A;
-    z-index:200;
+    z-index:10;
     border-top:1px solid #EF7A5D;
 }
 
@@ -221,29 +221,28 @@ body {
     .active {
         display: block;
     }
-    .nav > li {
+    .navi > li {
         float: none;
     }
-    .nav > li > .parent {
+    .navi > li > .parent {
         background-position: 95% 50%;
     }
-    .nav li li .parent {
-        background-image: url("http://localhost:8000/static/images/pagina-web/downArrow.png");
-        background-repeat: no-repeat;
-        background-position: 95% 50%;
-    }
-    .nav ul {
+    .navi li li .parent {
+		background: url("../../images/pagina-web/downArrow.png") no-repeat 95% 50%;
+	}
+    .navi ul {
         display: block;
         width: 100%;
     }
-   .nav > li.hover > ul , .nav li li.hover ul {
+   .navi > li.hover > ul , .navi li li.hover ul {
         position: static;
     }
-    .nav > li {
-    	 background-image: url("http://localhost:8000/static/images/pagina-web/nav-arrow.png");
+
+	.navi > li {
+    	 background-image: url("../../images/pagina-web/nav-arrow.png");
     	 background-position:96% 55%;
     }
-    .nav > li > .parent{
+    .navi > li > .parent{
     	background-position:96% 55%;
    }
 
@@ -307,13 +306,13 @@ body {
 }
 /** Content **/
 .content_top{
-  padding:2em 0;
+  /*padding:2em 0;*/
   background:#FFF;
 }
 .content_top h3{
 	font-size:25px;
 	color:#e44f2b;
-	padding-bottom:15px;
+	/*padding-bottom:15px;*/
 }
 .line{
   display:block;
@@ -338,7 +337,7 @@ body {
 	width:30px;
 	height:30px;
 	text-align:center;
-	background:#e44f2b url("http://localhost:8000/static/images/pagina-web/arrows.png") no-repeat;
+	background:#e44f2b url("../../images/pagina-web/arrows.png") no-repeat;
 	border-radius:2em;
 	-webkit-border-radius:2em;
 	-moz-border-radius:2em;
@@ -440,7 +439,7 @@ body {
 	font-size:15px;
 	padding:10px 15px;
     color: #9C9C9C;
-    background:url(http://localhost:8000/static/images/pagina-web/drop_arrow.png) no-repeat 0;
+    background:url(../../images/pagina-web/drop_arrow.png) no-repeat 0;
     border-bottom:1px solid #D6D6D6;
 }
 .categories li:last-child a{
@@ -489,7 +488,7 @@ body {
 	background:#D03D1A !important;
 }
 .add-banner2{
-	background:url("http://localhost:8000/static/images/pagina-web/banner-bg.png") repeat-x;
+	background:url("../../images/pagina-web/banner-bg.png") repeat-x;
 }
 .add-banner2 h4{
 	color:#23272a;
@@ -609,7 +608,7 @@ body {
 }
 .product-articles p a{
 	color:#e44f2b;
-	font-size;14px;
+	font-size: 14px;
 }
 .product-articles p a:hover{
 	text-decoration:underline;
@@ -670,7 +669,7 @@ body {
 	height:50px;
 	border: none;
 	text-indent: 100%;
-	background: url(http://localhost:8000/static/images/pagina-web/arrow_up.png) no-repeat right top;
+	background: url(../../images/pagina-web/arrow_up.png) no-repeat right top;
 }
 
 /*  Preview  ============================================================================= */
@@ -843,10 +842,10 @@ body {
 	text-decoration:none;
 }
 .wish-list li.wish{
-	background:url(http://localhost:8000/static/images/pagina-web/wishlist.png) no-repeat 0;
+	background:url(../../images/pagina-web/wishlist.png) no-repeat 0;
 }
 .wish-list li.compare{
-	background:url(http://localhost:8000/static/images/pagina-web/compare.png) no-repeat 0;
+	background:url(../../images/pagina-web/compare.png) no-repeat 0;
 	margin-right:0;
 }
 /* Checkbox Buttons */
@@ -920,7 +919,7 @@ body {
 	width:27px;
 	height:27px;
 	display:block;
-	background:url("../images/social-share.png") no-repeat;
+	background:url("../../images/social-share.png") no-repeat;
 }
 .social-share li a.share-face {
 	background-position: 0px 0px; 
@@ -1026,7 +1025,7 @@ body {
 	color: #333;
 }
 .input-box {
-	background: url(http://localhost:8000/static/images/pagina-web/tag.png) no-repeat 0 8px;
+	background: url(../../images/pagina-web/tag.png) no-repeat 0 8px;
 	padding-left: 35px;
 }
 .input-box input[type="text"] {
@@ -1174,7 +1173,7 @@ body {
 .rating > ul > li {
 	display:inline-block;
 	margin-left:2px;
-	background:url("http://localhost:8000/static/images/pagina-web/price-rating.png") no-repeat;
+	background:url("../../images/pagina-web/price-rating.png") no-repeat;
 	background-position:-20px 0px;
 	width:18px;
 	height:18px;
@@ -1264,6 +1263,7 @@ body {
 .mybutton {
 	font-size:16px;
 	padding:10px 25px;
+	/*margin-left: 30%;*/
 	font-family: 'Ubuntu Condensed', sans-serif;
 	background:#e44f2b;
 	color: #FFF;
@@ -1275,7 +1275,7 @@ body {
 	-moz-transition: all 0.5s ease-in-out;
 	-o-transition: all 0.5s ease-in-out;
 	transition: all 0.5s ease-in-out;
-	float:right;
+	float:left;
 	-webkit-apperance:none;
 	position:relative;
 }
@@ -1301,19 +1301,19 @@ body {
 .wrap {
 		width: 95%;
 	}
-	.nav a{
+	.navi a{
 	  padding:16px 20px;
 	}
 	.navigation{
 		margin:0 30px;
 	}
-	.nav li li a{
+	.navi li li a{
 		font-size:14px;
 	}
-	.nav ul{
+	.navi ul{
 		width:9em;
 	}
-	.nav > li > a{
+	.navi > li > a{
 		font-size:14px;
 	}
 	.slider-img img{
@@ -1339,11 +1339,11 @@ body {
 }
 @media only screen and (max-width: 800px) {
 
-	.nav {
+	.navi {
 		border-bottom:none;
 		border-top:none;
 	}
-	.nav ul{
+	.navi ul{
 		width:100%;
 	}
 	.header_bottom{
@@ -1361,7 +1361,7 @@ body {
 	.header_top{
 		padding-bottom:10px;
    }
-   .nav > li > a{
+   .navi > li > a{
    	padding:10px;
    }
    .content-bottom-left,.content-bottom-right {
@@ -1375,7 +1375,7 @@ body {
    	 margin-top:15px;
    }
    .content_top{
-   	padding:1em 0;
+   	/*padding:1em 0;*/
    }
    .add-banner{
    	 padding:1% 5%;

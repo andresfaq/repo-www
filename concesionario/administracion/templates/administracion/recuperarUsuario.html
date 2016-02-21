@@ -2,6 +2,8 @@
 {% load staticfiles %}
 {% block contenido %}
 
+<h3>Recuperación de usuarios</h3>
+
         <!--PRINCIPAL-->
         <div id="page-wrapper">
 
@@ -26,15 +28,6 @@
 		    {% endfor %}
 		{% endif %}
 		
-			<div class="panel-heading">
-				<div class="panel-title">
-					Usuario a recuperar
-				</div>
-				
-				<div class="panel-options">
-					<a href="#" data-rel="reload"><i class="entypo-arrows-ccw"></i></a>
-				</div>
-			</div>
 			
 			<div class="panel-body">
 				
@@ -54,7 +47,7 @@
 	
 	</div>
 	<div class="col-sm-5 ">
-		<input type="submit" class="btn btn-danger btn-icon" value="Recuperar usuario">
+		<input type="submit" class="mybutton" value="Recuperar usuario">
 			
 	</div>
 </form>
@@ -70,24 +63,4 @@
 
 	</div>
 
-	<div class="modal fade" id="confirmar-usuario" data-backdrop="static">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			
-			<div class="modal-header">
-				<h4 class="modal-title">Eliminación de usuario exitosa</h4>
-			</div>
-			
-			<div class="modal-body">
-			
-				Su usario fue eliminado con éxito... O tal vez no.
-				
-			</div>
-			
-			<div class="modal-footer">
-				<button type="button" class="btn btn-info" data-dismiss="modal">Finalizar</button>
-			</div>
-		</div>
-	</div>
-</div>
 {% endblock%}

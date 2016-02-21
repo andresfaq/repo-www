@@ -1,0 +1,67 @@
+{% extends 'administracion/base.html' %}
+{% load staticfiles %}
+{% block contenido %}
+
+<h3>Modificación de vehiculo</h3>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid" id="contenedor">
+
+<form action="" method="post" class="row">{% csrf_token %}
+<div class="col-md-12">
+		
+		<div class="panel panel-primary" data-collapsed="0">
+		{% if user_form_aux.errors %}
+		    {% for field in user_form_aux %}
+		        {% for error in field.errors %}
+		            <div class="alert alert-error">
+		                <strong>{{field.name}} {{ error|escape }}</strong>
+		            </div>
+		        {% endfor %}
+		    {% endfor %}
+		    {% for error in user_form_aux.non_field_errors %}
+		        <div class="alert alert-error">
+		            <strong>{{field.name}} {{ error|escape }}</strong>
+		        </div>
+		    {% endfor %}
+		{% endif %}
+			
+			<div class="panel-body">
+				
+				
+					<div class="form-group">
+						<label for="field-1" class="col-sm-3 control-label">Vehiculo</label>
+						
+						<div class="col-sm-5">
+							{{ user_form_aux.vehiculoChoice }}
+						</div>
+						
+
+						
+					</div>
+					
+				
+			</div>
+		
+		</div>
+	
+	</div>
+	<div class="col-sm-5 ">
+						<input type="submit" class="mybutton" value="Consultar">
+						
+						</div>
+</form>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+<br />
+
+</div>
+
+	</div>
+
+
+{% endblock%}

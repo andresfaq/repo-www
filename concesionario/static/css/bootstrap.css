@@ -1477,7 +1477,7 @@ pre code {
   }
 }
 table {
-  max-width: 100%;
+  max-width: 100%;/* JAMAS TOCAR EL COLOR DE TRANSPARENCIA */
   background-color: transparent;
 }
 th {
@@ -7229,6 +7229,7 @@ lesshat-selector {
   background-clip: padding-box;
 }
 .panel-primary {
+  color:#000000;
   border-color: #ebebeb;
   -webkit-border-radius: 3px;
   -webkit-background-clip: padding-box;
@@ -7236,11 +7237,12 @@ lesshat-selector {
   -moz-background-clip: padding;
   border-radius: 3px;
   background-clip: padding-box;
+  background-color: #ebebeb;
 }
 .panel-primary > .panel-heading {
-  color: #373e4a;
-  background-color: #ffffff;
+  color: #000000;
   border-color: #ebebeb;
+  background-color: #ebebeb;
 }
 .panel-primary > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #ebebeb;

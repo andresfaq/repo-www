@@ -9,8 +9,8 @@
 
    <script>
             var chart;
-            var colores = ["#FF0F00", "#FF9E01", "#F8FF01", "#04D215", "#0D8ECF", "#2A0CD0",
-             "#8A0CCF", "#CD0D74", "#754DEB", "#DDDDDD", "#999999", "#333333", "#000000"];
+            var colores = ["#FF0F00", "FF6600", "#FF9E01", "FCD202", "#F8FF01", "B0DE09", "#04D215", "#0D8ECF", "#2A0CD0",
+             "#8A0CCF", "#CD0D74", "#754DEB", "#DDDDDD", "#999999", "#333333"];
 
             var chartData = [
 
@@ -20,7 +20,7 @@
 
                       {% if  vendedor.num_ventas > vendedores.count  %}
                           
-                      "color" : colores[(vendedores.count - 1))]}
+                      "color" : colores[(parseInt('{{vendedor.num_ventas}}') -1)]}
 
                       {% endif %}
                       
