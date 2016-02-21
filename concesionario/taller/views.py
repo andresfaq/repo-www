@@ -134,6 +134,34 @@ def agregarRepuestosVehiculo(request):
             return JsonResponse(algo,safe=False)
     return HttpResponse()
 
+@login_required
+def verOrdenVehiculo(request):
+    print("llego a ver orden")
+    if request.method == 'POST':
+        if request.is_ajax():
+            codigoOrden = request.POST.get('codigo_Orden')
+            codigoRevision = request.POST.get('codigo_Revision')
+            orden = Orden.objects.select_related('codigo_jefe_taller').get(codigo_orden=codigoOrden)
+            repOrden = RepuestosPorOrden.objects.select_related('codigo_orden','codigo_repuesto').filter(codigo_orden=codigoOrden)
+            arrayR = []
+
+            for rep in repOrden:
+                repuesto = {}
+                repuesto['repuestoN']= rep.codigo_repuesto.nombre
+                repuesto['repuestoDes']= rep.codigo_repuesto.descripcion
+                repuesto['cantidadD']= rep.cantidad
+                arrayR.append(repuesto)
+
+            revisionV = RevisionVehiculo.objects.get(codigo_revision=codigoRevision)
+            contenido={'sucursal': str(orden.sucursal),
+                       'diagnostico': str(orden.diagnostico),
+                       'jefeTF': str(orden.codigo_jefe_taller.first_name),
+                       'jefeTL': str(orden.codigo_jefe_taller.last_name),
+                       'fechaCA': str(revisionV.fecha_cambio_aceite),
+                       'listaRep': arrayR}
+
+            return JsonResponse(contenido,safe=False)
+    return HttpResponse()
 
 '''
 @login_required

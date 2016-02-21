@@ -4,6 +4,11 @@
  *
 */
 
+
+.labelInfo{
+        color: #90949e;
+}
+
 input[type=number]{
     width: 40%;
 }

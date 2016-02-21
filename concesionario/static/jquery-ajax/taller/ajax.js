@@ -123,14 +123,66 @@ $(document).ready(function() {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
        }
     });
-    $(document).on("click","btVerRevision",function(){
+    $(document).on("click",".btVerRevision",function(){
         var estado=$(this).parents("tr").find("td").get(5);
         var codigoOrden=$(this).parents("tr").find("td").get(2);
+        var codigoRevision=$(this).parents("tr").find("td").get(1);
         var placa=$(this).parents("tr").find("td").get(0);
+        var fechaRev=$(this).parents("tr").find("td").get(3);
+        var km=$(this).parents("tr").find("td").get(4);
 
+        var txtRevision=$(codigoRevision).text();
         var txtEstado=$(estado).text();
         var txtOrden=$(codigoOrden).text();
         var txtPlaca=$(placa).text();
+        var txtfechaRev=$(fechaRev).text();
+        var txtKm=$(km).text();
+
+        $('#lbNumeroOrdenRev').text(txtOrden);
+        $('#lbNumeroPlacaOrdenRev').text(txtPlaca);
+        $('#estadoOrdenRev').text(txtEstado);
+        $('#fechaOrdenRev').text(txtfechaRev);
+        $('#kmOrdenRev').text(txtKm);
+        $.ajax(
+                {
+                    url:'/taller/carrosTaller/verOrdenVehiculo/',
+                    type:'post',
+                    datatype:'json',
+                    data: {'codigo_Orden': txtOrden,
+                           'codigo_Revision':txtRevision},
+
+                    success:function(data){
+                        //bodyRepuestoOR
+                        //console.log("dato con parse"+data.sucursal);
+                        var sucursal=data.sucursal;
+                        var diagnostico=data.diagnostico;
+                        var jefeTaller=data.jefeTF +" "+data.jefeTL;
+                        var fechaCA=data.fechaCA;
+                        var listaRepuestos=data.listaRep;
+                        var body=";"
+                        for(var i=0; i<listaRepuestos.length;i++){
+                            body+="<tr>";
+                            body+="<td>"+listaRepuestos[i].repuestoN+"</td>";
+                            body+="<td>"+listaRepuestos[i].repuestoDes+"</td>";
+                            body+="<td>"+listaRepuestos[i].cantidadD+"</td>";
+                            body+="</tr>";
+                        }
+                        $('#sucursalOrdenRev').text(sucursal);
+                        $('#aceiteOrdenRev').text(fechaCA);
+                        $('#diagnosticoOrdenRev').text(diagnostico);
+                        $('#jefeOrdenRev').text(jefeTaller);
+                        $('#bodyRepuestoOR').html(body);
+                        $('#verRevisionModal').appendTo("body").modal('show');
+                        console.log("buen envio");
+                    },
+                    error:function(data){
+                       // $('#lbMensaje').text("Error al registrar repuestos en la orden "+codigoOrden);
+                       //   $("#lbMensaje").css("color","Tomato");
+                       // $('#revisionModal').appendTo("body").modal('hide');
+                        console.log("error envio"+data.error);
+                    }
+                }
+        );
     });
     $(document).on("click",".btmodificarRevision",function(){
         var estado=$(this).parents("tr").find("td").get(5);
@@ -143,6 +195,7 @@ $(document).ready(function() {
 
         $('#lbNumeroOrden').text(txtOrden);//we set text in the labels
         $('#lbNumeroPlaca').text(txtPlaca);
+
 
         if(txtEstado.toLowerCase()=="Cancelado".toLowerCase()){
             $('#id_estado').val('C');
