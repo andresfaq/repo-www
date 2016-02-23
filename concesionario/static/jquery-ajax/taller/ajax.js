@@ -123,6 +123,13 @@ $(document).ready(function() {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
        }
     });
+    $("#repuestosTaller").DataTable({
+      responsive:true,
+      "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+       }
+    });
+
     $(document).on("click",".btVerRevision",function(){
         var estado=$(this).parents("tr").find("td").get(5);
         var codigoOrden=$(this).parents("tr").find("td").get(2);
@@ -275,7 +282,65 @@ $(document).ready(function() {
     });
 
     //*****************************************************************
-    
+    $(document).on("click",".btModificarRepuesto",function() {
+        var nombreR=$(this).parents("tr").find("td").get(1);
+        var descripcion=$(this).parents("tr").find("td").get(2);
+        var cantidad=$(this).parents("tr").find("td").get(3);
+        var precio=$(this).parents("tr").find("td").get(4);
+        var codigo=$(this).parents("tr").find("td").get(0);
+
+        var txtNombreR=$(nombreR).text();
+        var txtDescripcion=$(descripcion).text();
+        var txtCantidad=$(cantidad).text();
+        var txtPrecio=$(precio).text();
+        var txtCodigo=$(codigo).text();
+
+
+        $('#inpNombre').val(txtNombreR);
+        $('#inpDescripcion').val(txtDescripcion);
+        $('#inpCantidad').val(txtCantidad);
+        $('#inpPrecio').val(txtPrecio);
+        $('#lbCodigoR').text(txtCodigo);
+
+        $('#repuestoModal').appendTo("body").modal('show');
+    });
+
+    $('#btEditarRepuesto').click(function(e){
+        var nombre=$('#inpNombre').val();
+        var descripcion=$('#inpDescripcion').val();
+        var cantidad=$('#inpCantidad').val();
+        var precio=$('#inpPrecio').val();
+        var codigoR=$('#lbCodigoR').text();
+
+         $.ajax(
+                {
+                    url:'/taller/repuestos/modificar/',
+                    type:'post',
+                    datatype:'json',
+                    data: {'nombre': nombre,
+                           'descripcion':descripcion,
+                           'cantidad':cantidad,
+                           'precio':precio,
+                           'codigo':codigoR},
+
+                    success:function(data){
+                        $('#lbMensaje').text("El repuesto ha sido modificado correctamente");
+                        $("#lbMensaje").css("color","MediumSeaGreen ");
+                        $('#repuestoModal').appendTo("body").modal('hide');
+                        console.log("buen");
+                    },
+                    error:function(data){
+                        $('#lbMensaje').text("Error no se pudo modificar el repuesto ");
+                        $("#lbMensaje").css("color","Tomato");
+                        $('#repuestoModal').appendTo("body").modal('hide');
+                        console.log("error ljsdlfjsldfj"+data.error);
+                    }
+                }
+        );
+    });
+
+
+   //******************************************************************
 });
 
 

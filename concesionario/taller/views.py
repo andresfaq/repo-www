@@ -199,6 +199,40 @@ def agregarRefaccion(request):
     else:
        return render(request, 'taller/agregarRepuesto.html')
 
+
+@login_required
+def verRepuestos(request):
+    print("llego a repuestos")
+    repuestosInfo = InventarioRepuesto.objects.select_related('codigo_repuesto')
+    args = {}
+    args.update(csrf(request))
+    args['repuestos']= repuestosInfo
+    return render(request,'taller/repuestos.html',args)
+
+def modificarRepuesto(request):
+    if request.method == 'POST':
+        if request.is_ajax():
+            nombre = request.POST.get('nombre')
+            descripcion = request.POST.get('descripcion')
+            cantidad = request.POST.get('cantidad')
+            precio = request.POST.get('precio')
+            codigo = request.POST.get('codigo')
+            print("datos",nombre,codigo)
+            repuesto = Repuesto.objects.get(codigo_repuesto=codigo)
+            repuesto.nombre = nombre
+            repuesto.descripcion = descripcion
+            repuesto.save()
+
+            inventarioR = InventarioRepuesto.objects.get(codigo_repuesto=repuesto)
+            inventarioR.cantidad = cantidad
+            inventarioR.precio_unidad = precio
+            inventarioR.save()
+
+            contenido={'c':True}
+            return JsonResponse(contenido,safe=False)
+
+    return render(request,'taller/repuestos.html')
+
 '''
 @login_required
 def busquedaCodigoVenta(request):
