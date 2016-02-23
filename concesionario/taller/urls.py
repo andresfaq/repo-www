@@ -7,7 +7,8 @@ urlpatterns = [url(r'^$', views.inicio, name='inicio_taller'),
                url(r'^busquedaCodigoVenta/$', views.busquedaCodigoVenta, name='busquedaCodigoVenta'),
                url(r'^carrosTaller/$', views.mostrarVehiculosTaller, name='mostrarVehiculosTaller'),
                url(r'^carrosTaller/agregarRepuestosVehiculo/$', views.agregarRepuestosVehiculo, name='agregarRepuestosVehiculo'),
-               url(r'^carrosTaller/verOrdenVehiculo/$', views.verOrdenVehiculo, name='verOrdenVehiculo'), ]
+               url(r'^carrosTaller/verOrdenVehiculo/$', views.verOrdenVehiculo, name='verOrdenVehiculo'),
+               url(r'^agregarRefaccion/$', views.agregarRefaccion, name='agregarRefaccion'), ]
 
 # urlpatterns = patterns('concesionario.taller.views',
 #                        url(r'^$', views.inicio),

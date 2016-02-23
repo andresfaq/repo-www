@@ -30,19 +30,9 @@ class tallerForm(forms.Form):
         dato = int(self.cleaned_data['codigoVenta'])
         return dato
 
-
-    '''forms.ModelChoiceField(queryset=JefeTaller.objects.all().order_by('first_name'),
-                                       to_field_name='codigo_jefe_taller',label="Jefe Taller encargado")
-    jefeTaller= forms.ModelChoiceField(queryset=JefeTaller.objects.all().order_by('first_name').values_list('first_name',flat=True),
-                                       to_field_name="codigo_jefe_taller",
-                                       empty_label="Seleccione Jefe encargado",
-                                       widget=forms.Select(attrs={'onchange': 'this.form.submit();'}))
-    '''
-
-
 '''
-    class Meta:
-        model = Vehiculo
-        fields = '__all__'
+class tallerRepuesto(forms.Form):
+    inpNombre= forms.CharField(widget=forms.TextInput())
+    inpDescripcion= forms.CharField(widget=forms.TextInput())
+    inpDescripcion= forms.CharField(widget=forms.TextInput())
 '''
-

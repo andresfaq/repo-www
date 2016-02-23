@@ -163,6 +163,42 @@ def verOrdenVehiculo(request):
             return JsonResponse(contenido,safe=False)
     return HttpResponse()
 
+
+@login_required
+def agregarRefaccion(request):
+    if request.method == 'POST':
+        print("hola entro en el post")
+        nombre = request.POST.get('inpNombre')
+        descripcion = request.POST.get('inpDescripcion')
+        cantidad = request.POST.get('inpCantidad')
+        precio = request.POST.get('inpPrecio')
+
+        if((nombre != "") and (descripcion != "") and (cantidad != "") and (precio != "")):
+            print("entro en el if")
+            nuevoRepuesto = Repuesto(nombre=nombre,descripcion=descripcion)
+            nuevoRepuesto.save()
+            nuevoInventario = InventarioRepuesto(codigo_repuesto=nuevoRepuesto,
+                                                 cantidad=cantidad,precio_unidad=precio)
+            nuevoInventario.save()
+            args = {}
+            args.update(csrf(request))
+            args['mensajeRep'] = 'Repuesto registrado exitosamente'
+            args['inpNombre'] =""
+            args['inpDescripcion'] =""
+            args['inpCantidad'] = 0
+            args['inpPrecio'] = 0
+            return render(request, 'taller/agregarRepuesto.html',args)
+
+        else:
+            args = {}
+            args.update(csrf(request))
+            args['mensajeRep'] = 'Error al registrar Repuesto, verifique informacion'
+            return render(request, 'taller/agregarRepuesto.html',args)
+
+
+    else:
+       return render(request, 'taller/agregarRepuesto.html')
+
 '''
 @login_required
 def busquedaCodigoVenta(request):
