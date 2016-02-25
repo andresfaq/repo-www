@@ -2,7 +2,7 @@ from django import forms
 from paginaweb.static import *
 import datetime
 from functools import partial
-from administracion.models import Orden,JefeTaller
+from administracion.models import Orden,JefeTaller, Venta, RevisionVehiculo, Orden
 
 class tallerForm(forms.Form):
 
@@ -29,6 +29,26 @@ class tallerForm(forms.Form):
     def clean_codigoVenta(self):
         dato = int(self.cleaned_data['codigoVenta'])
         return dato
+
+    def getEstado(idX):
+            #placa(Venta) -> codigo_venta(Venta)-> codigo_venta_id(RevisionVehiculo) -> codigo_orden_id(RevisionVehiculo) -> codigo_orden(Orden) -> estado(Orden)
+        carros=RevisionVehiculo.objects.select_related('codigo_orden','codigo_venta')
+        estado = "None"
+
+        for carro in carros:
+            if carro.codigo_venta.placa == idX:
+                estado = carro.codigo_orden.estado
+
+        if estado == 'T':
+            estado = 'Terminado'
+        elif estado == 'C':
+            estado = 'Cancelado'
+        elif estado == 'E':
+            estado = 'En espera'
+        else:
+            estado = 'ERROR'
+        return estado
+
 
 '''
 class tallerRepuesto(forms.Form):

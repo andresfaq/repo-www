@@ -1,11 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from .formsVentas import VehiculoFormAll, VehiculoFormOne, ClienteForm
+from .formsVentas import VehiculoFormAll, VehiculoFormOne, ClienteForm, UserForm
 from administracion.models import Vehiculo
 from django.http import HttpResponseRedirect
 from django.contrib.sessions.models import Session
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
+from django.contrib.auth.hashers import make_password
+
 
 # Create your views here.
 @login_required
@@ -125,3 +128,38 @@ def cotizacion(request):
 	else:
 		user_form = ClienteForm()
 	return render(request, 'ventas/cotizacion.html', {'user_form': user_form, 'vehiculos': vehiculos, 'costo': costo})
+
+@login_required
+@csrf_exempt
+def cliente(request):
+    if request.method == 'POST':
+
+        # formulario enviado
+        user_form = UserForm(request.POST)
+
+        if user_form.is_valid():
+            usuario = user_form
+            usuario.password = make_password(user_form.cleaned_data['password'])
+            usuario.is_superuser = False
+            usuario.username = user_form.cleaned_data['username']
+            usuario.first_name = user_form.cleaned_data['first_name']
+            usuario.last_name = user_form.cleaned_data['last_name']
+            usuario.email = user_form.cleaned_data['email']
+            usuario.is_staff = False
+            usuario.is_active = True
+            usuario.cedula = user_form.cleaned_data['cedula']
+            usuario.direccion = user_form.cleaned_data['direccion']
+            usuario.fecha_de_nacimiento = user_form.cleaned_data['fecha_de_nacimiento']
+            usuario.telefono = user_form.cleaned_data['telefono']
+            UserForm.crearCliente(usuario)
+
+            messages.success(request,"El usuario "+usuario.username+" se ha creado satisfactoriamente")
+
+        else:
+            messages.warning(request, "No has diligenciado correctamente todos los campos o el cliente ya existe")
+
+    else:
+        # formulario inicial
+        user_form = UserForm()
+
+    return render(request, 'ventas/crearCliente.html', { 'user_form': user_form})  

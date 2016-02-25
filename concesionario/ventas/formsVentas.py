@@ -3,7 +3,7 @@ from paginaweb.static import *
 import datetime
 from functools import partial
 DateInput = partial(forms.DateInput, {'class': 'datepicker'})
-from administracion.models import Vehiculo, Cliente, Venta, Vendedor, InventarioVehiculo
+from administracion.models import Vehiculo, Cliente, Venta, Vendedor, InventarioVehiculo, User
 import string
 import random
 
@@ -99,3 +99,22 @@ class ClienteForm(forms.Form):
     def generarPlaca():
         placa = ''.join(random.choice(string.ascii_uppercase) for _ in range(3)) + ''.join(random.choice(string.digits) for _ in range(3))
         return placa
+
+class UserForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'password',
+            'first_name',
+            'last_name',
+            'email',
+            'cedula',
+            'direccion',
+            'fecha_de_nacimiento',
+            'telefono'
+            )
+
+    def crearCliente(usuario):
+        Cliente.objects.create(username=usuario.username,password=usuario.password,is_superuser=usuario.is_superuser,first_name=usuario.first_name,last_name=usuario.last_name,email=usuario.email,is_staff=usuario.is_staff,is_active=usuario.is_active,cedula=usuario.cedula,direccion=usuario.direccion,fecha_de_nacimiento=usuario.fecha_de_nacimiento,telefono=usuario.telefono)
