@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'taller',
     'rest_framework',
     'django_verbatim',
+    'whitenoise',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -124,6 +125,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # Redireccion de LOGIN
 

@@ -1,1 +1,1 @@
-web: gunicorn concesionario.concesionario.wsgi
+web: sh -c "cd concesionario && gunicorn concesionario.wsgi"
