@@ -24,3 +24,6 @@ concesionario/administracion/migrations/*.py
 
 #Ignorando scripts
 concesionario/*.sh
+
+#Ignorando configuracion local
+concesionario/concesionario/settings/local.py
