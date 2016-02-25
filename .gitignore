@@ -20,7 +20,7 @@ concesionario/media/vehiculos/*.jpg
 concesionario/vehiculos/*.jpg
 
 #Ignorando Migraciones
-#concesionario/administracion/migrations/*.py
+concesionario/administracion/migrations/*.py
 
 #Ignorando scripts
 concesionario/*.sh
