@@ -139,7 +139,7 @@ class Vehiculo(models.Model):
     marca = models.CharField(max_length=50, null=False)
     modelo = models.CharField(max_length=50, null=False)
     descripcion = models.CharField(max_length=200, null=True, blank=True)
-    imagen = models.ImageField(upload_to='vehiculos/') # Ver settings_old.py MEDIA_ROOT para ver el directorio donde se guardan las imagenes
+    #imagen = models.ImageField(upload_to='vehiculos/') # Ver settings_old.py MEDIA_ROOT para ver el directorio donde se guardan las imagenes
     cart = models.IntegerField(null=False, default=0)
 
     def __str__(self):
