@@ -12,6 +12,7 @@ from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.http import JsonResponse
 
 
 @login_required
@@ -371,7 +372,6 @@ def crearVehiculo(request):
             vehiculo.marca = user_form.cleaned_data['marca']
             vehiculo.modelo = user_form.cleaned_data['modelo']
             vehiculo.descripcion = user_form.cleaned_data['descripcion']
-            #vehiculo.imagen = user_form.cleaned_data['imagen']
             vehiculo.color = user_form.cleaned_data['color']
             vehiculo.cantidad = user_form.cleaned_data['cantidad']
             vehiculo.precio_unidad = user_form.cleaned_data['precio_unidad']
@@ -394,7 +394,6 @@ def modificarVehiculo(request,idX):
             vehiculo.marca = user_form.cleaned_data['marca']
             vehiculo.modelo = user_form.cleaned_data['modelo']
             vehiculo.descripcion = user_form.cleaned_data['descripcion']
-            #vehiculo.imagen = user_form.cleaned_data['imagen']
             vehiculo.color = user_form.cleaned_data['color']
             vehiculo.cantidad = user_form.cleaned_data['cantidad']
             vehiculo.precio_unidad = user_form.cleaned_data['precio_unidad']
@@ -428,3 +427,6 @@ def modificarVehiculoSeleccion(request):
         user_form_aux = FormVehiculoModificar()
 
     return render(request, 'administracion/modificarVehiculoSeleccion.html', { 'user_form_aux': user_form_aux})
+
+def prueba(request):
+	return JsonResponse({'foo':'bar'})

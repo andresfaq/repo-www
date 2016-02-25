@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, url, include
 from taller import views
+from taller.views import carroReparado
 
 
 urlpatterns = [url(r'^$', views.inicio, name='inicio_taller'),
@@ -10,7 +11,9 @@ urlpatterns = [url(r'^$', views.inicio, name='inicio_taller'),
                url(r'^carrosTaller/verOrdenVehiculo/$', views.verOrdenVehiculo, name='verOrdenVehiculo'),
                url(r'^agregarRefaccion/$', views.agregarRefaccion, name='agregarRefaccion'),
                url(r'^repuestos/$', views.verRepuestos, name='verRepuestos'),
-               url(r'^repuestos/modificar/$', views.modificarRepuesto, name='modificarRepuesto'), ]
+               url(r'^repuestos/modificar/$', views.modificarRepuesto, name='modificarRepuesto'),
+               url(r'^carroReparado/(?P<idX>\w+)/$', carroReparado, name='carroReparado'),
+               ]
 
 # urlpatterns = patterns('concesionario.taller.views',
 #                        url(r'^$', views.inicio),

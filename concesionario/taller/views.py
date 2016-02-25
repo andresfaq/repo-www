@@ -233,6 +233,9 @@ def modificarRepuesto(request):
 
     return render(request,'taller/repuestos.html')
 
+def carroReparado(request,idX):
+    estado = tallerForm.getEstado(idX)
+    return JsonResponse({'estado':estado})
 '''
 @login_required
 def busquedaCodigoVenta(request):

@@ -176,7 +176,6 @@ class VehiculoForm(forms.ModelForm):
 			#'marca',
 			'modelo',
 			'descripcion',
-			#'imagen'
 			)
 
 	def guardar(vehiculo):
