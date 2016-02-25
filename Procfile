@@ -1,1 +1,1 @@
-web: gunicorn concesionario.wsgi
+web: gunicorn concesionario.concesionario.wsgi
