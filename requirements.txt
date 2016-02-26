@@ -16,3 +16,4 @@ python-mimeparse==0.1.4
 six==1.10.0
 static3==0.6.1
 whitenoise==2.0.6
+django-cors-headers

@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'django_verbatim',
     'whitenoise',
+    'corsheaders',
 )
 
 MIDDLEWARE_CLASSES = (
