@@ -4,8 +4,17 @@ from administracion import models
 from rest_framework import generics
 from reportes.serializers import UserSerializer
 from rest_framework.decorators import api_view
+from django.contrib.auth.decorators import user_passes_test
+
+def es_gerente(user):
+    return user.groups.filter(name='Gerentes').exists()
 
 
+
+
+
+
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def inicio(request):
 
@@ -26,6 +35,7 @@ def inicio(request):
 
 	return render(request, 'reportes/index.html',{'sucursales':sucursales})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def usuarios(request):
 
@@ -33,6 +43,7 @@ def usuarios(request):
 
 	return render(request, 'reportes/usuarios.html', {'usuarios':usuarios})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def inventario(request):
 
@@ -40,6 +51,7 @@ def inventario(request):
 
 	return render(request, 'reportes/inventario.html',{'vehiculos':vehiculos})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def ventas(request):
 
@@ -53,6 +65,8 @@ def ventas(request):
 
 	return render(request, 'reportes/ventas.html', {'vendedores':vendedores})
 
+
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def reparaciones(request):
 
@@ -74,6 +88,8 @@ def reparaciones(request):
 
 	return(render(request, 'reportes/reparaciones.html', {'sucursales':sucursales}))
 
+
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def ordenes(request):
 
@@ -116,6 +132,8 @@ def ordenes(request):
 
 	return render(request,'reportes/ordenes.html',{'revision1':revision1,'revision2':revision2 ,'revision3':revision3,'fechas1':fechas1,'fechas2':fechas2,'fechas3':fechas3})
 
+
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def repuesto(request):
 	repuestos = models.Repuesto.objects.all()
