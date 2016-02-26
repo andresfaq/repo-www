@@ -1,0 +1,33 @@
+.panelogin{
+    width: 40%;
+    min-width: 300px;
+    max-width: 400px;
+
+    float: none;
+    margin: 0 auto;
+
+}
+
+.col-centered{
+
+    float: none;
+    margin: 0 auto;
+
+}
+
+.contenido{
+    background-color: #23272a;
+    float: none;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    max-height: 500px;
+    padding: 20px;
+}
+
+.btnInicio{
+
+    float: none;
+    margin: 0 auto;
+
+}

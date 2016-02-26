@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Concesionario::Logout</title>
-</head>
-<body>
-Esta es la pagina logout, Añadir boton de volver al inicio.
-</body>
-</html>
+{% extends 'registration/base.html' %}
+{% load staticfiles %}
+
+
+{% block contenido %}
+
+    <div class="container">
+
+    <div class="panel panel-default panelogin">
+        <div class="panel-heading">
+            <h1 class="panel-title">Logout</h1>
+        </div>
+
+    <div class="panel-body">
+
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-centered">
+
+                    <h1> Gracias por visitar nuestra pagina </h1>
+
+                    <br>
+
+                    <a class="btn btn-primary btnInicio" href="{% url "paginaweb.views.home" %}">Volver a Inicio</a>
+
+
+                </div><!-- Fin Col -->
+            </div><!-- Fin Row -->
+
+    </div>
+
+    </div>
+
+
+
+    </div> <!-- /container -->
+
+{% endblock %}
