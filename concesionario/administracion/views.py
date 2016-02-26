@@ -13,12 +13,21 @@ from django.contrib.auth.hashers import make_password
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.http import JsonResponse
+from django.contrib.auth.decorators import user_passes_test
+
+def es_gerente(user):
+    return user.groups.filter(name='Gerentes').exists()
 
 
+
+
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def inicio(request):
     return render(request, 'administracion/index.html')
 
+
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 @csrf_exempt
 def crearUsuario(request):
@@ -66,6 +75,7 @@ def crearUsuario(request):
 
     return render(request, 'administracion/crearUsuario.html', { 'user_form': user_form})  
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def modificarUsuario(request):
     if request.method == 'POST':
@@ -92,6 +102,7 @@ def modificarUsuario(request):
 
     return render(request, 'administracion/modificarUsuario.html', { 'user_form_aux': user_form_aux})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def eliminarUsuario(request):
     if request.method == 'POST':
@@ -114,6 +125,7 @@ def eliminarUsuario(request):
 
     return render(request, 'administracion/eliminarUsuario.html', { 'user_form': user_form})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def recuperarUsuario(request):
     if request.method == 'POST':
@@ -136,6 +148,7 @@ def recuperarUsuario(request):
 
     return render(request, 'administracion/recuperarUsuario.html', { 'user_form': user_form})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def modificarUsuarioAdministrador(request, idX):
     usernameText = UserFormModificate.getID(idX).username
@@ -161,6 +174,7 @@ def modificarUsuarioAdministrador(request, idX):
         user_form = UserFormAux(instance=user)
     return render(request, 'administracion/modificarUsuarioAdministrador.html', {'user_form': user_form, 'usernameText': usernameText})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def modificarUsuarioCliente(request, idX):
     usernameText = UserFormModificate.getID(idX).username
@@ -186,6 +200,7 @@ def modificarUsuarioCliente(request, idX):
         user_form = UserFormAux(instance=user)
     return render(request, 'administracion/modificarUsuarioCliente.html', {'user_form': user_form, 'usernameText': usernameText})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def modificarUsuarioVendedor(request, idX):
     userAux = UserFormModificate.getID(idX)
@@ -217,6 +232,7 @@ def modificarUsuarioVendedor(request, idX):
         user_form = EmpleadoFormAux(instance=user, initial={"salario": vendedorAux.salario, 'sucursalChoice': vendedorAux.codigo_sucursal_id})
     return render(request, 'administracion/modificarUsuarioEmpleado.html', {'user_form': user_form, 'usernameText': usernameText, 'sucursalActual': sucursalActual})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def modificarUsuarioGerente(request, idX):
     userAux = UserFormModificate.getID(idX)
@@ -248,6 +264,7 @@ def modificarUsuarioGerente(request, idX):
         user_form = EmpleadoFormAux(instance=user, initial={"salario": vendedorAux.salario, 'sucursalChoice': vendedorAux.codigo_sucursal_id})
     return render(request, 'administracion/modificarUsuarioEmpleado.html', {'user_form': user_form, 'usernameText': usernameText, 'sucursalActual': sucursalActual})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def modificarUsuarioJefeTaller(request, idX):
     userAux = UserFormModificate.getID(idX)
@@ -279,6 +296,7 @@ def modificarUsuarioJefeTaller(request, idX):
         user_form = EmpleadoFormAux(instance=user, initial={"salario": vendedorAux.salario, 'sucursalChoice': vendedorAux.codigo_sucursal_id})
     return render(request, 'administracion/modificarUsuarioEmpleado.html', {'user_form': user_form, 'usernameText': usernameText, 'sucursalActual': sucursalActual})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def modificarContrasena(request):
     if request.method == 'POST':
@@ -302,6 +320,7 @@ def modificarContrasena(request):
 
     return render(request, 'administracion/modificarContrasena.html', { 'user_form': user_form})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 @csrf_exempt
 def crearSucursal(request):
@@ -325,6 +344,7 @@ def crearSucursal(request):
 
     return render(request, 'administracion/crearSucursal.html', { 'user_form': user_form})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def modificarSucursalSeleccion(request):
     if request.method == 'POST':
@@ -341,6 +361,7 @@ def modificarSucursalSeleccion(request):
 
     return render(request, 'administracion/modificarSucursalSeleccion.html', { 'user_form_aux': user_form_aux})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def modificarSucursal(request, idX):
     sucursalAux = FormSucursalModificar.get(idX)
@@ -361,6 +382,7 @@ def modificarSucursal(request, idX):
         user_form = SucursalForm(instance=user)
     return render(request, 'administracion/modificarSucursal.html', {'user_form': user_form, 'usernameText': usernameText})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def crearVehiculo(request):
     if request.method == 'POST':
@@ -385,6 +407,8 @@ def crearVehiculo(request):
         user_form = VehiculoForm()
 
     return render(request, 'administracion/crearVehiculo.html', {'user_form': user_form})
+
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def modificarVehiculo(request,idX):
     if request.method == 'POST':
@@ -412,6 +436,7 @@ def modificarVehiculo(request,idX):
 
     return render(request, 'administracion/modificarVehiculo.html', { 'user_form': user_form, 'usernameText': usernameText})
 
+@user_passes_test(es_gerente, login_url='/login/')
 @login_required
 def modificarVehiculoSeleccion(request):
     if request.method == 'POST':
