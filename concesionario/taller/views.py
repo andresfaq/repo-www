@@ -9,16 +9,18 @@ from django.db import connection
 from administracion.models import User, Empleado,Orden,JefeTaller,Venta,Cliente,Vendedor,RevisionVehiculo,Sucursal,InventarioRepuesto,RepuestosPorOrden,Repuesto
 from django.http import JsonResponse
 import json
+from django.contrib.auth.decorators import user_passes_test
+
+def es_jefetaller(user):
+    return user.groups.filter(name='JefesTaller').exists()
 
 
-
-
-
-
+@user_passes_test(es_jefetaller, login_url='/login/')
 @login_required
 def inicio(request):
     return render(request, 'taller/index.html')
 
+@user_passes_test(es_jefetaller, login_url='/login/')
 @login_required
 def ingresarVehiculo(request):
         if request.POST and 'submit' in request.POST:
@@ -60,6 +62,7 @@ def ingresarVehiculo(request):
 
 
 #@csrf_exempt
+@user_passes_test(es_jefetaller, login_url='/login/')
 @login_required
 def busquedaCodigoVenta(request):
     if request.method == 'POST':        
@@ -94,7 +97,7 @@ def busquedaCodigoVenta(request):
 
     return HttpResponse()
 
-
+@user_passes_test(es_jefetaller, login_url='/login/')
 @login_required
 def mostrarVehiculosTaller(request):
     form = tallerForm(request.POST)
@@ -107,6 +110,7 @@ def mostrarVehiculosTaller(request):
     args['repuestos']=repuestos
     return render(request, 'taller/carrosTaller.html',args)
 
+@user_passes_test(es_jefetaller, login_url='/login/')
 @login_required
 def agregarRepuestosVehiculo(request):
     print(" llego al view ")
@@ -134,6 +138,7 @@ def agregarRepuestosVehiculo(request):
             return JsonResponse(algo,safe=False)
     return HttpResponse()
 
+@user_passes_test(es_jefetaller, login_url='/login/')
 @login_required
 def verOrdenVehiculo(request):
     print("llego a ver orden")
@@ -163,7 +168,7 @@ def verOrdenVehiculo(request):
             return JsonResponse(contenido,safe=False)
     return HttpResponse()
 
-
+@user_passes_test(es_jefetaller, login_url='/login/')
 @login_required
 def agregarRefaccion(request):
     if request.method == 'POST':
@@ -199,7 +204,7 @@ def agregarRefaccion(request):
     else:
        return render(request, 'taller/agregarRepuesto.html')
 
-
+@user_passes_test(es_jefetaller, login_url='/login/')
 @login_required
 def verRepuestos(request):
     print("llego a repuestos")
