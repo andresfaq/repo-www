@@ -54,7 +54,7 @@ INSTALLED_APPS = (
     'corsheaders',
 )
 
-CORS_ORIGIN_ALLOW_ALL = True
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
