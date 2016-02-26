@@ -8,13 +8,20 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.decorators import user_passes_test
+
+def es_vendedor(user):
+    return user.groups.filter(name='Vendedores').exists()
 
 
-# Create your views here.
+
+
+@user_passes_test(es_vendedor, login_url='/login/')
 @login_required
 def inicio(request):
 	return render(request, 'ventas/index.html')
 
+@user_passes_test(es_vendedor, login_url='/login/')
 @login_required
 def listarCarros(request):
 	carros = VehiculoFormAll.vehiculos
@@ -29,6 +36,7 @@ def listarCarros(request):
 
 	return render(request, 'ventas/listarCarros.html', { 'user_form': user_form, 'carros': carros})
 
+@user_passes_test(es_vendedor, login_url='/login/')
 @login_required
 def comprarCarro(request, codigo_vehiculo):
 	if request.method == "POST":
@@ -58,6 +66,7 @@ def comprarCarro(request, codigo_vehiculo):
 		user_form = ClienteForm()
 	return render(request, 'ventas/comprarCarro.html', { 'user_form': user_form, 'vehiculo': vehiculo})
 
+@user_passes_test(es_vendedor, login_url='/login/')
 @login_required
 def cotizarCarros(request):
 	carros = VehiculoFormAll.vehiculos
@@ -72,6 +81,7 @@ def cotizarCarros(request):
 
 	return render(request, 'ventas/cotizarCarros.html', { 'user_form': user_form, 'carros': carros})
 
+@user_passes_test(es_vendedor, login_url='/login/')
 @login_required
 def cotizarCarro(request,codigo_vehiculo):
 	vehiculo = VehiculoFormOne.get(codigo_vehiculo)
@@ -93,6 +103,7 @@ def cotizarCarro(request,codigo_vehiculo):
 
 	return render(request, 'ventas/cotizarCarros.html', { 'user_form': user_form, 'carros': carros})
 
+@user_passes_test(es_vendedor, login_url='/login/')
 @login_required
 def cotizacion(request):
 	vehiculos = VehiculoFormAll.vehiculoCompleto(VehiculoFormOne.cotizados())
@@ -129,6 +140,8 @@ def cotizacion(request):
 		user_form = ClienteForm()
 	return render(request, 'ventas/cotizacion.html', {'user_form': user_form, 'vehiculos': vehiculos, 'costo': costo})
 
+
+@user_passes_test(es_vendedor, login_url='/login/')
 @login_required
 @csrf_exempt
 def cliente(request):
