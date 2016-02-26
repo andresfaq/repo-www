@@ -15,7 +15,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 from django.core.urlresolvers import reverse_lazy
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,14 +25,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = 'k#=p82_6my^uxgh(ghswy!q8&$%$*iscjt&gu=w=yl(!3os$8)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-TEMPLATE_DEBUG = False
-
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
 
 # Application definition
+
+AUTH_PROFILE_MODULE = 'mi_aplicacion.Perfil'
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -41,20 +41,18 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tastypie',
     'paginaweb',
-    'administracion',
-    'ventas',
     'reportes',
-    'clientes',
+    'ventas',
+    'administracion',
+	'tastypie',
+	'autofixture',
     'taller',
+    'clientes',
     'rest_framework',
-    'django_verbatim',
-    'whitenoise',
     'corsheaders',
+    'dejango_verbatim',
 )
-
-CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -101,14 +99,13 @@ WSGI_APPLICATION = 'concesionario.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dca1petso80la5',
-        'USER': 'nrajgywlyspilh',
-        'PASSWORD': 'lKZRK6HIj0GnEVcWwvg9KMefjc',
-        'HOST': 'ec2-54-243-132-114.compute-1.amazonaws.com',
+        'NAME': 'concesionario',
+        'USER': 'daniel',
+        'PASSWORD': 'daniel',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -127,20 +124,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
 # Redireccion de LOGIN
 
 LOGIN_URL = reverse_lazy('login')
 
-
-# Ruta donde se guardan las imagenes
-MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

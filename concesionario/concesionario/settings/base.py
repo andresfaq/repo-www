@@ -54,6 +54,8 @@ INSTALLED_APPS = (
     'corsheaders',
 )
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -107,13 +109,24 @@ WSGI_APPLICATION = 'concesionario.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'dca1petso80la5',
+#        'USER': 'nrajgywlyspilh',
+#         'PASSWORD': 'lKZRK6HIj0GnEVcWwvg9KMefjc',
+#         'HOST': 'ec2-54-243-132-114.compute-1.amazonaws.com',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dca1petso80la5',
-       'USER': 'nrajgywlyspilh',
-        'PASSWORD': 'lKZRK6HIj0GnEVcWwvg9KMefjc',
-        'HOST': 'ec2-54-243-132-114.compute-1.amazonaws.com',
+        'NAME': 'concesionario',
+        'USER': 'daniel',
+        'PASSWORD': 'daniel',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
