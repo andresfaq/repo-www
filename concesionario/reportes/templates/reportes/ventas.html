@@ -83,12 +83,32 @@
                 // WRITE
                 chart.write("chartdiv");
             });
+             
+             
+             $(document).on("click","#filtro",function(){
+                 
+                 $.ajax({
+                     url: "http://localhost:8000/reportes/filtro",
+                     data:{filter:"filtro"}
+                 }).done(function(data){
+                     alert(data);
+                 }).fail(function(data){
+                     alert(data);
+                 });
+                 
+                 });
+             
         </script>
 
 {% endblock %}
 
 {% block contenido %}
-
-	<div id="chartdiv" class="estado" style="width: 100%; height: 100%;"></div>
+   
+        <div class="cosito" style="height:100%">
+	        <div id="chartdiv" class="estado" style="width: 80%; height:100%;"></div>
+            <label for="">filtro</label>
+            <button id="filtro">Aplicar</button>
+        </div>
+       
 
 {% endblock%}

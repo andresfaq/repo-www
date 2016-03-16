@@ -10,7 +10,15 @@ def es_gerente(user):
     return user.groups.filter(name='Gerentes').exists()
 
 
-
+@user_passes_test(es_gerente, login_url='/login/')
+@login_required
+def filtro(request):
+    vendedores = models.Vendedor.objects.all()
+    ventas = models.Venta.objects.all()
+    for vendedor in vendedores:
+        #vendedor.num_ventas = len(vendedor.filter(codigo_vendedor=ventas.codigo_vendedor)
+        vendedor.num_ventas = len(ventas.filter(codigo_vendedor=vendedor.codigo_vendedor))
+    return JSONResponse({"vendedores":vendedores})
 
 
 

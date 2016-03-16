@@ -46,6 +46,12 @@ body {
     padding-left: 100px;
 
 }
+
+.cosito{  
+    padding: 10px;
+    display: -webkit-box;
+}
+
 .wrap {
 	width:80%;
 	margin: 0 auto;
